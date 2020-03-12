@@ -8,6 +8,11 @@
 
     public class SlotMachine : BaseDeletableModel<string>
     {
+        public SlotMachine()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         public string LicenseNumber { get; set; }
 
         public string Model { get; set; }
@@ -18,9 +23,8 @@
 
         public GamingHall GamingHall { get; set; }
 
-        public IEnumerable<MachineCounters> MachinesCounters { get; set; } = new HashSet<MachineCounters>();
+        public virtual IEnumerable<MachineCounters> MachinesCounters { get; set; } = new HashSet<MachineCounters>();
 
-
-        public IEnumerable<Win> Wins { get; set; } = new HashSet<Win>();
+        public virtual IEnumerable<Win> Wins { get; set; } = new HashSet<Win>();
     }
 }

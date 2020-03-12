@@ -1,12 +1,15 @@
-﻿using OnlineSlotReports.Data.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnlineSlotReports.Data.Models
+﻿namespace OnlineSlotReports.Data.Models
 {
+    using System;
+
+    using OnlineSlotReports.Data.Common.Models;
+
     public class Win : BaseDeletableModel<string>
     {
+        public Win()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
         public string Url { get; set; }
 
@@ -14,13 +17,12 @@ namespace OnlineSlotReports.Data.Models
 
         public DateTime Date { get; set; }
 
-        public GamingHall GamingHall { get; set; }
+        public string GamingHallId { get; set; }
 
-        public string GamingHallid { get; set; }
-
-
-        public SlotMachine SlotMachine { get; set; }
+        public virtual GamingHall GamingHall { get; set; }
 
         public string SlotMachineId { get; set; }
+
+        public virtual SlotMachine SlotMachine { get; set; }
     }
 }

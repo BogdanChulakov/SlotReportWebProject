@@ -4,9 +4,9 @@ namespace OnlineSlotReports.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using OnlineSlotReports.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+
+    using OnlineSlotReports.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -16,6 +16,7 @@ namespace OnlineSlotReports.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.GamingHalls = new HashSet<GamingHall>();
         }
 
         // Audit info
@@ -33,5 +34,7 @@ namespace OnlineSlotReports.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<GamingHall> GamingHalls { get; set; }
     }
 }

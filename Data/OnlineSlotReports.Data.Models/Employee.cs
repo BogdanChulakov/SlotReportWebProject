@@ -4,11 +4,15 @@
     using System.Collections.Generic;
     using System.Text;
 
-    using OnlineSlotReports.Data.Common.Models;
     using Microsoft.AspNetCore.Identity;
+    using OnlineSlotReports.Data.Common.Models;
 
     public class Employee : BaseDeletableModel<string>
     {
+        public Employee()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
         public string Name { get; set; }
 
@@ -18,8 +22,8 @@
 
         public DateTime? EndWorkDate { get; set; }
 
-        public GamingHall GamingHall { get; set; }
-
         public string GamingHallId { get; set; }
+
+        public virtual GamingHall GamingHall { get; set; }
     }
 }

@@ -8,6 +8,10 @@
 
     public class GamingHall : BaseDeletableModel<string>
     {
+        public GamingHall()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
         public string HallName { get; set; }
 
@@ -19,12 +23,12 @@
 
         public ApplicationUser User { get; set; }
 
+        public virtual IEnumerable<SlotMachine> SlotMachines { get; set; } = new HashSet<SlotMachine>();
 
-        public IEnumerable<SlotMachine> SlotMachines { get; set; } = new HashSet<SlotMachine>();
+        public virtual IEnumerable<Win> Wins { get; set; } = new HashSet<Win>();
 
-        public IEnumerable<Win> Wins { get; set; } = new HashSet<Win>();
+        public virtual IEnumerable<Employee> Employees { get; set; } = new HashSet<Employee>();
 
-        public IEnumerable<Employee> Employees { get; set; } = new HashSet<Employee>();
-
+        public virtual IEnumerable<Pic> Galery { get; set; } = new HashSet<Pic>();
     }
 }

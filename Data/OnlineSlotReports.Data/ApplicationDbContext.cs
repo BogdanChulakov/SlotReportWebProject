@@ -26,9 +26,8 @@
 
         public DbSet<Setting> Settings { get; set; }
 
-
         public DbSet<GamingHall> GamingHalls { get; set; }
-        
+
         public DbSet<SlotMachine> SlotMachines { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
@@ -36,6 +35,8 @@
         public DbSet<MachineCounters> MachineCounters { get; set; }
 
         public DbSet<Win> Wins { get; set; }
+
+        public DbSet<Pic> Pics { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

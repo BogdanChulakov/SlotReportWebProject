@@ -25,6 +25,6 @@ namespace OnlineSlotReports.Data.Models
 
         public string SlotMachineId { get; set; }
 
-        public SlotMachine SlotMachine { get; set; }
+        public virtual SlotMachine SlotMachine { get; set; }
     }
 }
