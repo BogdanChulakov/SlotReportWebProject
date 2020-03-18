@@ -290,6 +290,7 @@ namespace OnlineSlotReports.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Adress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -299,7 +300,9 @@ namespace OnlineSlotReports.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("HallName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -308,9 +311,11 @@ namespace OnlineSlotReports.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Town")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -343,6 +348,7 @@ namespace OnlineSlotReports.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SlotMachineId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -364,6 +370,7 @@ namespace OnlineSlotReports.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("GamingHallId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
@@ -373,6 +380,7 @@ namespace OnlineSlotReports.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -428,15 +436,18 @@ namespace OnlineSlotReports.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("GamingHallId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("LicenseNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedOn")
@@ -469,9 +480,11 @@ namespace OnlineSlotReports.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GamingHallId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
@@ -481,6 +494,7 @@ namespace OnlineSlotReports.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SlotMachineId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Url")
@@ -559,39 +573,51 @@ namespace OnlineSlotReports.Data.Migrations
                 {
                     b.HasOne("OnlineSlotReports.Data.Models.ApplicationUser", "User")
                         .WithMany("GamingHalls")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OnlineSlotReports.Data.Models.MachineCounters", b =>
                 {
                     b.HasOne("OnlineSlotReports.Data.Models.SlotMachine", "SlotMachine")
                         .WithMany("MachinesCounters")
-                        .HasForeignKey("SlotMachineId");
+                        .HasForeignKey("SlotMachineId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OnlineSlotReports.Data.Models.Pic", b =>
                 {
                     b.HasOne("OnlineSlotReports.Data.Models.GamingHall", "GamingHall")
                         .WithMany("Galery")
-                        .HasForeignKey("GamingHallId");
+                        .HasForeignKey("GamingHallId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OnlineSlotReports.Data.Models.SlotMachine", b =>
                 {
                     b.HasOne("OnlineSlotReports.Data.Models.GamingHall", "GamingHall")
                         .WithMany("SlotMachines")
-                        .HasForeignKey("GamingHallId");
+                        .HasForeignKey("GamingHallId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OnlineSlotReports.Data.Models.Win", b =>
                 {
                     b.HasOne("OnlineSlotReports.Data.Models.GamingHall", "GamingHall")
                         .WithMany("Wins")
-                        .HasForeignKey("GamingHallId");
+                        .HasForeignKey("GamingHallId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("OnlineSlotReports.Data.Models.SlotMachine", "SlotMachine")
                         .WithMany("Wins")
-                        .HasForeignKey("SlotMachineId");
+                        .HasForeignKey("SlotMachineId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

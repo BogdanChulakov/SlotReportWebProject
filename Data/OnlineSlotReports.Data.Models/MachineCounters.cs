@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnlineSlotReports.Data.Models
+﻿namespace OnlineSlotReports.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text;
+
     public class MachineCounters
     {
         public MachineCounters()
@@ -23,6 +24,7 @@ namespace OnlineSlotReports.Data.Models
 
         public DateTime Date { get; set; }
 
+        [Required]
         public string SlotMachineId { get; set; }
 
         public virtual SlotMachine SlotMachine { get; set; }

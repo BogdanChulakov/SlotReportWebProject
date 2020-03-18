@@ -1,10 +1,12 @@
-﻿using OnlineSlotReports.Data.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnlineSlotReports.Data.Models
+﻿namespace OnlineSlotReports.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text;
+
+    using OnlineSlotReports.Data.Common.Models;
+
     public class Pic : BaseDeletableModel<string>
     {
         public Pic()
@@ -12,8 +14,11 @@ namespace OnlineSlotReports.Data.Models
             this.Id = Guid.NewGuid().ToString();
         }
 
+        [Required]
+        [RegularExpression("^(http|https)://")]
         public string Url { get; set; }
 
+        [Required]
         public string GamingHallId { get; set; }
 
         public virtual GamingHall GamingHall { get; set; }

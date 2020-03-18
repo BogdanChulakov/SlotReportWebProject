@@ -2,17 +2,6 @@
 {
     using System.Reflection;
 
-    using OnlineSlotReports.Data;
-    using OnlineSlotReports.Data.Common;
-    using OnlineSlotReports.Data.Common.Repositories;
-    using OnlineSlotReports.Data.Models;
-    using OnlineSlotReports.Data.Repositories;
-    using OnlineSlotReports.Data.Seeding;
-    using OnlineSlotReports.Services.Data;
-    using OnlineSlotReports.Services.Mapping;
-    using OnlineSlotReports.Services.Messaging;
-    using OnlineSlotReports.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -20,6 +9,17 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using OnlineSlotReports.Data;
+    using OnlineSlotReports.Data.Common;
+    using OnlineSlotReports.Data.Common.Repositories;
+    using OnlineSlotReports.Data.Models;
+    using OnlineSlotReports.Data.Repositories;
+    using OnlineSlotReports.Data.Seeding;
+    using OnlineSlotReports.Services.Data;
+    using OnlineSlotReports.Services.Data.GamingHallServices;
+    using OnlineSlotReports.Services.Mapping;
+    using OnlineSlotReports.Services.Messaging;
+    using OnlineSlotReports.Web.ViewModels;
 
     public class Startup
     {
@@ -59,6 +59,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IGamingHallService, GamingHallService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

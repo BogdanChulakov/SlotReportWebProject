@@ -11,7 +11,7 @@ namespace OnlineSlotReports.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20200305003025_dbBogdan")]
-    partial class dbBogdan
+    partial class DbBogdan
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

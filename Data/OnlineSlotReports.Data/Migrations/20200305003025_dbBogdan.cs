@@ -1,9 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace OnlineSlotReports.Data.Migrations
+﻿namespace OnlineSlotReports.Data.Migrations
 {
-    public partial class dbBogdan : Migration
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
+    public partial class DbBogdan : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

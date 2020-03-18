@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
 
     using OnlineSlotReports.Data.Common.Models;
@@ -13,12 +14,15 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
+        [Required]
         public string LicenseNumber { get; set; }
 
+        [Required]
         public string Model { get; set; }
 
         public int NumberInHall { get; set; }
 
+        [Required]
         public string GamingHallId { get; set; }
 
         public GamingHall GamingHall { get; set; }

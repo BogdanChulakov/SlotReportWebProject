@@ -3,12 +3,11 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
     using OnlineSlotReports.Data.Common.Repositories;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Data;
     using OnlineSlotReports.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
     {

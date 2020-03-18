@@ -4,11 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using OnlineSlotReports.Common;
-    using OnlineSlotReports.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using OnlineSlotReports.Common;
+    using OnlineSlotReports.Data.Models;
 
     internal class RolesSeeder : ISeeder
     {

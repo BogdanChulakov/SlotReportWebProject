@@ -3,9 +3,8 @@ namespace OnlineSlotReports.Data.Models
 {
     using System;
 
-    using OnlineSlotReports.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using OnlineSlotReports.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
