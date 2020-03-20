@@ -1,9 +1,8 @@
 ﻿namespace OnlineSlotReports.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

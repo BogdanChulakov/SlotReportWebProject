@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
 
-    using OnlineSlotReports.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+    using OnlineSlotReports.Web.ViewModels;
 
     public class HomeController : BaseController
     {

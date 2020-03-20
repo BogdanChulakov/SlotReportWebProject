@@ -1,9 +1,8 @@
 ﻿namespace OnlineSlotReports.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using OnlineSlotReports.Services.Data;
     using OnlineSlotReports.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {
