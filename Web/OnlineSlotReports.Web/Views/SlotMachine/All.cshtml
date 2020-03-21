@@ -1,0 +1,28 @@
+﻿@model OnlineSlotReports.Web.ViewModels.SlotMachinesViewModels.AllSlotMachinesViewModel
+@{
+    ViewData["Title"] = "All Slot Machines";
+}
+
+<a href="/SlotMachine/Add">Add Slot machine!</a>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">LicenseNumber</th>
+            <th scope="col">Model</th>
+            <th scope="col">NumberInHall</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var machine in Model.SlotMachines)
+        {
+
+            <tr>
+                <th scope="row">@machine.LicenseNumber</th>
+                <td>@machine.Model</td>
+                <td>@machine.NumberInHall</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

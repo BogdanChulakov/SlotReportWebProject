@@ -1,0 +1,30 @@
+﻿@model OnlineSlotReports.Web.ViewModels.GamingHallViewModels.DetailsViewModel
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update</h1>
+<div class="col-md-4">
+    <form asp-controller="GamingHall" asp-action="Update" method="post">
+        <input asp-for="Id" class="form-control" type="hidden" />
+        <div>
+            <label asp-for="HallName">Hall Name</label>
+            <input asp-for="HallName" class="form-control" />
+            <span asp-validation-for="HallName" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Adress"></label>
+            <input asp-for="Adress" class="form-control" />
+            <span asp-validation-for="Adress" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Town"></label>
+            <input asp-for="Town" class="form-control" />
+            <span asp-validation-for="Town" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <input type="submit" name="Save" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

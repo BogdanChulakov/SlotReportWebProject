@@ -1,0 +1,26 @@
+﻿@model OnlineSlotReports.Web.ViewModels.GamingHallViewModels.AllHallsViewModel
+@{
+    ViewData["Title"] = "Halls";
+}
+
+<h1>Halls</h1>
+@foreach (var hall in Model.GamingHalls)
+{
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-6">@hall.HallName</h1>
+            <p class="lead"><a href="/SlotMachine/All?id=@hall.Id">Machines</a> = @hall.SlotmachineCount</p>
+            <p class="lead">@hall.Adress</p>
+            <p class="lead">@hall.Town</p>
+            <table style="width:100%">
+                <tr align="right">
+                    <th><a href="/GamingHall/Details?id=@hall.Id" >Details</a></th>
+                    <th><a href="/GamingHall/Update?id=@hall.Id" >Update</a></th>
+                    <th><a href="/GamingHall/Delete?id=@hall.Id">Delete</a></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+}
+
+
