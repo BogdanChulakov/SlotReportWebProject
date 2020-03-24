@@ -11,6 +11,7 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
+        [Required]
         public string Url { get; set; }
 
         [Required]

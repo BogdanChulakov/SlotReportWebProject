@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineSlotReports.Data;
 
 namespace OnlineSlotReports.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200321235030_employeeUpdate")]
+    partial class employeeUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,10 +281,6 @@ namespace OnlineSlotReports.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("StartWorkDate")
                         .HasColumnType("datetime2");
 
@@ -352,10 +350,10 @@ namespace OnlineSlotReports.Data.Migrations
                     b.Property<decimal>("ElOut")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("MechIn")
+                    b.Property<int>("MechOut")
                         .HasColumnType("int");
 
-                    b.Property<int>("MechOut")
+                    b.Property<int>("MechjIn")
                         .HasColumnType("int");
 
                     b.Property<string>("SlotMachineId")

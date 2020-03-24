@@ -30,12 +30,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="GamingHall" asp-action="Add">Add Gaming Hall</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="GamingHall" asp-action="Halls">MyHalls</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="GamingHall" asp-action="Add">Add Gaming Hall</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="GamingHall" asp-action="Halls">MyHalls</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Croupier"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="Create">Report</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

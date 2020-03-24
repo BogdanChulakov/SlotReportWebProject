@@ -10,5 +10,7 @@
         IEnumerable<T> All<T>(string id);
 
         Task AddAsync(string licenseNumber, string model, int numberInHall, string gamingHallId);
+
+        Task DeleteAsync(string id);
     }
 }

@@ -17,6 +17,8 @@
 
         public string Town { get; set; }
 
-        public int SlotmachineCount { get; set; }
+        public int SlotMachinesCount { get; set; }
+
+        public int EmployeesCount { get; set; }
     }
 }

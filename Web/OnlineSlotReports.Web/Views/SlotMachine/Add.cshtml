@@ -3,19 +3,19 @@
     ViewData["Title"] = "View";
 }
     <div class="col-md-4">
-        <form asp-controller="GamingHall" asp-action="Add" method="post">
+        <form asp-controller="SlotMachine" asp-action="Add" method="post">
             <div>
                 <label asp-for="LicenseNumber">License Number</label>
                 <input asp-for="LicenseNumber" class="form-control" />
                 <span asp-validation-for="LicenseNumber" class="text-danger"></span>
             </div>
             <div>
-                <label asp-for="Model">Molde</label>
+                <label asp-for="Model">Model</label>
                 <input asp-for="Model" class="form-control" />
                 <span asp-validation-for="Model" class="text-danger"></span>
             </div>
             <div>
-                <label asp-for="NumberInHall">NumberInHall</label>
+                <label asp-for="NumberInHall">Number In Hall</label>
                 <input asp-for="NumberInHall" class="form-control" />
                 <span asp-validation-for="NumberInHall" class="text-danger"></span>
             </div>

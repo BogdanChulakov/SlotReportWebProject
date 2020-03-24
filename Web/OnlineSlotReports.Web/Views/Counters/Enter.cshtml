@@ -1,0 +1,36 @@
+﻿@model OnlineSlotReports.Web.ViewModels.MachineCounters.InputMachineCountersViewModel
+@{
+    ViewData["Title"] = "Enter";
+}
+
+<h1>Enter</h1>
+
+<div class="col-md-4">
+    <form asp-controller="Counters" asp-action="Enter" method="post">
+        <div>
+            <label asp-for="EllIn">Еlectronic input</label>
+            <input asp-for="EllIn" class="form-control" />
+            <span asp-validation-for="EllIn" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="EllOut">Еlectronic output</label>
+            <input asp-for="EllOut" class="form-control" />
+            <span asp-validation-for="EllOut" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="MechIn">Mechanical input</label>
+            <input asp-for="MechIn" class="form-control" />
+            <span asp-validation-for="MechIn" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="MechOut">Mechanical output</label>
+            <input asp-for="MechOut" class="form-control" />
+            <span asp-validation-for="MechOut" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <input type="submit" name="Save" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+

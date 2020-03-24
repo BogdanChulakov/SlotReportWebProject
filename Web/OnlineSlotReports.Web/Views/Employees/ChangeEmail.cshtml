@@ -1,0 +1,22 @@
+﻿@model OnlineSlotReports.Web.ViewModels.EmployeesViewModel.EmployeeChangeEmailViewModel
+@{
+    ViewData["Title"] = "ChangeEmail";
+}
+
+<h1 align="center">New Email</h1>
+<div class="col-md-4">
+    <form asp-controller="Employees" asp-action="ChangeEmail" method="post">
+        <div>
+            <label asp-for="Email">Enter New Email</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <input type="submit" name="Save" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+

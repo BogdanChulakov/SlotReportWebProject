@@ -14,5 +14,7 @@
 
         [Range(0, 999)]
         public int NumberInHall { get; set; }
+
+        public string GamingHallId { get; set; }
     }
 }

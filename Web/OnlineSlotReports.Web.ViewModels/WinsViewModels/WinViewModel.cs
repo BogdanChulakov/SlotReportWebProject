@@ -1,4 +1,4 @@
-﻿namespace OnlineSlotReports.Web.ViewModels.SlotMachinesViewModels
+﻿namespace OnlineSlotReports.Web.ViewModels.WinsViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -8,14 +8,14 @@
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Mapping;
 
-    public class SlotMachineViewModel : IMapFrom<SlotMachine>
+    public class WinViewModel : IMapFrom<Win>
     {
         public string Id { get; set; }
 
-        public string LicenseNumber { get; set; }
+        public string Url { get; set; }
 
-        public string Model { get; set; }
+        public string Description { get; set; }
 
-        public int NumberInHall { get; set; }
+        public DateTime Date { get; set; }
     }
 }

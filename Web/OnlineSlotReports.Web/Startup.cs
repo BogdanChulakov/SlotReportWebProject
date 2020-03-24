@@ -16,8 +16,11 @@
     using OnlineSlotReports.Data.Repositories;
     using OnlineSlotReports.Data.Seeding;
     using OnlineSlotReports.Services.Data;
+    using OnlineSlotReports.Services.Data.EmployeesServices;
     using OnlineSlotReports.Services.Data.GamingHallServices;
+    using OnlineSlotReports.Services.Data.MachineCountersServices;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
+    using OnlineSlotReports.Services.Data.WinsServices;
     using OnlineSlotReports.Services.Mapping;
     using OnlineSlotReports.Services.Messaging;
     using OnlineSlotReports.Web.ViewModels;
@@ -62,6 +65,9 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IGamingHallService, GamingHallService>();
             services.AddTransient<ISlotMachinesServices, SlotMachinesServices>();
+            services.AddTransient<IEmployeesServices, EmployeesServices>();
+            services.AddTransient<IMachineCountersServices, MachineCountersServices>();
+            services.AddTransient<IWinsServices, WinsServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

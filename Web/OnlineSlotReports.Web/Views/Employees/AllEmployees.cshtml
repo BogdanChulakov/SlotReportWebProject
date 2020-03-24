@@ -1,0 +1,32 @@
+﻿@model OnlineSlotReports.Web.ViewModels.EmployeesViewModel.AllEmployeesViewModel
+@{
+    ViewData["Title"] = "AllEmployees";
+}
+
+<h1 align="center">All Employees</h1>
+<a href="/Employees/Add/@Model.GamingHallId">Add Employee</a>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Hired On</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model.Employees)
+        {
+
+        <tr>
+            <th>@employee.FullName</th>
+            <th><a href="/Employees/ChangePhoneNumber/@employee.Id">@employee.PhoneNumber</a></th>
+            <td><a href="/Employees/ChangeEmail/@employee.Id">@employee.Email</a></td>
+            <td>@employee.StartWorkDate.Date</td>
+            <td><a href="/Employees/Delete/@employee.Id" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
