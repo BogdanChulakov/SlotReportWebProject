@@ -4,8 +4,22 @@
 }
 
 <h1 align="center">All Wins</h1>
-@foreach (var win in Model.Wins)
-{
-
-}
+<p>
+    <a href="/Wins/Add/@Model.GamingHallId" class="btn btn-primary">Add Wins!</a>
+</p>
+<div class="row">
+    @foreach (var win in Model.Wins)
+    {
+        <div class="col-md-4 card" style="width: 18rem;">
+            <img class="card-img-top" src="@win.Url" alt="Card image cap" height="200">
+            <div class="card-body">
+                <h5 class="card-title">@win.Date</h5>
+                <p class="card-text">@win.Description </p>
+                <p align="right">
+                    <a href="/Wins/Delete/@win.Id" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a>
+                </p>
+            </div>
+        </div>
+    }
+</div>
 

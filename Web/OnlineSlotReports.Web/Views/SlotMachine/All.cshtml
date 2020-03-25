@@ -3,7 +3,9 @@
     ViewData["Title"] = "All Slot Machines";
 }
 <h1 align="center">All Slot machines</h1>
-<a href="/SlotMachine/Add/@Model.GamingHallId">Add Slot machine!</a>
+<p>
+    <a href="/SlotMachine/Add/@Model.GamingHallId" class="btn btn-primary">Add Slot machine!</a>
+</p>
 <table class="table table-dark">
     <thead>
         <tr>
@@ -16,13 +18,13 @@
         @foreach (var machine in Model.SlotMachines)
         {
 
-        <tr>
-            <th>@machine.LicenseNumber</th>
-            <td>@machine.Model</td>
-            <td>@machine.NumberInHall</td>
-            <td><a href="/Counters/Enter/@machine.Id">Enter Counters</a></td>
-            <td><a href="/SlotMachine/Delete/@machine.Id" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a></td>
-        </tr>
+            <tr>
+                <th>@machine.LicenseNumber</th>
+                <td>@machine.Model</td>
+                <td>@machine.NumberInHall</td>
+                <td><a href="/Counters/Enter/@machine.Id">Enter Counters</a></td>
+                <td><a href="/SlotMachine/Delete/@machine.Id" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a></td>
+            </tr>
         }
     </tbody>
 </table>

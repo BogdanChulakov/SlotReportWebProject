@@ -1,0 +1,35 @@
+﻿@model OnlineSlotReports.Web.ViewModels.WinsViewModels.InputWinViewModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1 align="center">Add Win</h1>
+
+<div class="col-md-4">
+    <form asp-controller="Wins" asp-action="Add" method="post">
+        <div>
+            <label asp-for="Url">Url</label>
+            <input asp-for="Url" class="form-control" />
+            <span asp-validation-for="Url" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Description">Description</label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Date">Date of win</label>
+            <input asp-for="Date" class="form-control" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="SlotMachineId">Machine Number</label>
+            <select asp-for="SlotMachineId" asp-items="Model.MachineNumbers.Select(x=> new SelectListItem( x.NumberInHall.ToString(),x.Id))" class="form-control"></select>
+            <span asp-validation-for="SlotMachineId" class="text-danger"></span>
+        </div>
+        <br>
+        <div>
+            <input type="submit" name="Save" value="Add" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

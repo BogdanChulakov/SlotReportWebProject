@@ -28,6 +28,10 @@
         [HttpPost]
         public async Task<IActionResult> Add(InputGamingHallViewModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Content("Ivalid Input!");
+            }
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             await this.service.AddAsync(input.HallName, input.Adress, input.Town, userId);
 
