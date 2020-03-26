@@ -32,8 +32,9 @@
             {
                 return this.Content("Ivalid Input!");
             }
+
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            await this.service.AddAsync(input.HallName, input.Adress, input.Town, userId);
+            await this.service.AddAsync(input.HallName,input.Description,input.PhoneNumber, input.Adress, input.Town, userId);
 
             return this.Redirect("/");
         }
@@ -73,9 +74,18 @@
         [HttpPost]
         public async Task<IActionResult> Update(DetailsViewModel input)
         {
-            await this.service.UpdateAsync(input.Id, input.HallName, input.Adress, input.Town);
+            await this.service.UpdateAsync(input.Id, input.HallName, input.Description, input.PhoneNumber, input.Adress, input.Town);
 
             return this.Redirect("/GamingHall/Halls");
+        }
+
+        public IActionResult AddElements([FromQuery] string id)
+        {
+            var hallView = new AddElementsViewModel
+            {
+                Id = id,
+            };
+            return this.View(hallView);
         }
     }
 }

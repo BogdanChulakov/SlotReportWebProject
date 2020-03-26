@@ -8,7 +8,7 @@
 
     public interface IGamingHallService
     {
-        Task AddAsync(string hallName, string adress, string town, string userId);
+        Task AddAsync(string hallName, string description, string phoneNumber, string adress, string town, string userId);
 
         IEnumerable<T> AllHalls<T>(string userId);
 
@@ -16,6 +16,6 @@
 
         T GetT<T>(string id);
 
-        Task UpdateAsync(string id, string hallName, string adress, string town);
+        Task UpdateAsync(string id, string hallName, string description, string phoneNumber, string adress, string town);
     }
 }

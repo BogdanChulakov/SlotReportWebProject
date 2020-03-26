@@ -8,6 +8,11 @@
         [MaxLength(50)]
         public string HallName { get; set; }
 
+        public string Description { get; set; }
+
+        [Required]
+        public string PhoneNumber { get; set; }
+
         [Required]
         public string Adress { get; set; }
 

@@ -1,0 +1,20 @@
+﻿@model OnlineSlotReports.Web.ViewModels.GalleryViewModels.InputPicViewModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1 align="center">Add picture to Gallery</h1>
+
+<div class="col-md-4">
+    <form asp-controller="Gallery" asp-action="Add" method="post">
+        <div>
+            <label asp-for="Url">Url</label>
+            <input asp-for="Url" class="form-control" />
+            <span asp-validation-for="Url" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <input type="submit" name="Save" value="Add" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

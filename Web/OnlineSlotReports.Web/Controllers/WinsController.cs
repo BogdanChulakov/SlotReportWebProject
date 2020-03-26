@@ -42,7 +42,7 @@
 
             var gamingHallId = await this.services.AddAsync(input.Url, input.Description, input.Date, id, input.SlotMachineId);
 
-            return this.Redirect("/Wins/All/" + gamingHallId);
+            return this.RedirectToAction("All", "Wins", gamingHallId);
         }
 
         public IActionResult All([FromQuery] string id)
@@ -61,7 +61,7 @@
         {
             await this.services.Delete(id);
 
-            return this.Redirect("/Wins/All");
+            return this.RedirectToAction("All");
         }
     }
 }

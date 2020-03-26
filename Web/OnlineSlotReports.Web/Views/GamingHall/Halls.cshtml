@@ -9,16 +9,22 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-6" align="center">"@hall.HallName"</h1>
-            <p class="lead"><a href="/SlotMachine/All?id=@hall.Id">Slot Machines (@hall.SlotMachinesCount)</a></p>
-            <p class="lead"><a href="/Employees/AllEmployees?id=@hall.Id">Employees (@hall.EmployeesCount)</a></p>
-            <p class="lead"><a href="/Wins/All?id=@hall.Id">Wins</a></p>
+            <p class="lead" align="center">@hall.Adress @hall.Town</p>
+            <br>
+            <div class="row" align="center">
+                <p class="lead col-md-3"><a href="/SlotMachine/All?id=@hall.Id">Slot Machines (@hall.SlotMachinesCount)</a></p>
+                <p class="lead col-md-3"><a href="/Employees/AllEmployees?id=@hall.Id">Employees (@hall.EmployeesCount)</a></p>
+                <p class="lead col-md-3"><a href="/Wins/All?id=@hall.Id">Wins</a></p>
+                <p class="lead col-md-3"><a href="/Gallery/All?id=@hall.Id">Gallery</a></p>
+            </div>
             <p class="lead"></p>
-            <p class="lead">Adress: @hall.Adress @hall.Town</p>
+            <br>
             <table style="width:100%">
-                <tr align="right">
-                    <th><a href="/GamingHall/Details?id=@hall.Id" class="btn btn-primary">Details</a></th>
+                <tr align="center">
+                    <th><a href="/GamingHall/AddElements?id=@hall.Id" class="btn btn-primary">Add</a></th>
                     <th><a href="/GamingHall/Update?id=@hall.Id" class="btn btn-primary">Update</a></th>
                     <th><a href="/GamingHall/Delete?id=@hall.Id" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a></th>
+                    <th><a href="/GamingHall/Details?id=@hall.Id" class="btn btn-primary">Details</a></th>
                 </tr>
             </table>
         </div>

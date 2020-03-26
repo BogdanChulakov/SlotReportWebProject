@@ -14,8 +14,8 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
+        [Url]
         [Required]
-        [RegularExpression("^(http|https)://")]
         public string Url { get; set; }
 
         [Required]

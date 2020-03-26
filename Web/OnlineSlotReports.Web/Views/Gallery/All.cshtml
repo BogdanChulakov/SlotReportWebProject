@@ -1,0 +1,24 @@
+﻿@model OnlineSlotReports.Web.ViewModels.GalleryViewModels.AllPictureViewModel
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+<h1 align="center">Gallery</h1>
+<p>
+    <a href="/Gallery/Add/@Model.GamingHallId" class="btn btn-primary">Add picture!</a>
+</p>
+<div class="row">
+    @foreach (var pic in Model.Pictures)
+    {
+        <div class="col-md-4">
+            <div id="mdb-lightbox-ui"></div>
+            <div class="mdb-lightbox">
+                <figure class="col-md-12">
+                    <a href="@pic.Url" data-size="1600x1067">
+                        <img alt="picture" src="@pic.Url" class="img-fluid">
+                    </a>
+                </figure>
+            </div>
+        </div>
+    }
+</div>

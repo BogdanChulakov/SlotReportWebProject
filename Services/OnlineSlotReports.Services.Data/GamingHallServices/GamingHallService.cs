@@ -19,11 +19,13 @@
             this.repository = repository;
         }
 
-        public async Task AddAsync(string hallName, string adress, string town, string userId)
+        public async Task AddAsync(string hallName,string description,string phoneNumber, string adress, string town, string userId)
         {
             var gaminhHall = new GamingHall
             {
                 HallName = hallName,
+                Description = description,
+                PhoneNumber = phoneNumber,
                 Adress = adress,
                 Town = town,
                 UserId = userId,
@@ -53,12 +55,15 @@
             return hall;
         }
 
-        public async Task UpdateAsync(string id, string hallName, string adress, string town)
+        public async Task UpdateAsync(string id, string hallName, string description, string phoneNumber, string adress, string town)
         {
             var hall = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
             hall.HallName = hallName;
+            hall.Description = description;
+            hall.PhoneNumber = phoneNumber;
             hall.Adress = adress;
             hall.Town = town;
+
             await this.repository.SaveChangesAsync();
         }
     }

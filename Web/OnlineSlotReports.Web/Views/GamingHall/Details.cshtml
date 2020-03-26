@@ -1,12 +1,17 @@
 ﻿@model OnlineSlotReports.Web.ViewModels.GamingHallViewModels.DetailsViewModel
 @{
     ViewData["Title"] = "Details";
+    Layout = "_LayoutHall";
 }
 
-<h1>Details</h1>
-<h2 align="center">@Model.HallName</h2>
-<h2 align="right">Adress: @Model.Adress</h2>
-<h2 align="right">Town: @Model.Town</h2>
-
+<h1 align="center">@Model.HallName</h1>
+<div align="center">
+    <h2 align="center">@Model.Description</h2>
+</div>
+<div align="right">
+    <h3>Phone: @Model.PhoneNumber</h3>
+    <h3>Adress: @Model.Adress</h3>
+    <h3>Town: @Model.Town</h3>
+</div>
 
 

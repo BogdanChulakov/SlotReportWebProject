@@ -12,6 +12,16 @@
             <span asp-validation-for="HallName" class="text-danger"></span>
         </div>
         <div>
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="PhoneNumber">Phone Number</label>
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div>
             <label asp-for="Adress"></label>
             <input asp-for="Adress" class="form-control" />
             <span asp-validation-for="Adress" class="text-danger"></span>
