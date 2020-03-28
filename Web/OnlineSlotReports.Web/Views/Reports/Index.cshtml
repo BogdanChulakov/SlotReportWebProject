@@ -1,0 +1,17 @@
+﻿@model OnlineSlotReports.Web.ViewModels.ReportsViewModels.AllMachinesViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<a href="/Reports/Add" class="btn btn-primary">Add</a>
+@foreach (var machine in Model.MachinesViewModels)
+{
+<p>@machine.NumberInHall  @machine.LicenseNumber</p>
+
+}
+    
+
+
+
+

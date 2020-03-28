@@ -34,9 +34,9 @@
             }
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            await this.service.AddAsync(input.HallName,input.Description,input.PhoneNumber, input.Adress, input.Town, userId);
+            await this.service.AddAsync(input.HallName, input.Description, input.PhoneNumber, input.Adress, input.Town, userId);
 
-            return this.Redirect("/");
+            return this.Redirect("/GamingHall/Halls");
         }
 
         public async Task<IActionResult> Halls()
@@ -79,7 +79,7 @@
             return this.Redirect("/GamingHall/Halls");
         }
 
-        public IActionResult AddElements([FromQuery] string id)
+        public IActionResult AddElements([FromRoute] string id)
         {
             var hallView = new AddElementsViewModel
             {

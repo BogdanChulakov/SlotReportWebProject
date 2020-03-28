@@ -32,7 +32,7 @@
             return this.Redirect("/GamingHall/Halls");
         }
 
-        public IActionResult All([FromQuery]string id)
+        public IActionResult All([FromRoute]string id)
         {
             var macines = this.services.All<SlotMachineViewModel>(id);
             var slotMchines = new AllSlotMachinesViewModel

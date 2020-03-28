@@ -47,5 +47,15 @@
 
             await this.repository.SaveChangesAsync();
         }
+
+        public string GetHallId(string id)
+        {
+            var hallId = this.repository.All().Where(x => x.Id == id).Select(x => new
+            {
+                hallid = x.GamingHallId,
+            }).FirstOrDefault();
+
+            return hallId.hallid;
+        }
     }
 }

@@ -18,8 +18,13 @@
             this.services = services;
         }
 
-        public IActionResult All([FromQuery] string id)
+        public IActionResult All([FromRoute] string id)
         {
+            if (id == null)
+            {
+                id = this.TempData["id"].ToString();
+            }
+
             var pictures = this.services.All<PictureViewModel>(id);
 
             var allpicture = new AllPictureViewModel
@@ -45,14 +50,14 @@
             }
 
             await this.services.AddAsync(input.Url, id);
-
-            return this.RedirectToAction("All", "Gallery", id);
+            this.TempData["id"] = id;
+            return this.RedirectToAction("All");
         }
 
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
+            this.TempData["id"] = this.services.GetHallId(id);
             await this.services.Delete(id);
-
             return this.RedirectToAction("All");
         }
     }

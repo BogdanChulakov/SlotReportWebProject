@@ -45,7 +45,7 @@
             return this.RedirectToAction("All", "Wins", gamingHallId);
         }
 
-        public IActionResult All([FromQuery] string id)
+        public IActionResult All([FromRoute] string id)
         {
             var wins = this.services.All<WinViewModel>(id);
             var allWins = new AllWinsViewModel

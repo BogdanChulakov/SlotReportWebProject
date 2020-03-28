@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineSlotReports.Data;
 
 namespace OnlineSlotReports.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200328034630_AddReportEntity")]
+    partial class AddReportEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -458,7 +460,7 @@ namespace OnlineSlotReports.Data.Migrations
 
                     b.HasIndex("SlotMachineId");
 
-                    b.ToTable("Reports");
+                    b.ToTable("Report");
                 });
 
             modelBuilder.Entity("OnlineSlotReports.Data.Models.Setting", b =>

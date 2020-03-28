@@ -41,5 +41,7 @@
         public virtual IEnumerable<Employee> Employees { get; set; } = new HashSet<Employee>();
 
         public virtual IEnumerable<Pic> Galery { get; set; } = new HashSet<Pic>();
+
+        public virtual IEnumerable<Report> Reports { get; set; } = new HashSet<Report>();
     }
 }

@@ -1,7 +1,6 @@
 ﻿@model OnlineSlotReports.Web.ViewModels.GamingHallViewModels.DetailsViewModel
 @{
     ViewData["Title"] = "Details";
-    Layout = "_LayoutHall";
 }
 
 <h1 align="center">@Model.HallName</h1>
@@ -13,5 +12,20 @@
     <h3>Adress: @Model.Adress</h3>
     <h3>Town: @Model.Town</h3>
 </div>
+@section Links{
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/SlotMachine/All/@Model.Id">Slot Machines</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Employees/AllEmployees/@Model.Id">Employees</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Wins/All/@Model.Id">Wins</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Gallery/All/@Model.Id">Gallery</a>
+    </li>
+}
 
 

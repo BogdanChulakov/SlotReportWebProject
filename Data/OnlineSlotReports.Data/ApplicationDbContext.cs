@@ -33,6 +33,8 @@
 
         public DbSet<MachineCounters> MachineCounters { get; set; }
 
+        public DbSet<Report> Reports { get; set; }
+
         public DbSet<Win> Wins { get; set; }
 
         public DbSet<Pic> Pics { get; set; }

@@ -35,7 +35,7 @@
             return this.Redirect("/");
         }
 
-        public IActionResult AllEmployees(string id)
+        public IActionResult AllEmployees([FromRoute]string id)
         {
             var employees = this.services.All<EmployeeViewModel>(id);
             var allEmployeesViewModel = new AllEmployeesViewModel
