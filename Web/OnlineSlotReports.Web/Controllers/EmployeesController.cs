@@ -11,10 +11,14 @@
     public class EmployeesController : Controller
     {
         private readonly IEmployeesServices services;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<ApplicationRole> roleManager;
 
-        public EmployeesController(IEmployeesServices services)
+        public EmployeesController(IEmployeesServices services, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             this.services = services;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Add()
@@ -31,6 +35,22 @@
             }
 
             await this.services.AddAsync(input.FullName, input.Email, input.PhoneNumber, input.Password, input.StartWorkDate, id);
+
+            await this.userManager.CreateAsync(new ApplicationUser{UserName = input.Email, Email = input.Email, EmailConfirmed = true, }, input.Password);
+
+            var role = await this.roleManager.FindByNameAsync("Croupier");
+
+            if (role == null)
+            {
+                await this.roleManager.CreateAsync(new ApplicationRole
+                {
+                    Name = "Croupier",
+                });
+            }
+
+            var user = await this.userManager.FindByNameAsync(input.Email);
+
+            await this.userManager.AddToRoleAsync(user, "Croupier");
 
             return this.Redirect("/");
         }

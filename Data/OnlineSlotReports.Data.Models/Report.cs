@@ -18,26 +18,11 @@
 
         [Required]
         [Range(0, double.MaxValue)]
-        public decimal EllInForDay { get; set; }
+        public decimal InForDay { get; set; }
 
         [Required]
         [Range(0, double.MaxValue)]
-        public decimal EllOutForDay { get; set; }
-
-        public decimal EllResultForDay => this.EllInForDay - this.EllOutForDay;
-
-        [Required]
-        public int MechInForDay { get; set; }
-
-        [Required]
-        public int MechOutForDay { get; set; }
-
-        public int MechResultForDay => this.MechInForDay - this.MechOutForDay;
-
-        [Required]
-        public string SlotMachineId { get; set; }
-
-        public SlotMachine SlotMachine { get; set; }
+        public decimal OutForDay { get; set; }
 
         [Required]
         public string GamingHallId { get; set; }

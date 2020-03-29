@@ -24,5 +24,7 @@
         public string ConfirmPassword { get; set; }
 
         public DateTime StartWorkDate { get; set; }
+
+
     }
 }

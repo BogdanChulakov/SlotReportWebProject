@@ -424,39 +424,27 @@ namespace OnlineSlotReports.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("EllInForDay")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("EllOutForDay")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("GamingHallId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<decimal>("InForDay")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<int>("MechInForDay")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MechOutForDay")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("SlotMachineId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<decimal>("OutForDay")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GamingHallId");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("SlotMachineId");
 
                     b.ToTable("Reports");
                 });
@@ -673,12 +661,6 @@ namespace OnlineSlotReports.Data.Migrations
                     b.HasOne("OnlineSlotReports.Data.Models.GamingHall", "GamingHall")
                         .WithMany("Reports")
                         .HasForeignKey("GamingHallId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("OnlineSlotReports.Data.Models.SlotMachine", "SlotMachine")
-                        .WithMany("Reports")
-                        .HasForeignKey("SlotMachineId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

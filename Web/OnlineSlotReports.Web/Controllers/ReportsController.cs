@@ -6,30 +6,41 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using OnlineSlotReports.Services.Data.ReportServices;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
     using OnlineSlotReports.Web.ViewModels.ReportsViewModels;
 
     public class ReportsController : Controller
     {
-        private readonly ISlotMachinesServices slotMachines;
+        private readonly IReportServices reportServices;
 
-        public ReportsController(ISlotMachinesServices slotMachines)
+        public ReportsController(IReportServices reportServices)
         {
-            this.slotMachines = slotMachines;
+            this.reportServices = reportServices;
         }
 
-        public IActionResult Index([FromRoute] string id)
+        public IActionResult All([FromRoute] string id)
         {
             this.TempData["hallId"] = id;
-            var machines = this.slotMachines.All<IndexReportViewModel>(id);
-            var model = new AllMachinesViewModel();
-            model.MachinesViewModels = machines;
-            return this.View(model);
+            var reports = this.reportServices.All<IndexReportViewModel>(id);
+            var allReports = new AllReportsViewModel
+            {
+                Reports = reports,
+            };
+            return this.View(allReports);
         }
 
         public IActionResult Add()
         {
             return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(InputReportViewModel input)
+        {
+            await this.reportServices.Add(input.Date, input.InForDay, input.OutForDay, this.TempData["hallId"].ToString());
+
+            return this.Redirect("/Reports/All/" + this.TempData["hallId"].ToString());
         }
     }
 }

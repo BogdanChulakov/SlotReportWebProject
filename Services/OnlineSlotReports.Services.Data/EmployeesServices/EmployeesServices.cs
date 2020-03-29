@@ -13,14 +13,11 @@
     public class EmployeesServices : IEmployeesServices
     {
         private readonly IDeletableEntityRepository<Employee> repository;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly RoleManager<ApplicationRole> roleManager;
 
-        public EmployeesServices(IDeletableEntityRepository<Employee> repository, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public EmployeesServices(IDeletableEntityRepository<Employee> repository)
         {
             this.repository = repository;
-            this.userManager = userManager;
-            this.roleManager = roleManager;
+
         }
 
         public async Task AddAsync(string fullName, string email, string phonenumber, string password, DateTime startWorkDate, string gamingHallId)
@@ -37,27 +34,6 @@
 
             await this.repository.AddAsync(employee);
             await this.repository.SaveChangesAsync();
-            await this.userManager.CreateAsync(
-            new ApplicationUser
-            {
-                UserName = email,
-                Email = email,
-                EmailConfirmed = true,
-            }, password);
-
-            var role = await this.roleManager.FindByNameAsync("Croupier");
-
-            if (role == null)
-            {
-                await this.roleManager.CreateAsync(new ApplicationRole
-                {
-                    Name = "Croupier",
-                });
-            }
-
-            var user = await this.userManager.FindByNameAsync(email);
-
-            await this.userManager.AddToRoleAsync(user, "Croupier");
         }
 
         public IEnumerable<T> All<T>(string id)

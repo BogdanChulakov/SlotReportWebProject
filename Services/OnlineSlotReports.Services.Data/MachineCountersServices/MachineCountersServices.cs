@@ -1,10 +1,13 @@
 ﻿namespace OnlineSlotReports.Services.Data.MachineCountersServices
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using OnlineSlotReports.Data.Common.Repositories;
     using OnlineSlotReports.Data.Models;
+    using OnlineSlotReports.Services.Mapping;
 
     public class MachineCountersServices : IMachineCountersServices
     {
@@ -28,6 +31,13 @@
             };
             await this.repository.AddAsync(counters);
             await this.repository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> All<T>(string id)
+        {
+            IQueryable<MachineCounters> halls = this.repository.All().Where(x => x.SlotMachine.GamingHallId == id).OrderByDescending(x => x.Date);
+
+            return halls.To<T>().ToList();
         }
     }
 }

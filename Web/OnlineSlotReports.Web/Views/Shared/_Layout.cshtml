@@ -37,12 +37,6 @@
                             </li>
                         }
                         @RenderSection("Links", false)
-                        @if (User.IsInRole("Croupier"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="Create">Report</a>
-                            </li>
-                        }
                     </ul>
                 </div>
             </div>

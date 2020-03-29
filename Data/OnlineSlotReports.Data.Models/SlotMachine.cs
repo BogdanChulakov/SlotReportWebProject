@@ -30,7 +30,5 @@
         public virtual IEnumerable<MachineCounters> MachinesCounters { get; set; } = new HashSet<MachineCounters>();
 
         public virtual IEnumerable<Win> Wins { get; set; } = new HashSet<Win>();
-
-        public virtual IEnumerable<Report> Reports { get; set; } = new HashSet<Report>();
     }
 }
