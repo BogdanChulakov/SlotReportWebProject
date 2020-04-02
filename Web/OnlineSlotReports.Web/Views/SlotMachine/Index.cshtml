@@ -1,0 +1,24 @@
+﻿@model OnlineSlotReports.Web.ViewModels.SlotMachinesViewModels.AllIndexViewModel
+@{
+    ViewData["Title"] = "All Slot Machines";
+}
+<h1 align="center">Slot Machines</h1>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">NumberInHall</th>
+            <th scope="col">Model</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var machine in Model.SlotMachines)
+        {
+
+            <tr>
+                <td>@machine.NumberInHall</td>
+                <td>@machine.Model</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

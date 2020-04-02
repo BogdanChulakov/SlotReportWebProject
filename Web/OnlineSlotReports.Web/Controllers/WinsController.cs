@@ -5,12 +5,13 @@
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
     using OnlineSlotReports.Services.Data.WinsServices;
     using OnlineSlotReports.Web.ViewModels.WinsViewModels;
 
+    [Authorize]
     public class WinsController : Controller
     {
         private readonly IWinsServices services;
@@ -53,12 +54,30 @@
                 Wins = wins,
                 GamingHallId = id,
             };
+            if (id == null)
+            {
+                return this.View("Error");
+            }
+
+            return this.View(allWins);
+        }
+
+        [AllowAnonymous]
+        public IActionResult Index([FromRoute] string id)
+        {
+            var wins = this.services.All<WinViewModel>(id);
+            var allWins = new AllWinsViewModel
+            {
+                Wins = wins,
+                GamingHallId = id,
+            };
 
             return this.View(allWins);
         }
 
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             await this.services.Delete(id);
 
             return this.RedirectToAction("All");

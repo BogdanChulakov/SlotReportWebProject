@@ -1,0 +1,30 @@
+﻿@model OnlineSlotReports.Web.ViewModels.ReportsViewModels.InputReportViewModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1 align="center">Add Reports for Day</h1>
+
+<div class="col-md-4">
+    <form asp-controller="Reports" asp-action="Add" method="post">
+        <div>
+            <label asp-for="Date">Date</label>
+            <input asp-for="Date" class="form-control" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="InForDay">InForDay</label>
+            <input asp-for="InForDay" class="form-control" />
+            <span asp-validation-for="InForDay" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="OutForDay">OutForDay</label>
+            <input asp-for="OutForDay" class="form-control" />
+            <span asp-validation-for="OutForDay" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <input type="submit" name="Save" value="Add" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

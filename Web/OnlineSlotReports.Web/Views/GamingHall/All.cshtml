@@ -1,0 +1,28 @@
+﻿@model OnlineSlotReports.Web.ViewModels.GamingHallViewModels.AllIndexViewModel
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1 align="center"><strong>Gaming Halls</strong></h1>
+
+@foreach (var hall in Model.GamingHalls)
+{
+    <div class="card">
+        <div class="card-header">
+            <a asp-controller="GamingHall" asp-action="Index" asp-route-id="@hall.Id">@hall.HallName</a>
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="@hall.ImageUrl" alt="Alternate Text" height="100" />
+                    </div>
+                    <div class="col-md-10">
+                        <p>@hall.ShortDescription</p>
+                        <footer class="blockquote-footer"> Address: @hall.Adress<cite title="Source Title"> @hall.Town</cite></footer>
+                    </div>
+                </div>
+            </blockquote>
+        </div>
+    </div>
+}

@@ -1,0 +1,18 @@
+﻿@model OnlineSlotReports.Web.ViewModels.WinsViewModels.AllWinsViewModel
+@{
+    ViewData["Title"] = "AllWins";
+}
+
+<h1 align="center">All Wins</h1>
+<div class="row">
+    @foreach (var win in Model.Wins)
+    {
+        <div class="col-md-4 card" style="width: 18rem;">
+            <img class="card-img-top" src="@win.Url" alt="Card image cap" height="200">
+            <div class="card-body">
+                <h5 class="card-title">@win.Date</h5>
+                <p class="card-text">@win.Description </p>
+            </div>
+        </div>
+    }
+</div>

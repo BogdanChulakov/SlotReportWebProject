@@ -12,11 +12,15 @@
         public GamingHall()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.ImageUrl = @"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ8NtAyxsFdKU0bxkX6SfNICSXp_8RNbf2Sb2Ldl23PwHgu-O8s&usqp=CAU";
         }
 
         [Required]
         [MaxLength(50)]
         public string HallName { get; set; }
+
+        [Url]
+        public string ImageUrl { get; set; }
 
         public string Description { get; set; }
 

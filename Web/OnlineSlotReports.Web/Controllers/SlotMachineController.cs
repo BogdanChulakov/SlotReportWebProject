@@ -1,11 +1,12 @@
 ﻿namespace OnlineSlotReports.Web.Controllers
 {
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
     using OnlineSlotReports.Web.ViewModels.SlotMachinesViewModels;
 
+    [Authorize]
     public class SlotMachineController : Controller
     {
         private readonly ISlotMachinesServices services;
@@ -39,6 +40,18 @@
             {
                 SlotMachines = macines,
                 GamingHallId = id,
+            };
+
+            return this.View(slotMchines);
+        }
+
+        [AllowAnonymous]
+        public IActionResult Index([FromRoute]string id)
+        {
+            var macines = this.services.All<IndexViewModel>(id);
+            var slotMchines = new AllIndexViewModel
+            {
+                SlotMachines = macines,
             };
 
             return this.View(slotMchines);

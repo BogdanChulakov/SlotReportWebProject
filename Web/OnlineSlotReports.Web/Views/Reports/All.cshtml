@@ -1,0 +1,30 @@
+﻿@model OnlineSlotReports.Web.ViewModels.ReportsViewModels.AllReportsViewModel
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<h1 align="center">Reports</h1>
+<a href="/Reports/Add" class="btn btn-primary">Add</a>
+@foreach (var report in Model.Reports)
+{
+<div class="row">
+    <div class="col-md-3">
+       For Date: @report.Date
+    </div>
+    <div class="col-md-3">
+       Entrance for the day:  @report.InForDay
+    </div>
+    <div class="col-md-3">
+       Profits for the day: @report.OutForDay
+    </div>
+    <div class="col-md-3">
+       Result: @report.DeilyResult
+    </div>
+</div>
+}
+
+
+
+
+
+

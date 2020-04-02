@@ -45,7 +45,6 @@
         public async Task Delete(string id)
         {
             var win = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
-
             this.repository.Delete(win);
 
             await this.repository.SaveChangesAsync();

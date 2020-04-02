@@ -19,11 +19,12 @@
             this.repository = repository;
         }
 
-        public async Task AddAsync(string hallName,string description,string phoneNumber, string adress, string town, string userId)
+        public async Task AddAsync(string hallName, string imageUrl, string description, string phoneNumber, string adress, string town, string userId)
         {
             var gaminhHall = new GamingHall
             {
                 HallName = hallName,
+                ImageUrl=imageUrl,
                 Description = description,
                 PhoneNumber = phoneNumber,
                 Adress = adress,
@@ -32,6 +33,13 @@
             };
             await this.repository.AddAsync(gaminhHall);
             await this.repository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> All<T>()
+        {
+            IQueryable<GamingHall> halls = this.repository.All().OrderBy(x => x.HallName);
+
+            return halls.To<T>().ToList();
         }
 
         public IEnumerable<T> AllHalls<T>(string userId)
@@ -55,10 +63,11 @@
             return hall;
         }
 
-        public async Task UpdateAsync(string id, string hallName, string description, string phoneNumber, string adress, string town)
+        public async Task UpdateAsync(string id, string hallName, string imageUrl, string description, string phoneNumber, string adress, string town)
         {
             var hall = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
             hall.HallName = hallName;
+            hall.ImageUrl = imageUrl;
             hall.Description = description;
             hall.PhoneNumber = phoneNumber;
             hall.Adress = adress;

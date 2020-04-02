@@ -7,8 +7,8 @@
 
     public interface IReportServices
     {
-        Task Add(DateTime date, decimal inForDay,decimal outForday,string hallid);
+        Task Add(DateTime date, decimal inForDay, decimal outForday, string hallid);
 
-        IEnumerable<T> All<T>(string id);
+        IEnumerable<T> All<T>(string id, string userId);
     }
 }

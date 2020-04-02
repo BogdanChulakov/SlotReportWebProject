@@ -1,6 +1,4 @@
-﻿@using OnlineSlotReports.Web.ViewModels.GamingHallViewModels
-@model InputGamingHallViewModel
-
+﻿@model OnlineSlotReports.Web.ViewModels.GamingHallViewModels.InputGamingHallViewModel
 @{
     ViewData["Title"] = "Add";
 }
@@ -10,6 +8,11 @@
             <label asp-for="HallName">Hall Name</label>
             <input asp-for="HallName" class="form-control" />
             <span asp-validation-for="HallName" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="ImageUrl"></label>
+            <input asp-for="ImageUrl" class="form-control"></input>
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Description"></label>

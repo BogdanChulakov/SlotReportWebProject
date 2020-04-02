@@ -2,34 +2,27 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Text;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Mapping;
 
-    public class DetailsViewModel : IMapFrom<GamingHall>
+    public class GamingHallsIndexViewModel : IMapFrom<GamingHall>
     {
         public string Id { get; set; }
 
-        [Required]
         public string HallName { get; set; }
 
-        [Url]
         public string ImageUrl { get; set; }
 
-        [MaxLength(3000)]
         public string Description { get; set; }
 
-        [RegularExpression("^[0-9]+$")]
-        public string PhoneNumber { get; set; }
+        [NotMapped]
+        public string ShortDescription => 
+            this.Description?.Length <= 100 ? this.Description : this.Description?.Substring(0, 100) + "...";
 
-        [Required]
         public string Adress { get; set; }
 
-        [Required]
         public string Town { get; set; }
-
-        public string UserId { get; set; }
     }
 }
