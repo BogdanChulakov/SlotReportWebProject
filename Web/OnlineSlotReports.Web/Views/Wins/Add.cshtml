@@ -6,11 +6,9 @@
 <h1 align="center">Add Win</h1>
 
 <div class="col-md-4">
-    <form asp-controller="Wins" asp-action="Add" method="post">
+    <form asp-controller="Wins" asp-action="Add" method="post" dash-controller="Files" enctype="multipart/form-data">
         <div>
-            <label asp-for="Url">Url</label>
-            <input asp-for="Url" class="form-control" />
-            <span asp-validation-for="Url" class="text-danger"></span>
+            <input type="file" name="file" />
         </div>
         <div>
             <label asp-for="Description">Description</label>

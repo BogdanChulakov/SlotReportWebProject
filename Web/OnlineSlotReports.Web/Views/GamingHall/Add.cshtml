@@ -3,16 +3,11 @@
     ViewData["Title"] = "Add";
 }
 <div class="col-md-4">
-    <form asp-controller="GamingHall" asp-action="Add" method="post">
+    <form asp-controller="GamingHall" asp-action="Add" method="post" dash-controller="Files" enctype="multipart/form-data">
         <div>
             <label asp-for="HallName">Hall Name</label>
             <input asp-for="HallName" class="form-control" />
             <span asp-validation-for="HallName" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="ImageUrl"></label>
-            <input asp-for="ImageUrl" class="form-control"></input>
-            <span asp-validation-for="ImageUrl" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Description"></label>
@@ -33,6 +28,10 @@
             <label asp-for="Town"></label>
             <input asp-for="Town" class="form-control" />
             <span asp-validation-for="Town" class="text-danger"></span>
+        </div>
+        <br>
+        <div>
+            <input type="file" name="file" />
         </div>
         <br />
         <div>

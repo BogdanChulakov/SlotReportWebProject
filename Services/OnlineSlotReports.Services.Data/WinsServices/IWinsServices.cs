@@ -9,7 +9,7 @@
     {
         IEnumerable<T> All<T>(string id);
 
-        Task<string> AddAsync(string url, string description,DateTime date,string hallid, string slotMachineId);
+        Task<string> AddAsync(string url, string description, DateTime date, string hallid, string slotMachineId);
 
         Task Delete(string id);
     }

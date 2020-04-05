@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+
     using OnlineSlotReports.Data.Common.Repositories;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Mapping;

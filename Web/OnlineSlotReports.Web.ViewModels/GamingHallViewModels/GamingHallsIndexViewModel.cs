@@ -18,7 +18,7 @@
         public string Description { get; set; }
 
         [NotMapped]
-        public string ShortDescription => 
+        public string ShortDescription =>
             this.Description?.Length <= 100 ? this.Description : this.Description?.Substring(0, 100) + "...";
 
         public string Adress { get; set; }

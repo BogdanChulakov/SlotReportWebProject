@@ -17,7 +17,5 @@
         public string PhoneNumber { get; set; }
 
         public DateTime StartWorkDate { get; set; }
-
-
     }
 }

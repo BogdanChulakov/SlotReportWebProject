@@ -17,7 +17,6 @@
         public EmployeesServices(IDeletableEntityRepository<Employee> repository)
         {
             this.repository = repository;
-
         }
 
         public async Task AddAsync(string fullName, string email, string phonenumber, DateTime startWorkDate, string gamingHallId)

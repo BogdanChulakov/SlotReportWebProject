@@ -7,8 +7,7 @@
 
     public class InputWinViewModel
     {
-        [Required]
-        [Url]
+
         public string Url { get; set; }
 
         [Required]

@@ -7,12 +7,12 @@
 
     public interface IGalleryServices
     {
-
         Task Delete(string id);
 
         IEnumerable<T> All<T>(string id);
 
         string GetHallId(string id);
+
         Task<string> AddAsync(string url, string hallid);
     }
 }

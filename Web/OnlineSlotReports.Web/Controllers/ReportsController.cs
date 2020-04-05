@@ -46,7 +46,8 @@
             return this.Redirect("/Reports/All/" + input.GamingHallId);
         }
 
-        public IActionResult ForAPeriod([FromRoute] string id, ForADateReportViewModel input)
+        [HttpGet("/Report/ForAPeriod/id")]
+        public IActionResult ForAPeriod([FromQuery] string id, ForADateReportViewModel input)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var reports = this.reportServices.AllForAPeriod<IndexReportViewModel>(id, userId, input.FromDate, input.ToDate);

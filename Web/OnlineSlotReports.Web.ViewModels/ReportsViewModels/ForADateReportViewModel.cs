@@ -18,6 +18,5 @@
         public decimal TotalOut => this.Reports.Sum(x => x.OutForDay);
 
         public decimal TotaResult => this.Reports.Sum(x => x.DeilyResult);
-
     }
 }

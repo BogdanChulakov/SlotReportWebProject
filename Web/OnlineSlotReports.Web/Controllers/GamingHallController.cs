@@ -2,11 +2,14 @@
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Data.GamingHallServices;
+    using OnlineSlotReports.Web.CloudinaryHelper;
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
 
     [Authorize]
@@ -14,11 +17,13 @@
     {
         private readonly IGamingHallService service;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly Cloudinary cloudinary;
 
-        public GamingHallController(IGamingHallService service, UserManager<ApplicationUser> userManager)
+        public GamingHallController(IGamingHallService service, UserManager<ApplicationUser> userManager, Cloudinary cloudinary)
         {
             this.service = service;
             this.userManager = userManager;
+            this.cloudinary = cloudinary;
         }
 
         public IActionResult Add()
@@ -27,11 +32,16 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(InputGamingHallViewModel input)
+        public async Task<IActionResult> Add(InputGamingHallViewModel input, IFormFile file)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.Content("Ivalid Input!");
+            }
+
+            if (file != null)
+            {
+                input.ImageUrl = await CloudinaryExtension.UploadAsync(this.cloudinary, file);
             }
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -92,8 +102,18 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(DetailsViewModel input)
+        public async Task<IActionResult> Update(DetailsViewModel input, IFormFile file)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Content("Ivalid Input!");
+            }
+
+            if (file != null)
+            {
+                input.ImageUrl = await CloudinaryExtension.UploadAsync(this.cloudinary, file);
+            }
+
             await this.service.UpdateAsync(input.Id, input.HallName, input.ImageUrl, input.Description, input.PhoneNumber, input.Adress, input.Town);
 
             return this.Redirect("/GamingHall/Halls");

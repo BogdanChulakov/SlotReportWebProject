@@ -21,17 +21,28 @@
 
         public async Task AddAsync(string hallName, string imageUrl, string description, string phoneNumber, string adress, string town, string userId)
         {
-            var gaminhHall = new GamingHall
+            var gamingHall = new GamingHall();
+            if (imageUrl != null)
             {
-                HallName = hallName,
-                ImageUrl=imageUrl,
-                Description = description,
-                PhoneNumber = phoneNumber,
-                Adress = adress,
-                Town = town,
-                UserId = userId,
-            };
-            await this.repository.AddAsync(gaminhHall);
+                gamingHall.HallName = hallName;
+                gamingHall.ImageUrl = imageUrl;
+                gamingHall.Description = description;
+                gamingHall.PhoneNumber = phoneNumber;
+                gamingHall.Adress = adress;
+                gamingHall.Town = town;
+                gamingHall.UserId = userId;
+            }
+            else
+            {
+                gamingHall.HallName = hallName;
+                gamingHall.Description = description;
+                gamingHall.PhoneNumber = phoneNumber;
+                gamingHall.Adress = adress;
+                gamingHall.Town = town;
+                gamingHall.UserId = userId;
+            }
+
+            await this.repository.AddAsync(gamingHall);
             await this.repository.SaveChangesAsync();
         }
 
@@ -65,13 +76,14 @@
 
         public async Task UpdateAsync(string id, string hallName, string imageUrl, string description, string phoneNumber, string adress, string town)
         {
-            var hall = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
-            hall.HallName = hallName;
-            hall.ImageUrl = imageUrl;
-            hall.Description = description;
-            hall.PhoneNumber = phoneNumber;
-            hall.Adress = adress;
-            hall.Town = town;
+            var gamingHall = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            gamingHall.HallName = hallName;
+            gamingHall.ImageUrl = imageUrl;
+            gamingHall.Description = description;
+            gamingHall.PhoneNumber = phoneNumber;
+            gamingHall.Adress = adress;
+            gamingHall.Town = town;
 
             await this.repository.SaveChangesAsync();
         }

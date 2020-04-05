@@ -25,12 +25,14 @@
         public string Description { get; set; }
 
         [Required]
+        [RegularExpression("^[0-9]+$")]
         public string PhoneNumber { get; set; }
 
         [Required]
         public string Adress { get; set; }
 
         [Required]
+        [MaxLength(30)]
         public string Town { get; set; }
 
         [Required]
