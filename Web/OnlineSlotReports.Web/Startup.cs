@@ -1,7 +1,7 @@
 ﻿namespace OnlineSlotReports.Web
 {
     using System.Reflection;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -58,6 +58,15 @@
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
             services.AddRazorPages();
+
+            Account account = new Account(
+                             this.configuration["Cloudinary:AppName"],
+                             this.configuration["Cloudinary:AppKey"],
+                             this.configuration["Cloudinary:AppSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);
 
             services.AddSingleton(this.configuration);
 

@@ -14,6 +14,6 @@
 
         Task ChangePhoneNumberAsync(string id, string phoneNumber);
 
-        Task AddAsync(string fullName, string email, string phonenumber, string password, DateTime startWorkDate, string gamingHallId);
+        Task AddAsync(string fullName, string email, string phonenumber, DateTime startWorkDate, string gamingHallId);
     }
 }

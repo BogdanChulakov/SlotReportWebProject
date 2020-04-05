@@ -4,23 +4,30 @@
 }
 
 <h1 align="center">Reports</h1>
-<a href="/Reports/Add" class="btn btn-primary">Add</a>
+<hr />
+<a asp-controller="Reports" asp-action="Add" asp-route-id="@Model.HallId"class="btn btn-primary">Add</a>
+<hr />
+
+<div>
+    <a asp-controller="Reports" asp-action="ForAPeriod" asp-route-id="@Model.HallId" class="btn btn-primary">Reports for a perod</a>
+</div>
+<hr />
 @foreach (var report in Model.Reports)
 {
-<div class="row">
-    <div class="col-md-3">
-       For Date: @report.Date
+    <div class="row">
+        <div class="col-md-3">
+            For Date: @report.Date
+        </div>
+        <div class="col-md-3">
+            Entrance for the day:  @report.InForDay
+        </div>
+        <div class="col-md-3">
+            Profits for the day: @report.OutForDay
+        </div>
+        <div class="col-md-3">
+            Result: @report.DeilyResult
+        </div>
     </div>
-    <div class="col-md-3">
-       Entrance for the day:  @report.InForDay
-    </div>
-    <div class="col-md-3">
-       Profits for the day: @report.OutForDay
-    </div>
-    <div class="col-md-3">
-       Result: @report.DeilyResult
-    </div>
-</div>
 }
 
 

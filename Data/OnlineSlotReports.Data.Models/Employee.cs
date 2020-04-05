@@ -26,9 +26,6 @@
         [Required]
         public string PhoneNumber { get; set; }
 
-        [Required]
-        public string Password { get; set; }
-
         public DateTime StartWorkDate { get; set; }
 
         public DateTime? EndWorkDate { get; set; }

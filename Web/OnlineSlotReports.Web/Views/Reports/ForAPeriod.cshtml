@@ -1,0 +1,53 @@
+﻿@model OnlineSlotReports.Web.ViewModels.ReportsViewModels.ForADateReportViewModel
+@{
+    ViewData["Title"] = "ForAPeriod";
+}
+
+<h1>For A Period</h1>
+<form action="ForAPeriod" method="put">
+    <div>
+        <label asp-for="FromDate">From Date</label>
+        <input asp-for="FromDate" class="form-control" />
+        <span asp-validation-for="FromDate" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="ToDate">To Date</label>
+        <input asp-for="ToDate" class="form-control" />
+        <span asp-validation-for="ToDate" class="text-danger"></span>
+    </div>
+    @foreach (var report in Model.Reports)
+    {
+        <div>
+            <label asp-for="@report.InForDay">In For Day</label>
+            <input asp-for="@report.InForDay" class="form-control" />
+        </div>
+        <div>
+            <label asp-for="@report.OutForDay">Out For Day</label>
+            <input asp-for="@report.OutForDay" class="form-control" />
+        </div>
+        <div>
+            <label asp-for="@report.DeilyResult">Deily Result</label>
+            <input asp-for="@report.DeilyResult" class="form-control" />
+        </div>
+        <div>
+            <label asp-for="@report.Date">Date</label>
+            <input asp-for="@report.Date" class="form-control" />
+        </div>
+    }
+    <div>
+        <label asp-for="@Model.TotalIn">Total In</label>
+        <input asp-for="@Model.TotalIn" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="@Model.TotalOut">Total Out</label>
+        <input asp-for="@Model.TotalOut" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="@Model.TotaResult">Tota Result</label>
+        <input asp-for="@Model.TotaResult" class="form-control" />
+    </div>
+    <hr/>
+    <div>
+        <input type="submit" name="Save" value="Show" class="btn btn-primary" />
+    </div>
+</form>

@@ -41,5 +41,15 @@
 
             return halls.To<T>().ToList();
         }
+
+        public IEnumerable<T> AllForAPeriod<T>(string id, string userId, DateTime fromData, DateTime toData)
+        {
+            IQueryable<Report> halls = this.repository.All().Where(x => x.GamingHallId == id 
+                                                                     && x.GamingHall.UserId == userId 
+                                                                     && x.Date > fromData
+                                                                     && x.Date < toData).OrderByDescending(x => x.Date);
+
+            return halls.To<T>().ToList();
+        }
     }
 }

@@ -32,7 +32,7 @@
                 return this.Content("Ivalid Input!");
             }
 
-            await this.services.AddAsync(input.FullName, input.Email, input.PhoneNumber, input.Password, input.StartWorkDate, id);
+            await this.services.AddAsync(input.FullName, input.Email, input.PhoneNumber,input.StartWorkDate, id);
 
             return this.Redirect("/");
         }

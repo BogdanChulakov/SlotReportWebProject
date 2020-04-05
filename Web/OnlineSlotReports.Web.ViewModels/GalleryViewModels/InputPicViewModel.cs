@@ -7,7 +7,6 @@
 
     public class InputPicViewModel
     {
-        [Url]
         [Required]
         public string Url { get; set; }
 

@@ -20,14 +20,13 @@
 
         }
 
-        public async Task AddAsync(string fullName, string email, string phonenumber, string password, DateTime startWorkDate, string gamingHallId)
+        public async Task AddAsync(string fullName, string email, string phonenumber, DateTime startWorkDate, string gamingHallId)
         {
             var employee = new Employee
             {
                 FullName = fullName,
                 Email = email,
                 PhoneNumber = phonenumber,
-                Password = password,
                 StartWorkDate = startWorkDate,
                 GamingHallId = gamingHallId,
             };

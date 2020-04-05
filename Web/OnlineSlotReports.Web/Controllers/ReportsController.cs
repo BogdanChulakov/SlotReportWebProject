@@ -23,12 +23,12 @@
 
         public IActionResult All([FromRoute] string id)
         {
-            this.TempData["hallId"] = id;
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var reports = this.reportServices.All<IndexReportViewModel>(id, userId);
             var allReports = new AllReportsViewModel
             {
                 Reports = reports,
+                HallId = id,
             };
             return this.View(allReports);
         }
@@ -39,12 +39,23 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(InputReportViewModel input)
+        public async Task<IActionResult> Add([FromRoute] string id, InputReportViewModel input)
         {
+            await this.reportServices.Add(input.Date, input.InForDay, input.OutForDay, id);
 
-            await this.reportServices.Add(input.Date, input.InForDay, input.OutForDay, this.TempData["hallId"].ToString());
+            return this.Redirect("/Reports/All/" + input.GamingHallId);
+        }
 
-            return this.Redirect("/Reports/All/" + this.TempData["hallId"].ToString());
+        public IActionResult ForAPeriod([FromRoute] string id, ForADateReportViewModel input)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var reports = this.reportServices.AllForAPeriod<IndexReportViewModel>(id, userId, input.FromDate, input.ToDate);
+            var allReports = new ForADateReportViewModel
+            {
+                Reports = reports,
+            };
+
+            return this.View(allReports);
         }
     }
 }

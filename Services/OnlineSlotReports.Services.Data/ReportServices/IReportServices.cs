@@ -10,5 +10,7 @@
         Task Add(DateTime date, decimal inForDay, decimal outForday, string hallid);
 
         IEnumerable<T> All<T>(string id, string userId);
+
+        IEnumerable<T> AllForAPeriod<T>(string id, string userId, DateTime fromData, DateTime toData);
     }
 }

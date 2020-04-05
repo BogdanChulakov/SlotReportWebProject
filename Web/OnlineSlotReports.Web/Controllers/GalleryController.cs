@@ -5,10 +5,12 @@
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
-
+    using CloudinaryDotNet;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using OnlineSlotReports.Services.Data.GalleryServices;
     using OnlineSlotReports.Services.Data.GamingHallServices;
+    using OnlineSlotReports.Web.CloudinaryHelper;
     using OnlineSlotReports.Web.ViewModels.GalleryViewModels;
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
 
@@ -16,11 +18,16 @@
     {
         private readonly IGalleryServices services;
         private readonly IGamingHallService gamingHallService;
+        private readonly Cloudinary cloudinary;
 
-        public GalleryController(IGalleryServices services, IGamingHallService gamingHallService)
+        public GalleryController(
+            IGalleryServices services,
+            IGamingHallService gamingHallService,
+            Cloudinary cloudinary)
         {
             this.services = services;
             this.gamingHallService = gamingHallService;
+            this.cloudinary = cloudinary;
         }
 
         public IActionResult All([FromRoute] string id)
@@ -65,14 +72,16 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromRoute] string id, InputPicViewModel input)
+        public async Task<IActionResult> AddAsync([FromRoute] string id, IFormFile file)
         {
+            string url = await CloudinaryExtension.UploadAsync(this.cloudinary, file);
+
             if (!this.ModelState.IsValid)
             {
                 return this.Content("Ivalid Input!");
             }
 
-            await this.services.AddAsync(input.Url, id);
+            await this.services.AddAsync(url, id);
 
             this.TempData["id"] = id;
 
