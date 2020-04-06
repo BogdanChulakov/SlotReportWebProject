@@ -40,6 +40,16 @@
 
             var pictures = this.services.All<PictureViewModel>(id);
 
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            foreach (var item in pictures)
+            {
+                if (item.GamingHallUserId != userId)
+                {
+                    return this.Redirect("/GamingHall/Halls");
+                }
+            }
+
             var allpicture = new AllPictureViewModel
             {
                 Pictures = pictures,
@@ -75,6 +85,14 @@
         [HttpPost]
         public async Task<IActionResult> AddAsync([FromRoute] string id, IFormFile file)
         {
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId != hall.UserId)
+            {
+                return this.Redirect("/GamingHall/Halls");
+            }
+
             string url = await CloudinaryExtension.UploadAsync(this.cloudinary, file);
 
             if (!this.ModelState.IsValid)

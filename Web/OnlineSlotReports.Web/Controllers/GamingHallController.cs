@@ -91,12 +91,18 @@
         public IActionResult Details(string id)
         {
             var datailsViewModel = this.service.GetT<DetailsViewModel>(id);
-
             return this.View(datailsViewModel);
         }
 
         public IActionResult Update(string id)
         {
+            var hall = this.service.GetT<UserIdHallViewModel>(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId != hall.UserId)
+            {
+                return this.Redirect("/GamingHall/Halls");
+            }
+
             var datailsViewModel = this.service.GetT<DetailsViewModel>(id);
             return this.View(datailsViewModel);
         }

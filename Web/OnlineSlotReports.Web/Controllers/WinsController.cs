@@ -7,9 +7,11 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
     using OnlineSlotReports.Services.Data.WinsServices;
     using OnlineSlotReports.Web.CloudinaryHelper;
+    using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
     using OnlineSlotReports.Web.ViewModels.WinsViewModels;
 
     [Authorize]
@@ -18,16 +20,29 @@
         private readonly IWinsServices services;
         private readonly ISlotMachinesServices slotMachinesServices;
         private readonly Cloudinary cloudinary;
+        private readonly IGamingHallService gamingHallService;
 
-        public WinsController(IWinsServices services, ISlotMachinesServices slotMachinesServices, Cloudinary cloudinary)
+        public WinsController(
+            IWinsServices services,
+            ISlotMachinesServices slotMachinesServices,
+            Cloudinary cloudinary,
+            IGamingHallService gamingHallService)
         {
             this.services = services;
             this.slotMachinesServices = slotMachinesServices;
             this.cloudinary = cloudinary;
+            this.gamingHallService = gamingHallService;
         }
 
         public IActionResult Add([FromRoute]string id)
         {
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId != hall.UserId)
+            {
+                return this.Redirect("/GamingHall/Halls");
+            }
+
             var machineNumbers = this.slotMachinesServices.All<MachineDropDownViewModel>(id);
             InputWinViewModel model = new InputWinViewModel
             {
@@ -53,6 +68,13 @@
 
         public IActionResult All([FromRoute] string id)
         {
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId != hall.UserId)
+            {
+                return this.Redirect("/GamingHall/Halls");
+            }
+
             var wins = this.services.All<WinViewModel>(id);
             var allWins = new AllWinsViewModel
             {

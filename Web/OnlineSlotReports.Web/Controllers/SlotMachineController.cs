@@ -1,23 +1,36 @@
 ﻿namespace OnlineSlotReports.Web.Controllers
 {
+    using System.Security.Claims;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
+    using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
     using OnlineSlotReports.Web.ViewModels.SlotMachinesViewModels;
 
     [Authorize]
     public class SlotMachineController : Controller
     {
         private readonly ISlotMachinesServices services;
+        private readonly IGamingHallService gamingHallService;
 
-        public SlotMachineController(ISlotMachinesServices services)
+        public SlotMachineController(ISlotMachinesServices services, IGamingHallService gamingHallService)
         {
             this.services = services;
+            this.gamingHallService = gamingHallService;
         }
 
-        public IActionResult Add()
+        public IActionResult Add([FromRoute]string id)
         {
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId != hall.UserId)
+            {
+                return this.Redirect("/GamingHall/Halls");
+            }
+
             return this.View();
         }
 
@@ -35,6 +48,13 @@
 
         public IActionResult All([FromRoute]string id)
         {
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId != hall.UserId)
+            {
+                return this.Redirect("/GamingHall/Halls");
+            }
+
             var macines = this.services.All<SlotMachineViewModel>(id);
             var slotMchines = new AllSlotMachinesViewModel
             {
@@ -49,7 +69,7 @@
         public IActionResult Index([FromRoute]string id)
         {
             var macines = this.services.All<IndexViewModel>(id);
-            var slotMchines = new AllIndexViewModel
+            var slotMchines = new AllSlotMachinesIndexViewModel
             {
                 SlotMachines = macines,
             };

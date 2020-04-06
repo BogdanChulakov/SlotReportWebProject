@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using OnlineSlotReports.Common;
     using OnlineSlotReports.Data.Common.Repositories;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Mapping;
@@ -35,6 +36,7 @@
             else
             {
                 gamingHall.HallName = hallName;
+                gamingHall.ImageUrl = GlobalConstants.DefaultLogo;
                 gamingHall.Description = description;
                 gamingHall.PhoneNumber = phoneNumber;
                 gamingHall.Adress = adress;

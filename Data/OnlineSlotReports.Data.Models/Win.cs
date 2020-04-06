@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using OnlineSlotReports.Data.Common.Models;
 
     public class Win : BaseDeletableModel<string>

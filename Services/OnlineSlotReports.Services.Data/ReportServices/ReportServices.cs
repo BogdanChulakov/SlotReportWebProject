@@ -35,9 +35,9 @@
             await this.repository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> All<T>(string id, string userId)
+        public IEnumerable<T> All<T>(string id)
         {
-            IQueryable<Report> halls = this.repository.All().Where(x => x.GamingHallId == id && x.GamingHall.UserId == userId).OrderByDescending(x => x.Date);
+            IQueryable<Report> halls = this.repository.All().Where(x => x.GamingHallId == id).OrderByDescending(x => x.Date);
 
             return halls.To<T>().ToList();
         }

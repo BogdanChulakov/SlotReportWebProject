@@ -7,24 +7,34 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Services.Data.ReportServices;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
+    using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
     using OnlineSlotReports.Web.ViewModels.ReportsViewModels;
 
     [Authorize]
     public class ReportsController : Controller
     {
         private readonly IReportServices reportServices;
+        private readonly IGamingHallService gamingHallService;
 
-        public ReportsController(IReportServices reportServices)
+        public ReportsController(IReportServices reportServices, IGamingHallService gamingHallService)
         {
             this.reportServices = reportServices;
+            this.gamingHallService = gamingHallService;
         }
 
         public IActionResult All([FromRoute] string id)
         {
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var reports = this.reportServices.All<IndexReportViewModel>(id, userId);
+            if (userId != hall.UserId)
+            {
+                return this.Redirect("/GamingHall/Halls");
+            }
+
+            var reports = this.reportServices.All<IndexReportViewModel>(id);
             var allReports = new AllReportsViewModel
             {
                 Reports = reports,
@@ -33,8 +43,14 @@
             return this.View(allReports);
         }
 
-        public IActionResult Add()
+        public IActionResult Add([FromRoute]string id)
         {
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId != hall.UserId)
+            {
+                return this.Redirect("/GamingHall/Halls");
+            }
             return this.View();
         }
 

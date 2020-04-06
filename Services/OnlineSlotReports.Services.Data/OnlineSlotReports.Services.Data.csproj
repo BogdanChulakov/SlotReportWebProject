@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\OnlineSlotReports.Data.Common\OnlineSlotReports.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\OnlineSlotReports.Data.Models\OnlineSlotReports.Data.Models.csproj" />
+    <ProjectReference Include="..\..\OnlineSlotReports.Common\OnlineSlotReports.Common.csproj" />
     <ProjectReference Include="..\..\Web\OnlineSlotReports.Web.ViewModels\OnlineSlotReports.Web.ViewModels.csproj" />
     <ProjectReference Include="..\OnlineSlotReports.Services.Mapping\OnlineSlotReports.Services.Mapping.csproj" />
   </ItemGroup>
