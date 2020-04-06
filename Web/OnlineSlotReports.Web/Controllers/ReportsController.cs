@@ -51,6 +51,7 @@
             {
                 return this.Redirect("/GamingHall/Halls");
             }
+
             return this.View();
         }
 
@@ -62,11 +63,17 @@
             return this.Redirect("/Reports/All/" + input.GamingHallId);
         }
 
-        [HttpGet("/Report/ForAPeriod/id")]
-        public IActionResult ForAPeriod([FromQuery] string id, ForADateReportViewModel input)
+        [HttpGet("/Report/ForAPeriod/")]
+        public IActionResult ForAPeriod([FromQuery] ForADateReportViewModel input)
         {
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(input.Id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var reports = this.reportServices.AllForAPeriod<IndexReportViewModel>(id, userId, input.FromDate, input.ToDate);
+            if (userId != hall.UserId)
+            {
+                return this.Redirect("/GamingHall/Halls");
+            }
+
+            var reports = this.reportServices.AllForAPeriod<IndexReportViewModel>(input.Id, userId, input.FromDate, input.ToDate);
             var allReports = new ForADateReportViewModel
             {
                 Reports = reports,

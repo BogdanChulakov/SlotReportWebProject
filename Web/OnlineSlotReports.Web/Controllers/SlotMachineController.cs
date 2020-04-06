@@ -69,7 +69,7 @@
         public IActionResult Index([FromRoute]string id)
         {
             var macines = this.services.All<IndexViewModel>(id);
-            var slotMchines = new AllSlotMachinesIndexViewModel
+            var slotMchines = new ViewModels.SlotMachinesViewModels.AllIndexViewModel
             {
                 SlotMachines = macines,
             };

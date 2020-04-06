@@ -7,6 +7,8 @@
 
     public class ForADateReportViewModel
     {
+        public string Id { get; set; }
+
         public DateTime FromDate { get; set; }
 
         public DateTime ToDate { get; set; }

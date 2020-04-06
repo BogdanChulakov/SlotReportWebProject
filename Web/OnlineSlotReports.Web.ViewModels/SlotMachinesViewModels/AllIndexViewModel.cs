@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public class AllSlotMachinesIndexViewModel
+    public class AllIndexViewModel
     {
         public IEnumerable<IndexViewModel> SlotMachines { get; set; }
     }

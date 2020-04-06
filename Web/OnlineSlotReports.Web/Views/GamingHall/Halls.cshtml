@@ -3,13 +3,13 @@
     ViewData["Title"] = "Halls";
 }
 
-<h1 align="center">My Gaming Halls</h1>
+<h1 align="center" class="display-4">My Gaming Halls</h1>
 @foreach (var hall in Model.GamingHalls)
 {
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-6" align="center">"@hall.HallName"</h1>
-            <p class="lead" align="center">@hall.Adress @hall.Town</p>
+            <h1 align="center" class="display-4">"@hall.HallName"</h1>
+            <p class="lead" align="center">@hall.Adress - @hall.Town</p>
             <p class="lead" align="center"><a href="/Reports/All/@hall.Id" class="btn btn-primary">Reports</a></p>
             <br>
             <div class="row" align="center">
