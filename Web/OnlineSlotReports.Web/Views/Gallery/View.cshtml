@@ -18,7 +18,12 @@
 
 </head>
 <body>
-
+    @if (this.TempData["Message"] != null)
+    {
+        <div class="alert alert-success">
+            @this.TempData["Message"]
+        </div>
+    }
     <div class="container gallery-container">
 
         <h1 align="center" class="display-4">Gallery</h1>
@@ -31,14 +36,14 @@
                 @foreach (var pic in Model.Pictures)
                 {
 
-                <div class="col-md-4 card" style="width: 18rem;">
-                    <a class="lightbox" href="@pic.Url">
-                        <img src="@pic.Url" alt="Card image cap" height="200">
-                    </a>
-                    <p align="right">
-                        <a asp-controller="Gallery" asp-action="Delete" asp-route-id="@pic.Id"class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a>
-                    </p>
-                </div>
+                    <div class="col-md-4 card" style="width: 18rem;">
+                        <a class="lightbox" href="@pic.Url">
+                            <img src="@pic.Url" alt="Card image cap" height="200">
+                        </a>
+                        <p align="right">
+                            <a asp-controller="Gallery" asp-action="Delete" asp-route-id="@pic.Id" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a>
+                        </p>
+                    </div>
                 }
 
             </div>

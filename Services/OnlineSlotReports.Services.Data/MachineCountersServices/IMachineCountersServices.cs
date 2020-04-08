@@ -7,7 +7,7 @@
 
     public interface IMachineCountersServices
     {
-        Task AddAsync(decimal ellIn, decimal elout, int mechIn, int mechOut, DateTime date, string machineId);
+        Task<string> AddAsync(decimal ellIn, decimal elout, int mechIn, int mechOut, DateTime date, string machineId);
 
         IEnumerable<T> All<T>(string id);
     }

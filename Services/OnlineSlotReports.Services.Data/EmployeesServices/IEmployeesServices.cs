@@ -8,11 +8,11 @@
     {
         IEnumerable<T> All<T>(string id);
 
-        Task DeleteAsync(string id);
+        Task<string> DeleteAsync(string id);
 
-        Task ChangeEmailAsync(string id, string email);
+        Task<string> ChangeEmailAsync(string id, string email);
 
-        Task ChangePhoneNumberAsync(string id, string phoneNumber);
+        Task<string> ChangePhoneNumberAsync(string id, string phoneNumber);
 
         Task AddAsync(string fullName, string email, string phonenumber, DateTime startWorkDate, string gamingHallId);
     }

@@ -18,7 +18,7 @@
             this.repository = repository;
         }
 
-        public async Task AddAsync(decimal ellIn, decimal elout, int mechIn, int mechOut, DateTime date, string machineId)
+        public async Task<string> AddAsync(decimal ellIn, decimal elout, int mechIn, int mechOut, DateTime date, string machineId)
         {
             var counters = new MachineCounters
             {
@@ -29,8 +29,18 @@
                 Date = date,
                 SlotMachineId = machineId,
             };
+
             await this.repository.AddAsync(counters);
+
             await this.repository.SaveChangesAsync();
+
+            string gamingHallid = this.repository
+                .All()
+                .Where(x => x.SlotMachineId == machineId)
+                .Select(x => x.SlotMachine.GamingHallId)
+                .FirstOrDefault();
+
+            return gamingHallid;
         }
 
         public IEnumerable<T> All<T>(string id)

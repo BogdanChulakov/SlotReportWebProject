@@ -31,9 +31,11 @@
 
             var date = DateTime.UtcNow;
 
-            await this.services.AddAsync(input.EllIn, input.EllOut, input.MechIn, input.MechOut, date, id);
+            string gamingHallid = await this.services.AddAsync(input.EllIn, input.EllOut, input.MechIn, input.MechOut, date, id);
 
-            return this.Redirect("/GamingHall/Halls");
+            this.TempData["Message"] = "Machine counters was added successfully!";
+
+            return this.Redirect("/SlotMachine/All/" + gamingHallid);
         }
     }
 }

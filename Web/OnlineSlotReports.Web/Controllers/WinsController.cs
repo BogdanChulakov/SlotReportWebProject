@@ -63,6 +63,8 @@
 
             var gamingHallId = await this.services.AddAsync(input.Url, input.Description, input.Date, id, input.SlotMachineId);
 
+            this.TempData["Message"] = "Object was added successfully!";
+
             return this.Redirect("/Wins/All/" + gamingHallId);
         }
 
@@ -103,11 +105,12 @@
 
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            await this.services.Delete(id);
+            string gamingHallId = await this.services.Delete(id);
 
-            return this.RedirectToAction("All");
+            this.TempData["Message"] = "Object was deleted successfully!";
+
+            return this.Redirect("/Wins/All/" + gamingHallId);
         }
     }
 }

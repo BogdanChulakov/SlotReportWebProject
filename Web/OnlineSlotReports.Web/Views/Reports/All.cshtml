@@ -5,9 +5,14 @@
 
 <h1 align="center" class="display-4">Reports</h1>
 <hr />
-<a asp-controller="Reports" asp-action="Add" asp-route-id="@Model.HallId"class="btn btn-primary">Add</a>
+<a asp-controller="Reports" asp-action="Add" asp-route-id="@Model.HallId" class="btn btn-primary">Add</a>
 <hr />
-
+@if (this.TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @this.TempData["Message"]
+    </div>
+}
 <div>
     <a asp-controller="Reports" asp-action="ForAPeriod" asp-route-id="@Model.HallId" class="btn btn-primary">Reports for a perod</a>
 </div>

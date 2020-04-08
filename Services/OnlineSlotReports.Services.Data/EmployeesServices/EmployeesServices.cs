@@ -41,31 +41,37 @@
             return employees.To<T>().ToList();
         }
 
-        public async Task ChangeEmailAsync(string id, string email)
+        public async Task<string> ChangeEmailAsync(string id, string email)
         {
             var employee = await this.repository.GetByIdWithDeletedAsync(id);
-
+            var gamingHallId = employee.GamingHallId;
             employee.Email = email;
 
             await this.repository.SaveChangesAsync();
+
+            return gamingHallId;
         }
 
-        public async Task ChangePhoneNumberAsync(string id, string phoneNumber)
+        public async Task<string> ChangePhoneNumberAsync(string id, string phoneNumber)
         {
             var employee = await this.repository.GetByIdWithDeletedAsync(id);
-
+            var gamingHallId = employee.GamingHallId;
             employee.PhoneNumber = phoneNumber;
 
             await this.repository.SaveChangesAsync();
+
+            return gamingHallId;
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task<string> DeleteAsync(string id)
         {
             var employee = await this.repository.GetByIdWithDeletedAsync(id);
-
+            var gamingHallId = employee.GamingHallId;
             this.repository.Delete(employee);
 
             await this.repository.SaveChangesAsync();
+
+            return gamingHallId;
         }
     }
 }

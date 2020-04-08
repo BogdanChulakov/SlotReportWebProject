@@ -40,12 +40,14 @@
             return halls.To<T>().ToList();
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task<string> DeleteAsync(string id)
         {
             var mashine = await this.repository.GetByIdWithDeletedAsync(id);
-
+            string gamingHallId = mashine.GamingHallId;
             this.repository.Delete(mashine);
             await this.repository.SaveChangesAsync();
+
+            return gamingHallId;
         }
     }
 }

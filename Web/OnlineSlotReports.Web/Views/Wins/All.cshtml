@@ -7,6 +7,12 @@
 <p>
     <a asp-controller="Wins" asp-action="Add" asp-route-id="@Model.GamingHallId" class="btn btn-primary">Add Wins!</a>
 </p>
+@if (this.TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @this.TempData["Message"]
+    </div>
+}
 <div class="row">
     @foreach (var win in Model.Wins)
     {

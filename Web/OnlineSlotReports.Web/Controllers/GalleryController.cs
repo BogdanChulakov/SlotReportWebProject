@@ -33,11 +33,6 @@
 
         public IActionResult All([FromRoute] string id)
         {
-            if (id == null)
-            {
-                id = this.TempData["id"].ToString();
-            }
-
             var pictures = this.services.All<PictureViewModel>(id);
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -102,25 +97,20 @@
 
             await this.services.AddAsync(url, id);
 
-            this.TempData["id"] = id;
+            this.TempData["Message"] = "Picture was added successfully!";
 
-            return this.RedirectToAction("All");
+            return this.Redirect("/Gallery/All/" + id);
         }
 
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
             var gamingHallId = this.services.GetHallId(id);
-            this.TempData["id"] = gamingHallId;
-
-            var hall = this.gamingHallService.GetT<DetailsViewModel>(gamingHallId);
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (hall.UserId != userId)
-            {
-                return this.Content("Gredichka haker!");
-            }
 
             await this.services.Delete(id);
-            return this.RedirectToAction("All");
+
+            this.TempData["Message"] = "Picture was deleted successfully!";
+
+            return this.Redirect("/Gallery/All/" + gamingHallId);
         }
     }
 }

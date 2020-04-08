@@ -23,7 +23,5 @@
         public int MechOut { get; set; }
 
         public DateTime Date { get; set; }
-
-        public string MachineId { get; set; }
     }
 }

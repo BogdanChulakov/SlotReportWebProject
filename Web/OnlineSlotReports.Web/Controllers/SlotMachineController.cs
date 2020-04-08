@@ -43,7 +43,10 @@
             }
 
             await this.services.AddAsync(input.LicenseNumber, input.Model, input.NumberInHall, id);
-            return this.Redirect("/GamingHall/Halls");
+
+            this.TempData["Message"] = "Successfully added slot machine!";
+
+            return this.Redirect("/SlotMachine/All/" + id);
         }
 
         public IActionResult All([FromRoute]string id)
@@ -80,9 +83,11 @@
 
         public async Task<IActionResult> Delete([FromRoute]string id)
         {
-            await this.services.DeleteAsync(id);
+            string gamingHallid = await this.services.DeleteAsync(id);
 
-            return this.Redirect("/GamingHall/Halls");
+            this.TempData["Message"] = "Slot machine was deleted successfully!";
+
+            return this.Redirect("/SlotMachine/All/" + gamingHallid);
         }
     }
 }

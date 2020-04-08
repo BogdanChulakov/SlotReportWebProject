@@ -60,6 +60,8 @@
         {
             await this.reportServices.Add(input.Date, input.InForDay, input.OutForDay, id);
 
+            this.TempData["Message"] = "REport was added successfully!";
+
             return this.Redirect("/Reports/All/" + input.GamingHallId);
         }
 

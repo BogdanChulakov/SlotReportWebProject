@@ -46,7 +46,9 @@
 
             await this.services.AddAsync(input.FullName, input.Email, input.PhoneNumber, input.StartWorkDate, id);
 
-            return this.Redirect("/");
+            this.TempData["Message"] = "Employee was added successfully!";
+
+            return this.Redirect("/Employees/AllEmployees/" + id);
         }
 
         public IActionResult AllEmployees([FromRoute]string id)
@@ -70,9 +72,11 @@
 
         public async Task<IActionResult> Delete([FromRoute]string id)
         {
-            await this.services.DeleteAsync(id);
+            string gamingHallId = await this.services.DeleteAsync(id);
 
-            return this.Redirect("/GamingHall/Halls");
+            this.TempData["Message"] = "Employee was deleted successfully!";
+
+            return this.Redirect("/Employees/AllEmployees/" + gamingHallId);
         }
 
         public IActionResult ChangeEmail()
@@ -83,9 +87,11 @@
         [HttpPost]
         public async Task<IActionResult> ChangeEmail([FromRoute]string id, EmployeeChangeEmailViewModel model)
         {
-            await this.services.ChangeEmailAsync(id, model.Email);
+            string gamingHallId = await this.services.ChangeEmailAsync(id, model.Email);
 
-            return this.Redirect("/GamingHall/Halls");
+            this.TempData["Message"] = "Employee email successfully updated!";
+
+            return this.Redirect("/Employees/AllEmployees/" + gamingHallId);
         }
 
         public IActionResult ChangePhoneNumber()
@@ -96,9 +102,11 @@
         [HttpPost]
         public async Task<IActionResult> ChangePhoneNumber([FromRoute]string id, ChangePhoneNumberViewModel model)
         {
-            await this.services.ChangePhoneNumberAsync(id, model.PhoneNumber);
+            string gamingHallId = await this.services.ChangePhoneNumberAsync(id, model.PhoneNumber);
 
-            return this.Redirect("/GamingHall/Halls");
+            this.TempData["Message"] = "Employee Phone number successfully updated!";
+
+            return this.Redirect("/Employees/AllEmployees/" + gamingHallId);
         }
     }
 }
