@@ -72,6 +72,7 @@
             var slotMchines = new ViewModels.SlotMachinesViewModels.AllIndexViewModel
             {
                 SlotMachines = macines,
+                GamingHallId = id,
             };
 
             return this.View(slotMchines);

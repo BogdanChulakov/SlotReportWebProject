@@ -7,5 +7,7 @@
     public class AllIndexViewModel
     {
         public IEnumerable<IndexViewModel> SlotMachines { get; set; }
+
+        public string GamingHallId { get; set; }
     }
 }

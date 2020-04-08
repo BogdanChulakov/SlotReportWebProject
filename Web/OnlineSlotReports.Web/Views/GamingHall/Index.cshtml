@@ -12,7 +12,7 @@
         </div>
         <hr />
         <div>
-            <a asp-controller="SlotMachine" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary">Slot Machine</a>
+            <a asp-controller="SlotMachine" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary">Slot Machines</a>
         </div>
         <hr />
         <div>
@@ -29,8 +29,24 @@
         </div>
     </div>
     <div class="col-md-9">
-        <h1 align="center">@Model.HallName</h1>
+        <h1 align="center" class="display-4">@Model.HallName</h1>
         @Model.Description
     </div>
 </div>
+@section Links{
 
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/SlotMachine/Index/@Model.Id">Slot machines</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Gallery/Index/@Model.Id">Gallery</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Wins/Index/@Model.Id">Wins</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/GamingHall/Details/@Model.Id">Contacts</a>
+    </li>
+
+}
