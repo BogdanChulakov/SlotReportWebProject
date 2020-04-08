@@ -5,7 +5,7 @@
 
 <h1 align="center" class="display-4">All Employees</h1>
 <p>
-    <a href="/Employees/Add/@Model.GamingHallId" class="btn btn-primary">Add Employee!</a>
+    <a asp-controller="Employees" asp-action="Add" asp-route-id="@Model.GamingHallId" class="btn btn-primary">Add Employee!</a>
 </p>
 <table class="table table-dark">
     <thead>
@@ -22,10 +22,10 @@
 
         <tr>
             <th>@employee.FullName</th>
-            <th><a href="/Employees/ChangePhoneNumber/@employee.Id">@employee.PhoneNumber</a></th>
-            <td><a href="/Employees/ChangeEmail/@employee.Id">@employee.Email</a></td>
+            <th><a asp-controller="Employees" asp-action="ChangePhoneNumber" asp-route-id="@employee.Id">@employee.PhoneNumber</a></th>
+            <td><a asp-controller="Employees" asp-action="ChangeEmail" asp-route-id="@employee.Id">@employee.Email</a></td>
             <td>@employee.StartWorkDate.Date</td>
-            <td><a href="/Employees/Delete/@employee.Id" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a></td>
+            <td><a asp-controller="Employees" asp-action="Delete" asp-route-id="@employee.Id" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a></td>
         </tr>
         }
     </tbody>

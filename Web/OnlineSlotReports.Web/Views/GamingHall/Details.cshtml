@@ -13,21 +13,18 @@
     <h3>Town: @Model.Town</h3>
 </div>
 @section Links{
-
-
     <li class="nav-item">
-        <a class="nav-link text-dark" href="/SlotMachine/Index/@Model.Id">Slot machines</a>
+        <a class="nav-link text-dark" asp-controller="SlotMachine" asp-action="Index" asp-route-id="@Model.Id">Slot machines</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" href="/Gallery/Index/@Model.Id">Gallery</a>
+        <a class="nav-link text-dark" asp-controller="Gallery" asp-action="Index" asp-route-id="@Model.Id">Gallery</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" href="/Wins/Index/@Model.Id">Wins</a>
+        <a class="nav-link text-dark" asp-controller="Wins" asp-action="Index" asp-route-id="@Model.Id">Wins</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" href="/GamingHall/Details/@Model.Id">Contacts</a>
+        <a class="nav-link text-dark" asp-controller="GamingHall" asp-action="Details" asp-route-id="@Model.Id">Contacts</a>
     </li>
-
 }
 
 

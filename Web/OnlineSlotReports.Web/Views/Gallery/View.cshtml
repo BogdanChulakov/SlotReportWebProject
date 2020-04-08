@@ -23,7 +23,7 @@
 
         <h1 align="center" class="display-4">Gallery</h1>
         <p>
-            <a href="/Gallery/Add/@Model.GamingHallId" class="btn btn-primary">Add picture!</a>
+            <a asp-controller="Gallery" asp-action="Add" asp-route-id="@Model.GamingHallId" class="btn btn-primary">Add picture!</a>
         </p>
         <div class="tz-gallery">
 
@@ -36,7 +36,7 @@
                         <img src="@pic.Url" alt="Card image cap" height="200">
                     </a>
                     <p align="right">
-                        <a href="/Gallery/Delete/@pic.Id" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a>
+                        <a asp-controller="Gallery" asp-action="Delete" asp-route-id="@pic.Id"class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a>
                     </p>
                 </div>
                 }
