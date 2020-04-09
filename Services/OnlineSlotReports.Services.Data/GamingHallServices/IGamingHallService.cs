@@ -12,6 +12,8 @@
 
         IEnumerable<T> AllHalls<T>(string userId);
 
+        IEnumerable<T> AllOfChain<T>(string hallName);
+
         IEnumerable<T> All<T>();
 
         Task DeleteAsync(string id);

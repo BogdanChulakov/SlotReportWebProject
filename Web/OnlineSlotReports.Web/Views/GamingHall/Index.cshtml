@@ -28,9 +28,15 @@
             <a asp-controller="GamingHall" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">Contacts</a>
         </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-6">
         <h1 align="center" class="display-4">@Model.HallName</h1>
         @Model.Description
+    </div>
+    <div class="col-md-3">
+        <h6>All "@Model.HallName"</h6>
+        <h6>Gaming Halls</h6>
+        <hr />
+        <vc:index-g-hall name="@Model.HallName"></vc:index-g-hall>    
     </div>
 </div>
 @section Links{

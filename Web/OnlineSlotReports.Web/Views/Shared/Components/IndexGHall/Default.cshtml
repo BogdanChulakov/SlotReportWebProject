@@ -1,0 +1,12 @@
+﻿@model OnlineSlotReports.Web.ViewModels.GamingHallViewModels.AllGamingHallsViewcomponentModel
+@{
+    ViewData["Title"] = "Default";
+}
+
+@foreach (var hall in Model.GamingHalls)
+{
+    <div>@hall.Adress</div>
+    <div>@hall.Town</div>
+    <div align="right"><a asp-controller="GamingHall" asp-action="Index" asp-route-id="@hall.Id" class="btn btn-primary">Visit</a></div>
+    <hr />
+}
