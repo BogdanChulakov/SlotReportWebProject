@@ -9,6 +9,7 @@
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using OnlineSlotReports.Common;
     using OnlineSlotReports.Services.Data.GalleryServices;
     using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Web.CloudinaryHelper;
@@ -39,7 +40,7 @@
 
             foreach (var item in pictures)
             {
-                if (item.GamingHallUserId != userId)
+                if (item.GamingHallUserId != userId && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                 {
                     return this.Redirect("/GamingHall/Halls");
                 }

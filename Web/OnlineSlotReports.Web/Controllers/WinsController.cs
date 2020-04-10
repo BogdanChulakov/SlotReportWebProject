@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using OnlineSlotReports.Common;
     using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
     using OnlineSlotReports.Services.Data.WinsServices;
@@ -72,7 +73,7 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+            if (userId != hall.UserId && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.Redirect("/GamingHall/Halls");
             }

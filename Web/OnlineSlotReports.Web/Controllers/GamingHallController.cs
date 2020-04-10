@@ -77,6 +77,11 @@
         public IActionResult Index([FromRoute] string id)
         {
             var model = this.service.GetT<IndexGamingHallViewModel>(id);
+            if (model == null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(model);
         }
 
@@ -91,6 +96,10 @@
         public IActionResult Details(string id)
         {
             var datailsViewModel = this.service.GetT<DetailsViewModel>(id);
+            if (datailsViewModel == null)
+            {
+                return this.NotFound();
+            }
             return this.View(datailsViewModel);
         }
 
@@ -98,9 +107,9 @@
         {
             var hall = this.service.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+            if (hall == null || userId != hall.UserId)
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             var datailsViewModel = this.service.GetT<DetailsViewModel>(id);
