@@ -73,9 +73,9 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            if (hall == null || (userId != hall.UserId && !this.User.IsInRole(GlobalConstants.AdministratorRoleName)))
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             var wins = this.services.All<WinViewModel>(id);
@@ -84,10 +84,6 @@
                 Wins = wins,
                 GamingHallId = id,
             };
-            if (id == null)
-            {
-                return this.View("Error");
-            }
 
             return this.View(allWins);
         }

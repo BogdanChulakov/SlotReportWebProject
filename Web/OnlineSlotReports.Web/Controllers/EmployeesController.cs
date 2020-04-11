@@ -27,10 +27,11 @@
         public IActionResult Add([FromRoute]string id)
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+            if (hall == null || userId != hall.UserId)
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             return this.View();
@@ -41,7 +42,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.Content("Ivalid Input!");
+                return this.View(input);
             }
 
             await this.services.AddAsync(input.FullName, input.Email, input.PhoneNumber, input.StartWorkDate, id);
@@ -55,9 +56,10 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+
+            if (hall == null || userId != hall.UserId)
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             var employees = this.services.All<EmployeeViewModel>(id);
@@ -79,14 +81,25 @@
             return this.Redirect("/Employees/AllEmployees/" + gamingHallId);
         }
 
-        public IActionResult ChangeEmail()
+        public IActionResult ChangeEmail([FromRoute]string id)
         {
-            return this.View();
+            var employee = this.services.GetById<EmployeeChangeEmailViewModel>(id);
+            if (employee == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(employee);
         }
 
         [HttpPost]
         public async Task<IActionResult> ChangeEmail([FromRoute]string id, EmployeeChangeEmailViewModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
             string gamingHallId = await this.services.ChangeEmailAsync(id, model.Email);
 
             this.TempData["Message"] = "Employee email successfully updated!";
@@ -94,14 +107,25 @@
             return this.Redirect("/Employees/AllEmployees/" + gamingHallId);
         }
 
-        public IActionResult ChangePhoneNumber()
+        public IActionResult ChangePhoneNumber([FromRoute]string id)
         {
-            return this.View();
+            var employee = this.services.GetById<ChangePhoneNumberViewModel>(id);
+            if (employee == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(employee);
         }
 
         [HttpPost]
         public async Task<IActionResult> ChangePhoneNumber([FromRoute]string id, ChangePhoneNumberViewModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
             string gamingHallId = await this.services.ChangePhoneNumberAsync(id, model.PhoneNumber);
 
             this.TempData["Message"] = "Employee Phone number successfully updated!";

@@ -12,5 +12,7 @@
         Task AddAsync(string licenseNumber, string model, int numberInHall, string gamingHallId);
 
         Task<string> DeleteAsync(string id);
+
+        T GetById<T>(string id);
     }
 }

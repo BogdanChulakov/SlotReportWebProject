@@ -73,5 +73,12 @@
 
             return gamingHallId;
         }
+
+        public T GetById<T>(string id)
+        {
+            var emplouee = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+
+            return emplouee;
+        }
     }
 }

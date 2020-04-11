@@ -2,18 +2,23 @@
 {
     using System;
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using OnlineSlotReports.Services.Data.MachineCountersServices;
+    using OnlineSlotReports.Services.Data.SlotMachinesServices;
     using OnlineSlotReports.Web.ViewModels.MachineCounters;
+    using OnlineSlotReports.Web.ViewModels.SlotMachinesViewModels;
 
+    [Authorize]
     public class CountersController : Controller
     {
         private readonly IMachineCountersServices services;
+        private readonly ISlotMachinesServices slotMachinesServices;
 
-        public CountersController(IMachineCountersServices services)
+        public CountersController(IMachineCountersServices services, ISlotMachinesServices slotMachinesServices)
         {
             this.services = services;
+            this.slotMachinesServices = slotMachinesServices;
         }
 
         public IActionResult Enter()
@@ -26,7 +31,14 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.Content("Ivalid Input!");
+                return this.View(input);
+            }
+
+            var slotMachine = this.slotMachinesServices.GetById<IndexViewModel>(id);
+
+            if (slotMachine == null)
+            {
+                return this.NotFound();
             }
 
             var date = DateTime.UtcNow;

@@ -9,11 +9,6 @@
     {
         public IActionResult Index()
         {
-            //if (this.User.IsInRole("Croupier"))
-            //{
-            //    return this.Content("Implement report!!!!!!!!!!!!!!!!!!!!");
-            //}
-
             return this.View();
         }
 

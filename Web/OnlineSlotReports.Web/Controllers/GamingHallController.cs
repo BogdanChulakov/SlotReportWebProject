@@ -36,7 +36,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.Content("Ivalid Input!");
+                return this.View(input);
             }
 
             if (file != null)
@@ -100,6 +100,7 @@
             {
                 return this.NotFound();
             }
+
             return this.View(datailsViewModel);
         }
 
@@ -121,7 +122,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.Content("Ivalid Input!");
+                return this.View(input);
             }
 
             if (file != null)

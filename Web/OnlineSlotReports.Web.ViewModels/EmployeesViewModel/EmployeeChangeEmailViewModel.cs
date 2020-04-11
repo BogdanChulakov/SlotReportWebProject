@@ -5,7 +5,10 @@
     using System.ComponentModel.DataAnnotations;
     using System.Text;
 
-    public class EmployeeChangeEmailViewModel
+    using OnlineSlotReports.Data.Models;
+    using OnlineSlotReports.Services.Mapping;
+
+    public class EmployeeChangeEmailViewModel : IMapFrom<Employee>
     {
         [Required]
         [EmailAddress]

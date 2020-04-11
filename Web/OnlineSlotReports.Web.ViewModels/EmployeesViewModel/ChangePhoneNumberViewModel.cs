@@ -1,11 +1,11 @@
 ﻿namespace OnlineSlotReports.Web.ViewModels.EmployeesViewModel
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
 
-    public class ChangePhoneNumberViewModel
+    using OnlineSlotReports.Data.Models;
+    using OnlineSlotReports.Services.Mapping;
+
+    public class ChangePhoneNumberViewModel : IMapFrom<Employee>
     {
         [Required]
         public string PhoneNumber { get; set; }

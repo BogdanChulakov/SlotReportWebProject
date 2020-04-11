@@ -29,9 +29,9 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+            if (hall == null || userId != hall.UserId)
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             var reports = this.reportServices.All<IndexReportViewModel>(id);
@@ -47,9 +47,9 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+            if (hall == null || userId != hall.UserId)
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             return this.View();
@@ -58,6 +58,11 @@
         [HttpPost]
         public async Task<IActionResult> Add([FromRoute] string id, InputReportViewModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
             await this.reportServices.Add(input.Date, input.InForDay, input.OutForDay, id);
 
             this.TempData["Message"] = "REport was added successfully!";
@@ -70,9 +75,9 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(input.Id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+            if (hall == null || userId != hall.UserId)
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             var reports = this.reportServices.AllForAPeriod<IndexReportViewModel>(input.Id, userId, input.FromDate, input.ToDate);

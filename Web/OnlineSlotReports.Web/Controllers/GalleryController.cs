@@ -57,11 +57,6 @@
 
         public IActionResult Index([FromRoute] string id)
         {
-            if (id == null)
-            {
-                id = this.TempData["id"].ToString();
-            }
-
             var pictures = this.services.All<PictureViewModel>(id);
 
             var allpicture = new AllPictureViewModel
@@ -84,17 +79,14 @@
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+
+            if (hall == null || userId != hall.UserId)
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             string url = await CloudinaryExtension.UploadAsync(this.cloudinary, file);
 
-            if (!this.ModelState.IsValid)
-            {
-                return this.Content("Ivalid Input!");
-            }
 
             await this.services.AddAsync(url, id);
 

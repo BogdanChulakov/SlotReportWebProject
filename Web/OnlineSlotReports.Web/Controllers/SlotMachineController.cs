@@ -26,9 +26,9 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+            if (hall == null || userId != hall.UserId)
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             return this.View();
@@ -39,7 +39,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.Content("Ivalid Input!");
+                return this.View(input);
             }
 
             await this.services.AddAsync(input.LicenseNumber, input.Model, input.NumberInHall, id);
@@ -53,9 +53,9 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+            if (hall == null || userId != hall.UserId)
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             var macines = this.services.All<SlotMachineViewModel>(id);
@@ -72,6 +72,7 @@
         public IActionResult Index([FromRoute]string id)
         {
             var macines = this.services.All<IndexViewModel>(id);
+
             var slotMchines = new ViewModels.SlotMachinesViewModels.AllIndexViewModel
             {
                 SlotMachines = macines,
