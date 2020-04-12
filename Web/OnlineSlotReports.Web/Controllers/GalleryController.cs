@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using OnlineSlotReports.Common;
@@ -16,6 +17,7 @@
     using OnlineSlotReports.Web.ViewModels.GalleryViewModels;
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
 
+    [Authorize]
     public class GalleryController : Controller
     {
         private readonly IGalleryServices services;
@@ -60,6 +62,7 @@
             return this.View("View", allpicture);
         }
 
+        [AllowAnonymous]
         public IActionResult Index([FromRoute] string id)
         {
             var pictures = this.services.All<PictureViewModel>(id);

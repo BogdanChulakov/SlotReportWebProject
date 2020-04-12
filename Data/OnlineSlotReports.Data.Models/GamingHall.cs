@@ -21,6 +21,7 @@
         [Url]
         public string ImageUrl { get; set; }
 
+        [MaxLength(3000)]
         public string Description { get; set; }
 
         [Required]

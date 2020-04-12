@@ -14,10 +14,10 @@
 
         public string Id { get; set; }
 
-        [Range(0, double.MaxValue)]
+        [Range(0, 9999999999999999.99)]
         public decimal ElIn { get; set; }
 
-        [Range(0, double.MaxValue)]
+        [Range(0, 9999999999999999.99)]
         public decimal ElOut { get; set; }
 
         [Range(0, int.MaxValue)]

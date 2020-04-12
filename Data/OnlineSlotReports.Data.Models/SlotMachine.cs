@@ -15,11 +15,14 @@
         }
 
         [Required]
+        [MinLength(10)]
+        [StringLength(10)]
         public string LicenseNumber { get; set; }
 
         [Required]
         public string Model { get; set; }
 
+        [Range(0, 1000)]
         public int NumberInHall { get; set; }
 
         [Required]

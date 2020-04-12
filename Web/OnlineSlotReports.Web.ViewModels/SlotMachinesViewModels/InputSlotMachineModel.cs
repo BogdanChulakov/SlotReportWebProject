@@ -13,7 +13,7 @@
         [MaxLength(50)]
         public string Model { get; set; }
 
-        [Range(0, 999)]
+        [Range(0, 1000)]
         public int NumberInHall { get; set; }
 
         public string GamingHallId { get; set; }

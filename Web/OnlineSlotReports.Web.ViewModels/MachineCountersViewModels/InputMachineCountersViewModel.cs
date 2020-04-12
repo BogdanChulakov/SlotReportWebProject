@@ -10,10 +10,10 @@
 
     public class InputMachineCountersViewModel : IMapFrom<MachineCounters>
     {
-        [Range(0, double.MaxValue)]
+        [Range(0, 9999999999999999.99)]
         public decimal EllIn { get; set; }
 
-        [Range(0, double.MaxValue)]
+        [Range(0, 9999999999999999.99)]
         public decimal EllOut { get; set; }
 
         [Range(0, int.MaxValue)]
