@@ -9,8 +9,7 @@
     using OnlineSlotReports.Data;
     using OnlineSlotReports.Data.Models;
 
-    [Area("Administration")]
-    public class GamingHallsController : Controller
+    public class GamingHallsController : AdministrationController
     {
         private readonly ApplicationDbContext context;
 

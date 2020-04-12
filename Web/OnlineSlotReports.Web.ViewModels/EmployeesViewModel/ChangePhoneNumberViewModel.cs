@@ -8,6 +8,7 @@
     public class ChangePhoneNumberViewModel : IMapFrom<Employee>
     {
         [Required]
+        [RegularExpression("^[0-9]+$")]
         public string PhoneNumber { get; set; }
     }
 }

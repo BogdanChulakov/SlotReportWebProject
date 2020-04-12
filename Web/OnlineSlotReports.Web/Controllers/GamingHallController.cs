@@ -93,7 +93,7 @@
         }
 
         [AllowAnonymous]
-        public IActionResult Details(string id)
+        public IActionResult Details([FromRoute]string id)
         {
             var datailsViewModel = this.service.GetT<DetailsViewModel>(id);
             if (datailsViewModel == null)
@@ -141,6 +141,7 @@
             {
                 Id = id,
             };
+
             return this.View(hallView);
         }
     }

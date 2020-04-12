@@ -5,6 +5,7 @@
     public class InputSlotMachineModel
     {
         [Required]
+        [MinLength(10)]
         [StringLength(10)]
         public string LicenseNumber { get; set; }
 

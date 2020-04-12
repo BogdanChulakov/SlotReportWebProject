@@ -39,9 +39,9 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId != hall.UserId)
+            if (hall == null || userId != hall.UserId)
             {
-                return this.Redirect("/GamingHall/Halls");
+                return this.NotFound();
             }
 
             var machineNumbers = this.slotMachinesServices.All<MachineDropDownViewModel>(id);
@@ -57,7 +57,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.Content("Ivalid Input!");
+                return this.View(input);
             }
 
             input.Url = await CloudinaryExtension.UploadAsync(this.cloudinary, file);
@@ -91,7 +91,14 @@
         [AllowAnonymous]
         public IActionResult Index([FromRoute] string id)
         {
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+            if (hall == null)
+            {
+                return this.NotFound();
+            }
+
             var wins = this.services.All<WinViewModel>(id);
+
             var allWins = new AllWinsViewModel
             {
                 Wins = wins,

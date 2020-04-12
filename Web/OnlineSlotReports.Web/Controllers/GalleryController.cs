@@ -38,11 +38,16 @@
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+            if (hall == null)
+            {
+                return this.NotFound();
+            }
             foreach (var item in pictures)
             {
                 if (item.GamingHallUserId != userId && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                 {
-                    return this.Redirect("/GamingHall/Halls");
+                    return this.NotFound();
                 }
             }
 
@@ -58,6 +63,11 @@
         public IActionResult Index([FromRoute] string id)
         {
             var pictures = this.services.All<PictureViewModel>(id);
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+            if (hall == null)
+            {
+                return this.NotFound();
+            }
 
             var allpicture = new AllPictureViewModel
             {
@@ -68,13 +78,7 @@
             return this.View(allpicture);
         }
 
-        public IActionResult Add()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddAsync([FromRoute] string id, IFormFile file)
+        public IActionResult Add([FromRoute] string id)
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
 
@@ -85,8 +89,18 @@
                 return this.NotFound();
             }
 
-            string url = await CloudinaryExtension.UploadAsync(this.cloudinary, file);
+            return this.View();
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> AddAsync([FromRoute] string id, IFormFile file)
+        {
+            if (file == null)
+            {
+                return this.View();
+            }
+
+            string url = await CloudinaryExtension.UploadAsync(this.cloudinary, file);
 
             await this.services.AddAsync(url, id);
 

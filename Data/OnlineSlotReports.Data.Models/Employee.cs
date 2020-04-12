@@ -24,6 +24,7 @@
         public string Email { get; set; }
 
         [Required]
+        [RegularExpression("^[0-9]+$")]
         public string PhoneNumber { get; set; }
 
         public DateTime StartWorkDate { get; set; }

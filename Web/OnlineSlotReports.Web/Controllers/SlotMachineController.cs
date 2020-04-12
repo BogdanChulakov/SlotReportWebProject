@@ -71,6 +71,12 @@
         [AllowAnonymous]
         public IActionResult Index([FromRoute]string id)
         {
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
+            if (hall == null)
+            {
+                return this.NotFound();
+            }
+
             var macines = this.services.All<IndexViewModel>(id);
 
             var slotMchines = new ViewModels.SlotMachinesViewModels.AllIndexViewModel
