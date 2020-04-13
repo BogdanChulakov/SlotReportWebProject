@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -96,18 +97,20 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAsync([FromRoute] string id, IFormFile file)
+        public async Task<IActionResult> AddAsync([FromRoute] string id, ICollection<IFormFile> files)
         {
-            if (file == null)
+            if (files.Count == 0)
             {
                 return this.View();
             }
 
-            string url = await CloudinaryExtension.UploadAsync(this.cloudinary, file);
+            var urls = await CloudinaryExtension.UploadManyAsync(this.cloudinary, files);
+            foreach (var url in urls)
+            {
+                await this.services.AddAsync(url, id);
+            }
 
-            await this.services.AddAsync(url, id);
-
-            this.TempData["Message"] = "Picture was added successfully!";
+            this.TempData["Message"] = "Pictures was added successfully!";
 
             return this.Redirect("/Gallery/All/" + id);
         }
