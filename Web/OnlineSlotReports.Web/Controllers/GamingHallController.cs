@@ -65,49 +65,11 @@
             return this.View(allHallsViewModel);
         }
 
-        [AllowAnonymous]
-        public IActionResult All(int page = 1)
-        {
-            AllIndexHallViewModel allHallsViewModel = new AllIndexHallViewModel
-            {
-                GamingHalls = this.service.All<GamingHallsIndexViewModel>(ItemPerPage, (page - 1) * ItemPerPage),
-            };
-
-            var count = this.service.GetHallsCount();
-            allHallsViewModel.PagesCount = (int)Math.Ceiling((double)count / ItemPerPage);
-            allHallsViewModel.CurentPage = page;
-            return this.View(allHallsViewModel);
-        }
-
-        [AllowAnonymous]
-        public IActionResult Index([FromRoute] string id)
-        {
-            var model = this.service.GetT<IndexGamingHallViewModel>(id);
-            if (model == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(model);
-        }
-
         public async Task<IActionResult> Delete(string id)
         {
             await this.service.DeleteAsync(id);
 
             return this.Redirect("/GamingHall/Halls");
-        }
-
-        [AllowAnonymous]
-        public IActionResult Details([FromRoute]string id)
-        {
-            var datailsViewModel = this.service.GetT<DetailsViewModel>(id);
-            if (datailsViewModel == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(datailsViewModel);
         }
 
         public IActionResult Update(string id)
@@ -149,6 +111,55 @@
             };
 
             return this.View(hallView);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("/GamingHall/Search/")]
+        public IActionResult Search(string name)
+        {
+            var searchModel = new SearchHallsViewModel();
+            var halls = this.service.Search<GamingHallsIndexViewModel>(name);
+            searchModel.GamingHalls = halls;
+
+            return this.View(searchModel);
+        }
+
+        [AllowAnonymous]
+        public IActionResult All(int page = 1)
+        {
+            AllIndexHallViewModel allHallsViewModel = new AllIndexHallViewModel
+            {
+                GamingHalls = this.service.All<GamingHallsIndexViewModel>(ItemPerPage, (page - 1) * ItemPerPage),
+            };
+
+            var count = this.service.GetHallsCount();
+            allHallsViewModel.PagesCount = (int)Math.Ceiling((double)count / ItemPerPage);
+            allHallsViewModel.CurentPage = page;
+            return this.View(allHallsViewModel);
+        }
+
+        [AllowAnonymous]
+        public IActionResult Index([FromRoute] string id)
+        {
+            var model = this.service.GetT<IndexGamingHallViewModel>(id);
+            if (model == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(model);
+        }
+
+        [AllowAnonymous]
+        public IActionResult Details([FromRoute]string id)
+        {
+            var datailsViewModel = this.service.GetT<DetailsViewModel>(id);
+            if (datailsViewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(datailsViewModel);
         }
     }
 }

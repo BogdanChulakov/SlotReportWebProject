@@ -12,8 +12,12 @@
     <h3>Adress: @Model.Adress</h3>
     <h3>Town: @Model.Town</h3>
 </div>
-@section Links{
-    <partial name="_LinksPartial" model="@Model.Id" />
+@if (!User.Identity.IsAuthenticated)
+{
+    @section Links{
+        <partial name="_LinksPartial" model="@Model.Id" />
+    }
 }
+
 
 

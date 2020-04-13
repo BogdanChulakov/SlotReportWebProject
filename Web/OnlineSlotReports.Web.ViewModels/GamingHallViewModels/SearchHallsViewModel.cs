@@ -4,11 +4,9 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public class AllIndexHallViewModel
+    public class SearchHallsViewModel
     {
-        public int PagesCount { get; set; }
-
-        public int CurentPage { get; set; }
+        public string Name { get; set; }
 
         public IEnumerable<GamingHallsIndexViewModel> GamingHalls { get; set; }
     }

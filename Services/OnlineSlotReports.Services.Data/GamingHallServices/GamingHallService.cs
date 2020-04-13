@@ -90,6 +90,13 @@
             return hall;
         }
 
+        public IEnumerable<T> Search<T>(string name)
+        {
+            IQueryable<GamingHall> halls = this.repository.All().Where(x => x.Town == name || x.HallName == name).OrderBy(x => x.CreatedOn);
+
+            return halls.To<T>().ToList();
+        }
+
         public async Task UpdateAsync(string id, string hallName, string imageUrl, string description, string phoneNumber, string adress, string town)
         {
             var gamingHall = this.repository.All().Where(x => x.Id == id).FirstOrDefault();

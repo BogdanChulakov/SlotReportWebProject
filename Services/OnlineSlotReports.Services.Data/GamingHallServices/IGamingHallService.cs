@@ -23,5 +23,7 @@
         Task UpdateAsync(string id, string hallName, string imageUrl, string description, string phoneNumber, string adress, string town);
 
         int GetHallsCount();
+
+        IEnumerable<T> Search<T>(string name);
     }
 }
