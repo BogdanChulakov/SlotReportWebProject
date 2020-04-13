@@ -17,7 +17,9 @@
     @foreach (var win in Model.Wins)
     {
         <div class="col-md-4 card" style="width: 18rem;">
-            <img class="card-img-top" src="@win.Url" alt="Card image cap" height="200">
+            <a class="lightbox" href="@win.Url">
+                <img class="card-img-top" src="@win.Url" alt="Card image cap" height="200">
+            </a>
             <div class="card-body">
                 <h5 class="card-title">@win.Date</h5>
                 <p class="card-text">@win.Description </p>

@@ -36,11 +36,11 @@
                 @foreach (var pic in Model.Pictures)
                 {
 
-                    <div class="col-md-4 card" style="width: 18rem;">
+                    <div class="col-md-4">
                         <a class="lightbox" href="@pic.Url">
-                            <img src="@pic.Url" alt="Card image cap" height="200">
+                            <img src="@pic.Url" height="200" width="320">
                         </a>
-                        <p align="right">
+                        <p align="center">
                             <a asp-controller="Gallery" asp-action="Delete" asp-route-id="@pic.Id" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a>
                         </p>
                     </div>
