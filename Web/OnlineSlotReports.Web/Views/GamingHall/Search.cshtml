@@ -11,6 +11,14 @@
         <input type="submit" value="Search" class="btn btn-primary" />
     </div>
 </form>
+<div align="center">
+    @if (Model.GamingHalls.Count() == 0 && this.TempData["message"] != null)
+    {
+        <div class="alert alert-warning m-4 col-md-4">
+            @this.TempData["Message"]
+        </div>
+    }
+</div>
 @foreach (var hall in Model.GamingHalls)
 {
     <div class="card m-4">

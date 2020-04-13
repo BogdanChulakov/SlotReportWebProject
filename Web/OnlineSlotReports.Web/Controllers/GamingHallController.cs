@@ -120,7 +120,10 @@
             var searchModel = new SearchHallsViewModel();
             var halls = this.service.Search<GamingHallsIndexViewModel>(name);
             searchModel.GamingHalls = halls;
-
+            if (name != null)
+            {
+               this.TempData["message"] = "No result for this serach!";
+            }
             return this.View(searchModel);
         }
 

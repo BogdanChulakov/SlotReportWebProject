@@ -2,10 +2,11 @@
 @{
     ViewData["Title"] = "Add";
 }
-<div class="col-md-4">
+<div class="col-md-4 border border-light bg-light">
+    <p class="m-2" align="center">Create new Gaming hall:</p>
     <form asp-controller="GamingHall" asp-action="Add" method="post" dash-controller="Files" enctype="multipart/form-data">
         <div>
-            <label asp-for="HallName">Hall Name</label>
+            <label class="m4" asp-for="HallName">Hall Name</label>
             <input asp-for="HallName" class="form-control" />
             <span asp-validation-for="HallName" class="text-danger"></span>
         </div>
@@ -35,7 +36,7 @@
         </div>
         <br />
         <div>
-            <input type="submit" name="Save" value="Save" class="btn btn-primary" />
+            <input type="submit" name="Save" value="Save" class="btn btn-primary m-2" align="center"/>
         </div>
     </form>
 </div>

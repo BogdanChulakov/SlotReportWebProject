@@ -14,7 +14,7 @@
         public string Description { get; set; }
 
         [Required]
-        [RegularExpression("^[0-9]+$")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Phone number can contains only digits.")]
         public string PhoneNumber { get; set; }
 
         [Required]
