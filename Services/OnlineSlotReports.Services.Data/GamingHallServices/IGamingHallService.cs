@@ -8,18 +8,20 @@
 
     public interface IGamingHallService
     {
-        Task AddAsync(string hallName , string imageUrl, string description, string phoneNumber, string adress, string town, string userId);
+        Task AddAsync(string hallName, string imageUrl, string description, string phoneNumber, string adress, string town, string userId);
 
         IEnumerable<T> AllHalls<T>(string userId);
 
         IEnumerable<T> AllOfChain<T>(string hallName);
 
-        IEnumerable<T> All<T>();
+        IEnumerable<T> All<T>(int take, int skip = 0);
 
         Task DeleteAsync(string id);
 
         T GetT<T>(string id);
 
         Task UpdateAsync(string id, string hallName, string imageUrl, string description, string phoneNumber, string adress, string town);
+
+        int GetHallsCount();
     }
 }

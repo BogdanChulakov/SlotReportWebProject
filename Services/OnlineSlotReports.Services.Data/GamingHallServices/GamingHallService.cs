@@ -48,9 +48,9 @@
             await this.repository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> All<T>()
+        public IEnumerable<T> All<T>(int take, int skip)
         {
-            IQueryable<GamingHall> halls = this.repository.All().OrderBy(x => x.HallName);
+            var halls = this.repository.All().OrderBy(x => x.HallName).Skip(skip).Take(take);
 
             return halls.To<T>().ToList();
         }
@@ -74,6 +74,13 @@
             var hall = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
             this.repository.Delete(hall);
             await this.repository.SaveChangesAsync();
+        }
+
+        public int GetHallsCount()
+        {
+            int count = this.repository.All().Count();
+
+            return count;
         }
 
         public T GetT<T>(string id)

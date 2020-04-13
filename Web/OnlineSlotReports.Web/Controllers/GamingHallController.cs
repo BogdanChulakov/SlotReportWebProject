@@ -1,5 +1,6 @@
 ﻿namespace OnlineSlotReports.Web.Controllers
 {
+    using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
     using CloudinaryDotNet;
@@ -15,6 +16,8 @@
     [Authorize]
     public class GamingHallController : Controller
     {
+        private const int ItemPerPage = 5;
+
         private readonly IGamingHallService service;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly Cloudinary cloudinary;
@@ -63,13 +66,16 @@
         }
 
         [AllowAnonymous]
-        public IActionResult All()
+        public IActionResult All(int page = 1)
         {
-            AllIndexViewModel allHallsViewModel = new AllIndexViewModel
+            AllIndexHallViewModel allHallsViewModel = new AllIndexHallViewModel
             {
-                GamingHalls = this.service.All<GamingHallsIndexViewModel>(),
+                GamingHalls = this.service.All<GamingHallsIndexViewModel>(ItemPerPage, (page - 1) * ItemPerPage),
             };
 
+            var count = this.service.GetHallsCount();
+            allHallsViewModel.PagesCount = (int)Math.Ceiling((double)count / ItemPerPage);
+            allHallsViewModel.CurentPage = page;
             return this.View(allHallsViewModel);
         }
 
