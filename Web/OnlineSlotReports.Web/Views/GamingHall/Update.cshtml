@@ -2,9 +2,8 @@
 @{
     ViewData["Title"] = "Update";
 }
-
-<h1 align="center" class="display-4">Update</h1>
-<div class="col-md-4">
+<div class="col-md-4 border border-dark bg-light">
+    <p class="m-2" align="center">Edit Gaming hall:</p>
     <form asp-controller="GamingHall" asp-action="Update" method="post" dash-controller="Files" enctype="multipart/form-data">
         <input asp-for="Id" class="form-control" type="hidden" />
         <div>
@@ -13,12 +12,12 @@
             <span asp-validation-for="HallName" class="text-danger"></span>
         </div>
         <div>
-            <input asp-for="ImageUrl" class="form-control" type="hidden"/>
+            <input asp-for="ImageUrl" class="form-control" type="hidden" />
             <span asp-validation-for="ImageUrl" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Description"></label>
-            <input asp-for="Description" class="form-control" />
+            <textarea asp-for="Description" class="form-control"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div>
@@ -42,7 +41,7 @@
         </div>
         <br />
         <div>
-            <input type="submit" name="Save" value="Save" class="btn btn-primary" />
+            <input type="submit" name="Save" value="Save" class="btn btn-primary m-2" />
         </div>
     </form>
 </div>

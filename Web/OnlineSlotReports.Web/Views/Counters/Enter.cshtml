@@ -2,10 +2,8 @@
 @{
     ViewData["Title"] = "Enter";
 }
-
-<h1 align="center" class="display-4">Enter slot machine counters</h1>
-
-<div class="col-md-4">
+<div class="col-md-4 border border-dark bg-light">
+    <p class="m-2" align="center">Enter slot machine counters:</p>
     <form asp-controller="Counters" asp-action="Enter" method="post">
         <div>
             <label asp-for="EllIn">Еlectronic input</label>
@@ -29,7 +27,7 @@
         </div>
         <br />
         <div>
-            <input type="submit" name="Save" value="Save" class="btn btn-primary" />
+            <input type="submit" name="Save" value="Save" class="btn btn-primary m-2" />
         </div>
     </form>
 </div>

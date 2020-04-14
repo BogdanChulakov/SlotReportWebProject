@@ -2,10 +2,8 @@
 @{
     ViewData["Title"] = "Add";
 }
-
-<h1 align="center" class="display-4">Add Report for day</h1>
-
-<div class="col-md-4">
+<div class="col-md-4 border border-dark bg-light">
+    <p class="m-2" align="center">Add Report for day:</p>
     <form asp-controller="Reports" asp-action="Add" method="post">
         <div>
             <label asp-for="Date">Date</label>
@@ -24,7 +22,7 @@
         </div>
         <br />
         <div>
-            <input type="submit" name="Save" value="Add" class="btn btn-primary" />
+            <input type="submit" name="Save" value="Add" class="btn btn-primary m-2"/>
         </div>
     </form>
 </div>

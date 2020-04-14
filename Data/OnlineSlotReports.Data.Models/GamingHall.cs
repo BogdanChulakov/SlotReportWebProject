@@ -49,5 +49,7 @@
         public virtual IEnumerable<Pic> Galery { get; set; } = new HashSet<Pic>();
 
         public virtual IEnumerable<Report> Reports { get; set; } = new HashSet<Report>();
+
+        public virtual IEnumerable<Message> Messages { get; set; } = new HashSet<Message>();
     }
 }

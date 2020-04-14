@@ -1,0 +1,10 @@
+﻿@model OnlineSlotReports.Web.ViewModels.MessageViewModels.IndexMessageViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+@Model.Sender - @Model.Date
+<fr />
+@Model.Content
+
+<a asp-controller="Message" asp-action="All" asp-route-id="@Model.GamingHallId" class="btn btn-primary">Go back!</a>

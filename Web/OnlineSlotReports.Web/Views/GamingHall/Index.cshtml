@@ -8,23 +8,7 @@
 
     <div class="col-md-3">
         <div>
-            <img src="@Model.ImageUrl" alt="Alternate Text" width="100" />
-        </div>
-        <hr />
-        <div>
-            <a asp-controller="SlotMachine" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary">Slot Machines</a>
-        </div>
-        <hr />
-        <div>
-            <a asp-controller="Gallery" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary">Gallery</a>
-        </div>
-        <hr />
-        <div>
-            <a asp-controller="Wins" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary">Wins</a>
-        </div>
-        <hr />
-        <div>
-            <a asp-controller="GamingHall" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">Contacts</a>
+            <img src="@Model.ImageUrl" alt="Alternate Text" width="200" />
         </div>
         <hr />
         <h6>All "@Model.HallName"</h6>

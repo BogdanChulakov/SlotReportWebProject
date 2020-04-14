@@ -8,5 +8,7 @@
         public const string CroupierRoleName = "Croupier";
         public const string ManagerRoleName = "Manager";
         public const string DefaultLogo = @"https://res.cloudinary.com/bogdankick/image/upload/v1586306094/kqx3bfb0ciakoud2oy2t.jpg";
+        public const string AnonymousMessage = "Anonymous";
+        public const int ItemPerPage = 5;
     }
 }

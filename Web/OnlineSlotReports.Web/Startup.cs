@@ -21,6 +21,7 @@
     using OnlineSlotReports.Services.Data.GalleryServices;
     using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Services.Data.MachineCountersServices;
+    using OnlineSlotReports.Services.Data.MessageServices;
     using OnlineSlotReports.Services.Data.ReportServices;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
     using OnlineSlotReports.Services.Data.WinsServices;
@@ -85,6 +86,7 @@
             services.AddTransient<IWinsServices, WinsServices>();
             services.AddTransient<IGalleryServices, GalleryServices>();
             services.AddTransient<IReportServices, ReportServices>();
+            services.AddTransient<IMessageService, MessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

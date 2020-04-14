@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\OnlineSlotReports.Common\OnlineSlotReports.Common.csproj" />
     <ProjectReference Include="..\OnlineSlotReports.Data.Common\OnlineSlotReports.Data.Common.csproj" />
   </ItemGroup>
   

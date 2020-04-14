@@ -1,5 +1,8 @@
 ﻿@model string
 <li class="nav-item">
+    <a class="nav-link text-dark" asp-controller="GamingHall" asp-action="Index" asp-route-id="@Model">Home</a>
+</li>
+<li class="nav-item">
     <a class="nav-link text-dark" asp-controller="SlotMachine" asp-action="Index" asp-route-id="@Model">Slot machines</a>
 </li>
 <li class="nav-item">
@@ -9,5 +12,5 @@
     <a class="nav-link text-dark" asp-controller="Wins" asp-action="Index" asp-route-id="@Model">Wins</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link text-dark" asp-controller="GamingHall" asp-action="Details" asp-route-id="@Model">Contacts</a>
+    <a class="nav-link text-dark" asp-controller="Message" asp-action="Create" asp-route-id="@Model">Contacts</a>
 </li>

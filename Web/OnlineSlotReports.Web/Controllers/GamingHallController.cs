@@ -3,11 +3,13 @@
     using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
+
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using OnlineSlotReports.Common;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Web.CloudinaryHelper;
@@ -16,7 +18,7 @@
     [Authorize]
     public class GamingHallController : Controller
     {
-        private const int ItemPerPage = 5;
+        private const int ItemPerPage = GlobalConstants.ItemPerPage;
 
         private readonly IGamingHallService service;
         private readonly UserManager<ApplicationUser> userManager;
@@ -124,6 +126,7 @@
             {
                this.TempData["message"] = "No result for this serach!";
             }
+
             return this.View(searchModel);
         }
 

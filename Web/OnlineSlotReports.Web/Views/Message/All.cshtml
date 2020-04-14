@@ -1,0 +1,19 @@
+﻿@model OnlineSlotReports.Web.ViewModels.MessageViewModels.AllMessageViewModel
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1>Mail</h1>
+@foreach (var message in Model.Messages)
+{
+    <div class="card">
+        <div class="card-header">
+            @message.Sender - @message.Date
+        </div>
+        <div class="card-body">
+            <p class="card-text">@message.ShortContent</p>
+            <a asp-controller="Message" asp-action="Index" asp-route-id="@message.Id" class="btn btn-primary">Open</a>
+        </div>
+    </div>
+}
+

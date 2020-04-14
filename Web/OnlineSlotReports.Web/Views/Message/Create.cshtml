@@ -1,0 +1,25 @@
+﻿@model OnlineSlotReports.Web.ViewModels.MessageViewModels.InputMessageViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="col-md-4 border border-dark bg-light">
+    <p class="m-2" align="center">Send messag:</p>
+    <form asp-controller="Message" asp-action="Create" method="post">
+        <div>
+            <label asp-for="Sender">Name</label>
+            <input asp-for="Sender" class="form-control" />
+            <span asp-validation-for="Sender" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Content">Content</label>
+            <textarea asp-for="Content" class="form-control"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <input type="submit" name="Save" value="Save" class="btn btn-primary m-2" />
+        </div>
+    </form>
+</div>
+
+
