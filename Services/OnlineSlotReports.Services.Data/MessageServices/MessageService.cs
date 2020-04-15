@@ -54,5 +54,23 @@
 
             return messageT;
         }
+
+        public IEnumerable<T> GetAllReadById<T>(string id)
+        {
+            IQueryable<Message> employees = this.repository.All().Where(x => x.GamingHallId == id && x.Readed == true).OrderByDescending(x => x.Date);
+
+            return employees.To<T>().ToList();
+        }
+
+        public async Task<string> DeleteAsync(string id)
+        {
+            var message = await this.repository.GetByIdWithDeletedAsync(id);
+            var gamingHallId = message.GamingHallId;
+            this.repository.Delete(message);
+
+            await this.repository.SaveChangesAsync();
+
+            return gamingHallId;
+        }
     }
 }

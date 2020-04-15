@@ -8,6 +8,8 @@
     {
         public string GamingHallId { get; set; }
 
-        public IEnumerable<IndexMessageViewModel> Messages { get; set; }
+        public IEnumerable<IndexMessageViewModel> NewMessages { get; set; }
+
+        public IEnumerable<IndexMessageViewModel> ReadMessages { get; set; }
     }
 }

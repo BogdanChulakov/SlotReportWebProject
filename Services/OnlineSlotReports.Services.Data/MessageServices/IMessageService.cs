@@ -9,6 +9,10 @@
 
         Task<T> GetByIdAsync<T>(string id);
 
+        IEnumerable<T> GetAllReadById<T>(string id);
+
         Task AddAsync(string hallId, string sender, string content);
+
+        Task<string> DeleteAsync(string id);
     }
 }

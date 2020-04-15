@@ -3,10 +3,12 @@
     ViewData["Title"] = "All";
 }
 
-<h1>Mail</h1>
-@foreach (var message in Model.Messages)
+<h1 class="display-4" align="center">Mail</h1>
+
+<p class="alert-dismissible">New messages</p>
+@foreach (var message in Model.NewMessages)
 {
-    <div class="card">
+    <div class="card alert-primary m-2">
         <div class="card-header">
             @message.Sender - @message.Date
         </div>
@@ -16,4 +18,18 @@
         </div>
     </div>
 }
-
+<hr />
+<p>Read messages</p>
+@foreach (var message in Model.ReadMessages)
+{
+    <div class="card alert-secondary m-2">
+        <div class="card-header">
+            @message.Sender - @message.Date
+        </div>
+        <div class="card-body">
+            <p class="card-text">@message.ShortContent</p>
+            <a asp-controller="Message" asp-action="Index" asp-route-id="@message.Id" class="btn btn-primary float-left">Open</a>
+            <a asp-controller="Message" asp-action="Delete" asp-route-id="@message.Id" class="btn btn-danger float-right" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+        </div>
+    </div>
+}

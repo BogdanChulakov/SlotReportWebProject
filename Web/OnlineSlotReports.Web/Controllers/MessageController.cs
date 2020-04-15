@@ -33,10 +33,12 @@
         [Authorize]
         public IActionResult All(string id)
         {
-            var messages = this.massageService.All<IndexMessageViewModel>(id);
-            var allMessages = new AllMessageViewModel();
-            allMessages.Messages = messages;
+            var newMessages = this.massageService.All<IndexMessageViewModel>(id);
+            var readMessages = this.massageService.GetAllReadById<IndexMessageViewModel>(id);
 
+            var allMessages = new AllMessageViewModel();
+            allMessages.NewMessages = newMessages;
+            allMessages.ReadMessages = readMessages;
             return this.View(allMessages);
         }
 
@@ -46,6 +48,13 @@
             var message = await this.massageService.GetByIdAsync<IndexMessageViewModel>(id);
 
             return this.View(message);
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var hallId = await this.massageService.DeleteAsync(id);
+
+            return this.Redirect("/Message/All/" + hallId);
         }
     }
 }
