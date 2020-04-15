@@ -3,7 +3,7 @@
     ViewData["Title"] = "Create";
 }
 <div class="col-md-4 border border-dark bg-light">
-    <p class="m-2" align="center">Send messag:</p>
+    <p class="m-2" align="center">Send message:</p>
     <form asp-controller="Message" asp-action="Create" method="post">
         <div>
             <label asp-for="Sender">Name</label>
@@ -21,5 +21,7 @@
         </div>
     </form>
 </div>
-
+@section Links{
+    <partial name="_LinksPartial" model="@Model.GamingHallId" />
+}
 

@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Search";
 }
-<h6 align="center" class="align-content-center" >Can search hall by name or town!</h6>
+<p align="center" class="alert-info align-content-center m-4" >You can search hall by name or town!</p>
 <form asp-controller="GamingHall" asp-action="Search" asp-route-name="@Model.Name" method="get">
     <div class="md-form active-pink-2 mb-3">
         <input asp-for="Name" class="form-control" type="text" placeholder="Search" aria-label="Search">

@@ -20,10 +20,10 @@
         <p class="lead">@hall.Adress - @hall.Town</p>
         <p class="lead"><a asp-controller="Reports" asp-action="All" asp-route-id="@hall.Id" class="btn btn-primary">Reports</a></p>
         <hr />
-        <a asp-controller="GamingHall" asp-action="AddElements" asp-route-id="@hall.Id" class="btn btn-primary">Insert panel</a>
-        <a asp-controller="GamingHall" asp-action="Update" asp-route-id="@hall.Id" class="btn btn-primary">Edit</a>
-        <a asp-controller="GamingHall" asp-action="Delete" asp-route-id="@hall.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-        <a asp-controller="GamingHall" asp-action="Details" asp-route-id="@hall.Id" class="btn btn-primary">Details</a>
+        <a asp-controller="GamingHall" asp-action="AddElements" asp-route-id="@hall.Id">Insert panel</a> |
+        <a asp-controller="GamingHall" asp-action="Update" asp-route-id="@hall.Id">Edit</a> |
+        <a asp-controller="GamingHall" asp-action="Details" asp-route-id="@hall.Id">Details</a>
+        <a asp-controller="GamingHall" asp-action="Delete" asp-route-id="@hall.Id" class="btn btn-danger float-right" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
     </div>
 </div>
 }

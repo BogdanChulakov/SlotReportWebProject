@@ -4,6 +4,8 @@
 
     public class InputMessageViewModel
     {
+        public string GamingHallId { get; set; }
+
         public string Sender { get; set; }
 
         [Required]

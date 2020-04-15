@@ -48,9 +48,13 @@
         public async Task<T> GetByIdAsync<T>(string id)
         {
             var messageT = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
-            var message = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
-            message.Readed = true;
-            await this.repository.SaveChangesAsync();
+
+            if (messageT != null)
+            {
+                var message = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+                message.Readed = true;
+                await this.repository.SaveChangesAsync();
+            }
 
             return messageT;
         }

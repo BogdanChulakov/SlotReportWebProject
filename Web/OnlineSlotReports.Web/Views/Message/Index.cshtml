@@ -2,9 +2,10 @@
 @{
     ViewData["Title"] = "Index";
 }
+<ul class="list-group">
+    <li class="list-group-item active">@Model.Sender - @Model.Date</li>
+    <li class="list-group-item">@Model.Content</li>
+    <li class="list-group-item"><a asp-controller="Message" asp-action="All" asp-route-id="@Model.GamingHallId" class="btn btn-primary">Go back!</a></li>
+</ul>
 
-@Model.Sender - @Model.Date
-<fr />
-@Model.Content
 
-<a asp-controller="Message" asp-action="All" asp-route-id="@Model.GamingHallId" class="btn btn-primary">Go back!</a>

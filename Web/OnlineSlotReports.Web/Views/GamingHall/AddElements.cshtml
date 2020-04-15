@@ -4,15 +4,18 @@
 }
 
 <h1 align="center" class="display-4">Add Elements</h1>
-<p>
-    <a asp-controller="SlotMachine" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add Slot machine!</a>
-</p>
-<p>
-    <a asp-controller="Employees" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add Employee!</a>
-</p>
-<p>
-    <a asp-controller="Wins" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add Wins!</a>
-</p>
-<p>
-    <a asp-controller="Gallery" asp-action="Add" asp-route-id="@Model.Id"class="btn btn-primary">Add picture!</a>
-</p>
+<hr />
+<div class="alert-heading">
+    <p>
+        <a asp-controller="SlotMachine" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add Slot machine!</a>
+    </p>
+    <p>
+        <a asp-controller="Employees" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add Employee!</a>
+    </p>
+    <p>
+        <a asp-controller="Wins" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add Wins!</a>
+    </p>
+    <p>
+        <a asp-controller="Gallery" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add picture!</a>
+    </p>
+</div>

@@ -3,14 +3,18 @@
     ViewData["Title"] = "Details";
 }
 
-<h1 align="center" class="display-4">@Model.HallName</h1>
-<div align="center">
-    <h2 align="center">@Model.Description</h2>
-</div>
-<div align="right">
-    <h3>Phone: @Model.PhoneNumber</h3>
-    <h3>Adress: @Model.Adress</h3>
-    <h3>Town: @Model.Town</h3>
+<h1 align="center" class="display-4">"@Model.HallName"</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4" align="left">
+        <img src="@Model.ImageUrl" alt="Alternate Text" width="300" />
+        <p class="m-2"><i class="fas fa-phone-square"></i> @Model.PhoneNumber</p>
+        <p class="m-2">Adress: @Model.Adress</p>
+        <p class="m-2">Town: @Model.Town</p>
+    </div>
+    <div class="col-md-8" align="left">
+        <h2 align="center">@Model.Description</h2>
+    </div>
 </div>
 @if (!User.Identity.IsAuthenticated)
 {
