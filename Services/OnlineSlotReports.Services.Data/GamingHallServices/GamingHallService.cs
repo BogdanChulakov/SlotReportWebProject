@@ -23,26 +23,20 @@
         public async Task AddAsync(string hallName, string imageUrl, string description, string phoneNumber, string adress, string town, string userId)
         {
             var gamingHall = new GamingHall();
-            if (imageUrl != null)
+
+            gamingHall.HallName = hallName;
+
+            if (imageUrl == null)
             {
-                gamingHall.HallName = hallName;
-                gamingHall.ImageUrl = imageUrl;
-                gamingHall.Description = description;
-                gamingHall.PhoneNumber = phoneNumber;
-                gamingHall.Adress = adress;
-                gamingHall.Town = town;
-                gamingHall.UserId = userId;
+                imageUrl = GlobalConstants.DefaultLogo;
             }
-            else
-            {
-                gamingHall.HallName = hallName;
-                gamingHall.ImageUrl = GlobalConstants.DefaultLogo;
-                gamingHall.Description = description;
-                gamingHall.PhoneNumber = phoneNumber;
-                gamingHall.Adress = adress;
-                gamingHall.Town = town;
-                gamingHall.UserId = userId;
-            }
+
+            gamingHall.ImageUrl = imageUrl;
+            gamingHall.Description = description;
+            gamingHall.PhoneNumber = phoneNumber;
+            gamingHall.Adress = adress;
+            gamingHall.Town = town;
+            gamingHall.UserId = userId;
 
             await this.repository.AddAsync(gamingHall);
             await this.repository.SaveChangesAsync();

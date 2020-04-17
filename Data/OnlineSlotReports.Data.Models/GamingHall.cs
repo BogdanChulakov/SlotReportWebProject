@@ -19,6 +19,7 @@
         public string HallName { get; set; }
 
         [Url]
+        [Required]
         public string ImageUrl { get; set; }
 
         [MaxLength(3000)]
