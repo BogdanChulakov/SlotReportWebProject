@@ -92,7 +92,7 @@
 
         public IEnumerable<T> Search<T>(string name)
         {
-            IQueryable<GamingHall> halls = this.repository.All().Where(x => x.Town == name || x.HallName == name).OrderBy(x => x.CreatedOn);
+            IQueryable<GamingHall> halls = this.repository.All().Where(x => x.Town.Contains(name) || x.HallName.Contains(name)).OrderBy(x => x.CreatedOn);
 
             return halls.To<T>().ToList();
         }

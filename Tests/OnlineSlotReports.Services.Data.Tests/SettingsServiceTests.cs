@@ -4,15 +4,12 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+    using Moq;
     using OnlineSlotReports.Data;
     using OnlineSlotReports.Data.Common.Repositories;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Data.Repositories;
-
-    using Microsoft.EntityFrameworkCore;
-
-    using Moq;
-
     using Xunit;
 
     public class SettingsServiceTests
