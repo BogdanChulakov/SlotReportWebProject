@@ -154,5 +154,58 @@
 
             Assert.Equal("1", result);
         }
+
+        [Fact]
+        public async Task GetByIdWithValidId()
+        {
+            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
+            await service.AddAsync(
+                "1234567890",
+                "Megajack",
+                1,
+                "1");
+
+            var slotMachine = await dbContext.SlotMachines.FirstOrDefaultAsync();
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            var result = service.GetById<IndexViewModel>(slotMachine.Id);
+
+            Assert.True(result != null);
+            Assert.Equal(slotMachine.Id, result.Id);
+        }
+
+        [Fact]
+        public async Task GetByIdWithInvalidId()
+        {
+            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
+            await service.AddAsync(
+                "1234567890",
+                "Megajack",
+                1,
+                "1");
+
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            var result = service.GetById<IndexViewModel>("invalidId");
+
+            Assert.True(result == null);
+        }
+
+        [Fact]
+        public async Task GetByIdWithNullId()
+        {
+            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
+            await service.AddAsync(
+                "1234567890",
+                "Megajack",
+                1,
+                "1");
+
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            var result = service.GetById<IndexViewModel>(null);
+
+            Assert.True(result == null);
+        }
     }
 }

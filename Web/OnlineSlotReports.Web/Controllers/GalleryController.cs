@@ -21,12 +21,12 @@
     [Authorize]
     public class GalleryController : Controller
     {
-        private readonly IGalleryServices services;
+        private readonly IGalleryService services;
         private readonly IGamingHallService gamingHallService;
         private readonly Cloudinary cloudinary;
 
         public GalleryController(
-            IGalleryServices services,
+            IGalleryService services,
             IGamingHallService gamingHallService,
             Cloudinary cloudinary)
         {
@@ -46,6 +46,7 @@
             {
                 return this.NotFound();
             }
+
             foreach (var item in pictures)
             {
                 if (item.GamingHallUserId != userId && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
@@ -66,14 +67,14 @@
         [AllowAnonymous]
         public IActionResult Index([FromRoute] string id)
         {
-            var pictures = this.services.All<PictureViewModel>(id);
+            var pictures = this.services.All<GuestViewModel>(id);
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             if (hall == null)
             {
                 return this.NotFound();
             }
 
-            var allpicture = new AllPictureViewModel
+            var allpicture = new AllGuestViewModel
             {
                 Pictures = pictures,
                 GamingHallId = id,
@@ -119,7 +120,7 @@
         {
             var gamingHallId = this.services.GetHallId(id);
 
-            await this.services.Delete(id);
+            await this.services.DeleteAsync(id);
 
             this.TempData["Message"] = "Picture was deleted successfully!";
 

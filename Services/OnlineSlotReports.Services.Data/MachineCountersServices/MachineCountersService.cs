@@ -9,11 +9,11 @@
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Mapping;
 
-    public class MachineCountersServices : IMachineCountersServices
+    public class MachineCountersService : IMachineCountersService
     {
         private readonly IRepository<MachineCounters> repository;
 
-        public MachineCountersServices(IRepository<MachineCounters> repository)
+        public MachineCountersService(IRepository<MachineCounters> repository)
         {
             this.repository = repository;
         }
@@ -41,13 +41,6 @@
                 .FirstOrDefault();
 
             return gamingHallid;
-        }
-
-        public IEnumerable<T> All<T>(string id)
-        {
-            IQueryable<MachineCounters> halls = this.repository.All().Where(x => x.SlotMachine.GamingHallId == id).OrderByDescending(x => x.Date);
-
-            return halls.To<T>().ToList();
         }
     }
 }

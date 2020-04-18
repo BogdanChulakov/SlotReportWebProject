@@ -10,11 +10,11 @@
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Mapping;
 
-    public class GalleryServices : IGalleryServices
+    public class GalleryService : IGalleryService
     {
         private readonly IDeletableEntityRepository<Pic> repository;
 
-        public GalleryServices(IDeletableEntityRepository<Pic> repository)
+        public GalleryService(IDeletableEntityRepository<Pic> repository)
         {
             this.repository = repository;
         }
@@ -40,7 +40,7 @@
             return allPicture.To<T>().ToList();
         }
 
-        public async Task Delete(string id)
+        public async Task DeleteAsync(string id)
         {
             var pic = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
 

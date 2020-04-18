@@ -12,10 +12,10 @@
     [Authorize]
     public class CountersController : Controller
     {
-        private readonly IMachineCountersServices services;
+        private readonly IMachineCountersService services;
         private readonly ISlotMachinesService slotMachinesServices;
 
-        public CountersController(IMachineCountersServices services, ISlotMachinesService slotMachinesServices)
+        public CountersController(IMachineCountersService services, ISlotMachinesService slotMachinesServices)
         {
             this.services = services;
             this.slotMachinesServices = slotMachinesServices;

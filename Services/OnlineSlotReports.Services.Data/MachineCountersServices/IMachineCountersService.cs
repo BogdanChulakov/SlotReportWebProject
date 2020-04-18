@@ -5,10 +5,8 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface IMachineCountersServices
+    public interface IMachineCountersService
     {
         Task<string> AddAsync(decimal ellIn, decimal elout, int mechIn, int mechOut, DateTime date, string machineId);
-
-        IEnumerable<T> All<T>(string id);
     }
 }

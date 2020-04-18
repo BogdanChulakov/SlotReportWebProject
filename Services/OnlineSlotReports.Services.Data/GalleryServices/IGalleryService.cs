@@ -5,9 +5,9 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface IGalleryServices
+    public interface IGalleryService
     {
-        Task Delete(string id);
+        Task DeleteAsync(string id);
 
         IEnumerable<T> All<T>(string id);
 

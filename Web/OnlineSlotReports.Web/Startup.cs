@@ -82,9 +82,9 @@
             services.AddTransient<IGamingHallService, GamingHallService>();
             services.AddTransient<ISlotMachinesService, SlotMachinesService>();
             services.AddTransient<IEmployeesService, EmployeesService>();
-            services.AddTransient<IMachineCountersServices, MachineCountersServices>();
+            services.AddTransient<IMachineCountersService, MachineCountersService>();
             services.AddTransient<IWinsServices, WinsServices>();
-            services.AddTransient<IGalleryServices, GalleryServices>();
+            services.AddTransient<IGalleryService, GalleryService>();
             services.AddTransient<IReportServices, ReportServices>();
             services.AddTransient<IMessageService, MessageService>();
         }

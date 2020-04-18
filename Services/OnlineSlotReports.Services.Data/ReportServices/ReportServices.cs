@@ -13,9 +13,9 @@
     public class ReportServices : IReportServices
     {
         private readonly IDeletableEntityRepository<Report> repository;
-        private readonly IMachineCountersServices countersServices;
+        private readonly IMachineCountersService countersServices;
 
-        public ReportServices(IDeletableEntityRepository<Report> repository, IMachineCountersServices countersServices)
+        public ReportServices(IDeletableEntityRepository<Report> repository, IMachineCountersService countersServices)
         {
             this.repository = repository;
             this.countersServices = countersServices;
