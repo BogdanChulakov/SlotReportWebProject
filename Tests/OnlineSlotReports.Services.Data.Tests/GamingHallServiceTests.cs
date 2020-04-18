@@ -350,34 +350,6 @@
         }
 
         [Fact]
-        public async Task DeleteAsyncWithNullId()
-        {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
-            var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
-            await service.AddAsync(
-                  "hall",
-                  "image",
-                  "desc",
-                  "1111",
-                  "adress",
-                  "town",
-                  "1");
-
-            await service.DeleteAsync(null);
-
-            var result = await dbContext.GamingHalls.FirstOrDefaultAsync();
-
-            Assert.Equal("hall", result.HallName);
-            Assert.Equal("image", result.ImageUrl);
-            Assert.Equal("desc", result.Description);
-            Assert.Equal("1111", result.PhoneNumber);
-            Assert.Equal("adress", result.Adress);
-            Assert.Equal("town", result.Town);
-            Assert.Equal("1", result.UserId);
-        }
-
-        [Fact]
         public async Task All()
         {
             var dbContext = ApplicationDbContextFactory.CreateDbContext();

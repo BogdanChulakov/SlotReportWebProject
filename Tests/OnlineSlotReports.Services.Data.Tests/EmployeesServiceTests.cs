@@ -280,30 +280,6 @@
         }
 
         [Fact]
-        public async Task DeleteAsyncWithNullId()
-        {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
-            var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
-            var date = DateTime.UtcNow;
-            await service.AddAsync(
-                "Ivan Ivanov",
-                "mail@mail.mail",
-                "08888888888",
-                date,
-                "1");
-
-            await service.DeleteAsync(null);
-
-            var result = await dbContext.Employees.FirstOrDefaultAsync();
-
-            Assert.Equal("Ivan Ivanov", result.FullName);
-            Assert.Equal("mail@mail.mail", result.Email);
-            Assert.Equal("08888888888", result.PhoneNumber);
-            Assert.Equal(date, result.StartWorkDate);
-            Assert.Equal("1", result.GamingHallId);
-        }
-
-        [Fact]
         public async Task GetByIdWithVaidId()
         {
             var dbContext = ApplicationDbContextFactory.CreateDbContext();
@@ -388,22 +364,5 @@
             Assert.Equal("1", result);
         }
 
-        [Fact]
-        public async Task GetHallIdWithInvalidId()
-        {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
-            var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
-            var date = DateTime.UtcNow;
-            await service.AddAsync(
-                "Ivan Ivanov",
-                "mail@mail.mail",
-                "08888888888",
-                date,
-                "1");
-
-            var result = service.GetHallId("invalid");
-
-            Assert.True(result == null);
-        }
     }
 }
