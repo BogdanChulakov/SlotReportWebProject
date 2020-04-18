@@ -51,12 +51,11 @@
 
         public string GetHallId(string id)
         {
-            var hallId = this.repository.All().Where(x => x.Id == id).Select(x => new
-            {
-                hallid = x.GamingHallId,
-            }).FirstOrDefault();
+            var pic = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
 
-            return hallId.hallid;
+            var gamingHallId = pic.GamingHallId;
+
+            return gamingHallId;
         }
     }
 }

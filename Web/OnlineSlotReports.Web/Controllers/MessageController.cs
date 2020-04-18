@@ -71,7 +71,9 @@
 
         public async Task<IActionResult> Delete(string id)
         {
-            var hallId = await this.massageService.DeleteAsync(id);
+            var hallId = this.massageService.GetHallId(id);
+
+            await this.massageService.DeleteAsync(id);
 
             return this.Redirect("/Message/All/" + hallId);
         }

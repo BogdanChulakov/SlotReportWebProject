@@ -10,11 +10,11 @@
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Mapping;
 
-    public class SlotMachinesServices : ISlotMachinesServices
+    public class SlotMachinesService : ISlotMachinesService
     {
         private readonly IDeletableEntityRepository<SlotMachine> repository;
 
-        public SlotMachinesServices(IDeletableEntityRepository<SlotMachine> repository)
+        public SlotMachinesService(IDeletableEntityRepository<SlotMachine> repository)
         {
             this.repository = repository;
         }
@@ -40,14 +40,13 @@
             return halls.To<T>().ToList();
         }
 
-        public async Task<string> DeleteAsync(string id)
+        public async Task DeleteAsync(string id)
         {
             var mashine = await this.repository.GetByIdWithDeletedAsync(id);
-            string gamingHallId = mashine.GamingHallId;
-            this.repository.Delete(mashine);
-            await this.repository.SaveChangesAsync();
 
-            return gamingHallId;
+            this.repository.Delete(mashine);
+
+            await this.repository.SaveChangesAsync();
         }
 
         public T GetById<T>(string id)
@@ -55,6 +54,15 @@
             var machine = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
 
             return machine;
+        }
+
+        public string GetHallId(string id)
+        {
+            var slotMachine = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            var gamingHallId = slotMachine.GamingHallId;
+
+            return gamingHallId;
         }
     }
 }

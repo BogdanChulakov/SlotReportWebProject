@@ -8,7 +8,7 @@
     {
         IEnumerable<T> All<T>(string id);
 
-        Task<string> DeleteAsync(string id);
+        Task DeleteAsync(string id);
 
         Task<string> ChangeEmailAsync(string id, string email);
 
@@ -17,5 +17,7 @@
         Task AddAsync(string fullName, string email, string phonenumber, DateTime startWorkDate, string gamingHallId);
 
         T GetById<T>(string id);
+
+        string GetHallId(string id);
     }
 }

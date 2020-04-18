@@ -5,13 +5,15 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface ISlotMachinesServices
+    public interface ISlotMachinesService
     {
         IEnumerable<T> All<T>(string id);
 
         Task AddAsync(string licenseNumber, string model, int numberInHall, string gamingHallId);
 
-        Task<string> DeleteAsync(string id);
+        Task DeleteAsync(string id);
+
+        string GetHallId(string id);
 
         T GetById<T>(string id);
     }

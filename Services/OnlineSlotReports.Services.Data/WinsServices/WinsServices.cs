@@ -42,13 +42,20 @@
             return wins.To<T>().ToList();
         }
 
-        public async Task<string> Delete(string id)
+        public async Task Delete(string id)
         {
             var win = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
-            var gamingHallId = win.GamingHallId;
+
             this.repository.Delete(win);
 
             await this.repository.SaveChangesAsync();
+        }
+
+        public string GetHallId(string id)
+        {
+            var win = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            var gamingHallId = win.GamingHallId;
 
             return gamingHallId;
         }

@@ -80,7 +80,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IGamingHallService, GamingHallService>();
-            services.AddTransient<ISlotMachinesServices, SlotMachinesServices>();
+            services.AddTransient<ISlotMachinesService, SlotMachinesService>();
             services.AddTransient<IEmployeesServices, EmployeesServices>();
             services.AddTransient<IMachineCountersServices, MachineCountersServices>();
             services.AddTransient<IWinsServices, WinsServices>();

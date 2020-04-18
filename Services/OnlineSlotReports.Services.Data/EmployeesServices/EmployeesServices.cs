@@ -63,15 +63,13 @@
             return gamingHallId;
         }
 
-        public async Task<string> DeleteAsync(string id)
+        public async Task DeleteAsync(string id)
         {
             var employee = await this.repository.GetByIdWithDeletedAsync(id);
-            var gamingHallId = employee.GamingHallId;
+
             this.repository.Delete(employee);
 
             await this.repository.SaveChangesAsync();
-
-            return gamingHallId;
         }
 
         public T GetById<T>(string id)
@@ -79,6 +77,15 @@
             var emplouee = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
 
             return emplouee;
+        }
+
+        public string GetHallId(string id)
+        {
+            var employee = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            var gamingHallId = employee.GamingHallId;
+
+            return gamingHallId;
         }
     }
 }

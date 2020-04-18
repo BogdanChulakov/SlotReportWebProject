@@ -13,12 +13,12 @@
     [Authorize]
     public class SlotMachineController : Controller
     {
-        private readonly ISlotMachinesServices services;
+        private readonly ISlotMachinesService service;
         private readonly IGamingHallService gamingHallService;
 
-        public SlotMachineController(ISlotMachinesServices services, IGamingHallService gamingHallService)
+        public SlotMachineController(ISlotMachinesService service, IGamingHallService gamingHallService)
         {
-            this.services = services;
+            this.service = service;
             this.gamingHallService = gamingHallService;
         }
 
@@ -42,7 +42,7 @@
                 return this.View(input);
             }
 
-            await this.services.AddAsync(input.LicenseNumber, input.Model, input.NumberInHall, id);
+            await this.service.AddAsync(input.LicenseNumber, input.Model, input.NumberInHall, id);
 
             this.TempData["Message"] = "Successfully added slot machine!";
 
@@ -58,7 +58,7 @@
                 return this.NotFound();
             }
 
-            var macines = this.services.All<SlotMachineViewModel>(id);
+            var macines = this.service.All<SlotMachineViewModel>(id);
             var slotMchines = new AllSlotMachinesViewModel
             {
                 SlotMachines = macines,
@@ -77,7 +77,7 @@
                 return this.NotFound();
             }
 
-            var macines = this.services.All<IndexViewModel>(id);
+            var macines = this.service.All<IndexViewModel>(id);
 
             var slotMchines = new ViewModels.SlotMachinesViewModels.AllIndexViewModel
             {
@@ -90,7 +90,9 @@
 
         public async Task<IActionResult> Delete([FromRoute]string id)
         {
-            string gamingHallid = await this.services.DeleteAsync(id);
+            string gamingHallid = this.service.GetHallId(id);
+
+            await this.service.DeleteAsync(id);
 
             this.TempData["Message"] = "Slot machine was deleted successfully!";
 

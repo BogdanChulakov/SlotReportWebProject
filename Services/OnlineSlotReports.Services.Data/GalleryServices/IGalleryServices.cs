@@ -14,5 +14,6 @@
         string GetHallId(string id);
 
         Task<string> AddAsync(string url, string hallid);
+
     }
 }

@@ -74,7 +74,9 @@
 
         public async Task<IActionResult> Delete([FromRoute]string id)
         {
-            string gamingHallId = await this.services.DeleteAsync(id);
+            string gamingHallId = this.services.GetHallId(id);
+
+            await this.services.DeleteAsync(id);
 
             this.TempData["Message"] = "Employee was deleted successfully!";
 

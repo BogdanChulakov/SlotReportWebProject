@@ -13,9 +13,9 @@
     public class CountersController : Controller
     {
         private readonly IMachineCountersServices services;
-        private readonly ISlotMachinesServices slotMachinesServices;
+        private readonly ISlotMachinesService slotMachinesServices;
 
-        public CountersController(IMachineCountersServices services, ISlotMachinesServices slotMachinesServices)
+        public CountersController(IMachineCountersServices services, ISlotMachinesService slotMachinesServices)
         {
             this.services = services;
             this.slotMachinesServices = slotMachinesServices;

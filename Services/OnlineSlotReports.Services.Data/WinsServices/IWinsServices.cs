@@ -11,6 +11,8 @@
 
         Task<string> AddAsync(string url, string description, DateTime date, string hallid, string slotMachineId);
 
-        Task<string> Delete(string id);
+        Task Delete(string id);
+
+        string GetHallId(string id);
     }
 }

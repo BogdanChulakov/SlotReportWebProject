@@ -19,13 +19,13 @@
     public class WinsController : Controller
     {
         private readonly IWinsServices services;
-        private readonly ISlotMachinesServices slotMachinesServices;
+        private readonly ISlotMachinesService slotMachinesServices;
         private readonly Cloudinary cloudinary;
         private readonly IGamingHallService gamingHallService;
 
         public WinsController(
             IWinsServices services,
-            ISlotMachinesServices slotMachinesServices,
+            ISlotMachinesService slotMachinesServices,
             Cloudinary cloudinary,
             IGamingHallService gamingHallService)
         {
@@ -110,7 +110,9 @@
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
 
-            string gamingHallId = await this.services.Delete(id);
+            string gamingHallId = this.services.GetHallId(id);
+
+            await this.services.Delete(id);
 
             this.TempData["Message"] = "Object was deleted successfully!";
 

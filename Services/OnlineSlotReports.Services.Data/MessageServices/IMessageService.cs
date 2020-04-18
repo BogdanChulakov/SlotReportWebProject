@@ -13,6 +13,8 @@
 
         Task AddAsync(string hallId, string sender, string content);
 
-        Task<string> DeleteAsync(string id);
+        Task DeleteAsync(string id);
+
+        string GetHallId(string id);
     }
 }
