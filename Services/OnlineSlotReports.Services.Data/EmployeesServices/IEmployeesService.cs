@@ -4,15 +4,15 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public interface IEmployeesServices
+    public interface IEmployeesService
     {
         IEnumerable<T> All<T>(string id);
 
         Task DeleteAsync(string id);
 
-        Task<string> ChangeEmailAsync(string id, string email);
+        Task ChangeEmailAsync(string id, string email);
 
-        Task<string> ChangePhoneNumberAsync(string id, string phoneNumber);
+        Task ChangePhoneNumberAsync(string id, string phoneNumber);
 
         Task AddAsync(string fullName, string email, string phonenumber, DateTime startWorkDate, string gamingHallId);
 

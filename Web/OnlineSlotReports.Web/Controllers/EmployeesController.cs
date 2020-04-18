@@ -15,12 +15,12 @@
     [Authorize]
     public class EmployeesController : Controller
     {
-        private readonly IEmployeesServices services;
+        private readonly IEmployeesService service;
         private readonly IGamingHallService gamingHallService;
 
-        public EmployeesController(IEmployeesServices services, IGamingHallService gamingHallService)
+        public EmployeesController(IEmployeesService service, IGamingHallService gamingHallService)
         {
-            this.services = services;
+            this.service = service;
             this.gamingHallService = gamingHallService;
         }
 
@@ -45,7 +45,7 @@
                 return this.View(input);
             }
 
-            await this.services.AddAsync(input.FullName, input.Email, input.PhoneNumber, input.StartWorkDate, id);
+            await this.service.AddAsync(input.FullName, input.Email, input.PhoneNumber, input.StartWorkDate, id);
 
             this.TempData["Message"] = "Employee was added successfully!";
 
@@ -62,7 +62,7 @@
                 return this.NotFound();
             }
 
-            var employees = this.services.All<EmployeeViewModel>(id);
+            var employees = this.service.All<EmployeeViewModel>(id);
             var allEmployeesViewModel = new AllEmployeesViewModel
             {
                 Employees = employees,
@@ -74,9 +74,9 @@
 
         public async Task<IActionResult> Delete([FromRoute]string id)
         {
-            string gamingHallId = this.services.GetHallId(id);
+            string gamingHallId = this.service.GetHallId(id);
 
-            await this.services.DeleteAsync(id);
+            await this.service.DeleteAsync(id);
 
             this.TempData["Message"] = "Employee was deleted successfully!";
 
@@ -85,7 +85,7 @@
 
         public IActionResult ChangeEmail([FromRoute]string id)
         {
-            var employee = this.services.GetById<EmployeeChangeEmailViewModel>(id);
+            var employee = this.service.GetById<EmployeeChangeEmailViewModel>(id);
             if (employee == null)
             {
                 return this.NotFound();
@@ -102,7 +102,9 @@
                 return this.View(model);
             }
 
-            string gamingHallId = await this.services.ChangeEmailAsync(id, model.Email);
+            string gamingHallId = this.service.GetHallId(id);
+
+            await this.service.ChangeEmailAsync(id, model.Email);
 
             this.TempData["Message"] = "Employee email successfully updated!";
 
@@ -111,7 +113,7 @@
 
         public IActionResult ChangePhoneNumber([FromRoute]string id)
         {
-            var employee = this.services.GetById<ChangePhoneNumberViewModel>(id);
+            var employee = this.service.GetById<ChangePhoneNumberViewModel>(id);
             if (employee == null)
             {
                 return this.NotFound();
@@ -128,7 +130,9 @@
                 return this.View(model);
             }
 
-            string gamingHallId = await this.services.ChangePhoneNumberAsync(id, model.PhoneNumber);
+            string gamingHallId = this.service.GetHallId(id);
+
+            await this.service.ChangePhoneNumberAsync(id, model.PhoneNumber);
 
             this.TempData["Message"] = "Employee Phone number successfully updated!";
 

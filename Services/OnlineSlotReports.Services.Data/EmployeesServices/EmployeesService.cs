@@ -10,11 +10,11 @@
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Mapping;
 
-    public class EmployeesServices : IEmployeesServices
+    public class EmployeesService : IEmployeesService
     {
         private readonly IDeletableEntityRepository<Employee> repository;
 
-        public EmployeesServices(IDeletableEntityRepository<Employee> repository)
+        public EmployeesService(IDeletableEntityRepository<Employee> repository)
         {
             this.repository = repository;
         }
@@ -41,26 +41,22 @@
             return employees.To<T>().ToList();
         }
 
-        public async Task<string> ChangeEmailAsync(string id, string email)
+        public async Task ChangeEmailAsync(string id, string email)
         {
             var employee = await this.repository.GetByIdWithDeletedAsync(id);
-            var gamingHallId = employee.GamingHallId;
+
             employee.Email = email;
 
             await this.repository.SaveChangesAsync();
-
-            return gamingHallId;
         }
 
-        public async Task<string> ChangePhoneNumberAsync(string id, string phoneNumber)
+        public async Task ChangePhoneNumberAsync(string id, string phoneNumber)
         {
             var employee = await this.repository.GetByIdWithDeletedAsync(id);
-            var gamingHallId = employee.GamingHallId;
+
             employee.PhoneNumber = phoneNumber;
 
-            await this.repository.SaveChangesAsync();
-
-            return gamingHallId;
+            await this.repository.SaveChangesAsync();;
         }
 
         public async Task DeleteAsync(string id)
@@ -74,18 +70,16 @@
 
         public T GetById<T>(string id)
         {
-            var emplouee = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
+            var employee = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
 
-            return emplouee;
+            return employee;
         }
 
         public string GetHallId(string id)
         {
             var employee = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
 
-            var gamingHallId = employee.GamingHallId;
-
-            return gamingHallId;
+            return employee.GamingHallId;
         }
     }
 }
