@@ -58,7 +58,7 @@
 
         public IEnumerable<T> AllOfChain<T>(string hallName)
         {
-            IQueryable<GamingHall> halls = this.repository.All().Where(x => x.HallName == hallName).OrderBy(x => x.CreatedOn);
+            var halls = this.repository.All().Where(x => x.HallName == hallName).OrderBy(x => x.CreatedOn);
 
             return halls.To<T>().ToList();
         }
@@ -66,6 +66,11 @@
         public async Task DeleteAsync(string id)
         {
             var hall = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+            if (hall == null)
+            {
+                return;
+            }
+
             this.repository.Delete(hall);
             await this.repository.SaveChangesAsync();
         }
