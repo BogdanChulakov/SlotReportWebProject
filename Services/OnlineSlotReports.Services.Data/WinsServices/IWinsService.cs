@@ -5,13 +5,13 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface IWinsServices
+    public interface IWinsService
     {
         IEnumerable<T> All<T>(string id);
 
         Task<string> AddAsync(string url, string description, DateTime date, string hallid, string slotMachineId);
 
-        Task Delete(string id);
+        Task DeleteAsync(string id);
 
         string GetHallId(string id);
     }

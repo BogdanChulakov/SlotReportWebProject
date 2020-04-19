@@ -9,11 +9,11 @@
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Mapping;
 
-    public class WinsServices : IWinsServices
+    public class WinsService : IWinsService
     {
         private readonly IDeletableEntityRepository<Win> repository;
 
-        public WinsServices(IDeletableEntityRepository<Win> repository)
+        public WinsService(IDeletableEntityRepository<Win> repository)
         {
             this.repository = repository;
         }
@@ -42,7 +42,7 @@
             return wins.To<T>().ToList();
         }
 
-        public async Task Delete(string id)
+        public async Task DeleteAsync(string id)
         {
             var win = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
 

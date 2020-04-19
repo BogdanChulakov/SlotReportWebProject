@@ -18,13 +18,13 @@
     [Authorize]
     public class WinsController : Controller
     {
-        private readonly IWinsServices services;
+        private readonly IWinsService services;
         private readonly ISlotMachinesService slotMachinesServices;
         private readonly Cloudinary cloudinary;
         private readonly IGamingHallService gamingHallService;
 
         public WinsController(
-            IWinsServices services,
+            IWinsService services,
             ISlotMachinesService slotMachinesServices,
             Cloudinary cloudinary,
             IGamingHallService gamingHallService)
@@ -112,7 +112,7 @@
 
             string gamingHallId = this.services.GetHallId(id);
 
-            await this.services.Delete(id);
+            await this.services.DeleteAsync(id);
 
             this.TempData["Message"] = "Object was deleted successfully!";
 
