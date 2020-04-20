@@ -19,6 +19,7 @@
     using OnlineSlotReports.Web.ViewModels.EmployeesViewModel;
     using Xunit;
 
+    [Collection("Mappings collection")]
     public class EmployeesServiceTests
     {
         [Fact]
@@ -63,7 +64,7 @@
                 "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var results = service.All<EmployeeViewModel>("1");
             int count = 0;
@@ -99,7 +100,7 @@
                 "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var results = service.All<EmployeeViewModel>(null);
             int count = 0;
@@ -129,7 +130,7 @@
                 "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var results = service.All<EmployeeViewModel>("2");
             int count = 0;
@@ -328,7 +329,7 @@
 
             var employee = await dbContext.Employees.FirstOrDefaultAsync();
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var result = service.GetById<EmployeeViewModel>(employee.Id);
 
@@ -355,7 +356,7 @@
                 date,
                 "1");
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var result = service.GetById<EmployeeViewModel>("1234");
 
@@ -378,7 +379,7 @@
                 date,
                 "1");
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var result = service.GetById<EmployeeViewModel>(null);
 
