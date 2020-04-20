@@ -1,22 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OnlineSlotReports.Data;
-using OnlineSlotReports.Data.Models;
-using OnlineSlotReports.Data.Repositories;
-using OnlineSlotReports.Services.Data.MachineCountersServices;
-using OnlineSlotReports.Services.Data.ReportServices;
-using OnlineSlotReports.Services.Mapping;
-using OnlineSlotReports.Web.ViewModels;
-using OnlineSlotReports.Web.ViewModels.ReportsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace OnlineSlotReports.Services.Data.Tests
+﻿namespace OnlineSlotReports.Services.Data.Tests
 {
+    using System;
+    using System.Reflection;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using OnlineSlotReports.Data;
+    using OnlineSlotReports.Data.Models;
+    using OnlineSlotReports.Data.Repositories;
+    using OnlineSlotReports.Services.Data.MachineCountersServices;
+    using OnlineSlotReports.Services.Data.ReportServices;
+    using OnlineSlotReports.Services.Mapping;
+    using OnlineSlotReports.Web.ViewModels;
+    using OnlineSlotReports.Web.ViewModels.ReportsViewModels;
+    using Xunit;
+
+    [Collection("Mappings collection")]
     public class ReportServiceTests
     {
         [Fact]
@@ -55,7 +54,6 @@ namespace OnlineSlotReports.Services.Data.Tests
                 await service.AddAsync(data, 1 + i, 1 + i, "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
             var reports = service.All<IndexReportViewModel>("1");
 
             int count = 0;
@@ -88,7 +86,6 @@ namespace OnlineSlotReports.Services.Data.Tests
                 await service.AddAsync(data, 1 + i, 1 + i, "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
             var reports = service.All<IndexReportViewModel>("11");
 
             int count = 0;
@@ -117,8 +114,9 @@ namespace OnlineSlotReports.Services.Data.Tests
             {
                 await service.AddAsync(data1, 1, 1, "1");
             }
+
             var data2 = DateTime.UtcNow;
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             var reports = service.AllForAPeriod<IndexReportViewModel>("1", data1, data2);
 
             int count = 0;

@@ -17,6 +17,7 @@
     using OnlineSlotReports.Web.ViewModels.SlotMachinesViewModels;
     using Xunit;
 
+    [Collection("Mappings collection")]
     public class SlotMachinesServiceTests
     {
         [Fact]
@@ -55,8 +56,6 @@
                  "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             var results = service.All<SlotMachineViewModel>("1");
             int count = 0;
             foreach (var result in results)
@@ -86,8 +85,6 @@
                  "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             var results = service.All<SlotMachineViewModel>(null);
             int count = 0;
             foreach (var result in results)
@@ -113,8 +110,6 @@
                  1,
                  "1");
             }
-
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var results = service.All<SlotMachineViewModel>("2");
             int count = 0;
@@ -185,7 +180,7 @@
                 "1");
 
             var slotMachine = await dbContext.SlotMachines.FirstOrDefaultAsync();
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             var result = service.GetById<IndexViewModel>(slotMachine.Id);
 
             Assert.True(result != null);
@@ -206,7 +201,6 @@
                 1,
                 "1");
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
             var result = service.GetById<IndexViewModel>("invalidId");
 
             Assert.True(result == null);
@@ -226,7 +220,6 @@
                 1,
                 "1");
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
             var result = service.GetById<IndexViewModel>(null);
 
             Assert.True(result == null);

@@ -16,6 +16,7 @@
     using OnlineSlotReports.Web.ViewModels.GalleryViewModels;
     using Xunit;
 
+    [Collection("Mappings collection")]
     public class GalleryServiceTests
     {
 
@@ -49,7 +50,6 @@
                                "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
             var pics = service.All<GuestViewModel>("1");
             int count = 0;
             foreach (var pic in pics)
@@ -76,7 +76,6 @@
                                "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
             var pics = service.All<GuestViewModel>("2");
             int count = 0;
             foreach (var pic in pics)
@@ -102,7 +101,6 @@
                                "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
             var pics = service.All<GuestViewModel>(null);
             int count = 0;
             foreach (var pic in pics)

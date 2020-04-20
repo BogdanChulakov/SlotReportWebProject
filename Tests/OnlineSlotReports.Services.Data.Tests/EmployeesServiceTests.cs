@@ -64,8 +64,6 @@
                 "1");
             }
 
-            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             var results = service.All<EmployeeViewModel>("1");
             int count = 0;
             foreach (var result in results)
@@ -100,8 +98,6 @@
                 "1");
             }
 
-            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             var results = service.All<EmployeeViewModel>(null);
             int count = 0;
             foreach (var result in results)
@@ -129,8 +125,6 @@
                 date,
                 "1");
             }
-
-            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var results = service.All<EmployeeViewModel>("2");
             int count = 0;
@@ -329,8 +323,6 @@
 
             var employee = await dbContext.Employees.FirstOrDefaultAsync();
 
-            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             var result = service.GetById<EmployeeViewModel>(employee.Id);
 
             Assert.Equal(employee.FullName, result.FullName);
@@ -356,8 +348,6 @@
                 date,
                 "1");
 
-            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             var result = service.GetById<EmployeeViewModel>("1234");
 
             Assert.True(result == null);
@@ -378,8 +368,6 @@
                 "08888888888",
                 date,
                 "1");
-
-            //AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var result = service.GetById<EmployeeViewModel>(null);
 

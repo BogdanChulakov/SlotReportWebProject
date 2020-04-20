@@ -16,6 +16,7 @@
     using OnlineSlotReports.Web.ViewModels.MessageViewModels;
     using Xunit;
 
+    [Collection("Mappings collection")]
     public class MessageServiceTests
     {
         [Fact]
@@ -50,7 +51,7 @@
                 "1");
 
             var message = await dbContextMessage.Messages.FirstOrDefaultAsync();
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             var result = await service.GetByIdAsync<IndexMessageViewModel>(message.Id);
 
             Assert.Equal("Ivan Ivanov", result.Sender);
@@ -73,8 +74,6 @@
                 "content" + i,
                 "222");
             }
-
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var results = service.All<IndexMessageViewModel>("222");
 
@@ -106,8 +105,6 @@
                 "1");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             var results = service.All<IndexMessageViewModel>(null);
 
             int count = 0;
@@ -138,8 +135,6 @@
             var message = await dbContextMessage.Messages.Where(x => x.Sender == "Ivan Ivanov3").FirstOrDefaultAsync();
             message.Readed = true;
             await dbContextMessage.SaveChangesAsync();
-
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var results = service.GetAllReadById<IndexMessageViewModel>("222");
 

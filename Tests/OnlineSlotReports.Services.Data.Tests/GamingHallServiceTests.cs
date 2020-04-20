@@ -19,6 +19,7 @@
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
     using Xunit;
 
+    [Collection("Mappings collection")]
     public class GamingHallServiceTests
     {
         [Fact]
@@ -103,7 +104,6 @@
 
             Assert.Equal(0, service.GetHallsCount());
             dbContext.Database.EnsureDeleted();
-
         }
 
         [Fact]
@@ -194,7 +194,6 @@
                   "town",
                   "1");
             var hall = await dbContext.GamingHalls.FirstOrDefaultAsync();
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var result = service.GetT<DetailsViewModel>(hall.Id);
 
@@ -223,7 +222,6 @@
                   "adress1",
                   "town",
                   "1");
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var result = service.GetT<DetailsViewModel>("1234567");
 
@@ -247,7 +245,6 @@
                   "adress1",
                   "town",
                   "1");
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var result = service.GetT<DetailsViewModel>(null);
 
@@ -279,7 +276,6 @@
                   "adress1",
                   "town",
                   "1");
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var halls = service.Search<IndexGamingHallViewModel>("hall1");
 
@@ -314,7 +310,6 @@
                   "adress1",
                   "town",
                   "1");
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var halls = service.Search<IndexGamingHallViewModel>("town");
 
@@ -349,7 +344,6 @@
                   "adress1",
                   "town",
                   "1");
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var halls = service.Search<IndexGamingHallViewModel>("non-existent");
             int count = 0;
@@ -407,8 +401,6 @@
                   "userId" + i);
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             int page = 2;
             int itemPerPage = 3;
 
@@ -443,8 +435,6 @@
                   "town",
                   "userId" + i);
             }
-
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             int page = 4;
             int itemPerPage = 3;
@@ -493,8 +483,6 @@
                   "userId" + i);
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             var result = service.AllHalls<GamingHallViewModel>("userId");
             int count = 0;
             foreach (var hall in result)
@@ -526,8 +514,6 @@
                   "userId");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             var result = service.AllHalls<GamingHallViewModel>("userIdInvalid");
             int count = 0;
             foreach (var hall in result)
@@ -558,8 +544,6 @@
                   "town",
                   "userId");
             }
-
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var result = service.AllHalls<GamingHallViewModel>(null);
             int count = 0;
@@ -603,8 +587,6 @@
                   "town",
                   "userId");
             }
-
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var result = service.AllOfChain<GamingHallViewComponentModel>("hall");
             int count = 0;
@@ -650,8 +632,6 @@
                   "userId");
             }
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
             var result = service.AllOfChain<GamingHallViewComponentModel>(null);
             int count = 0;
             foreach (var hall in result)
@@ -694,8 +674,6 @@
                   "town",
                   "userId");
             }
-
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             var result = service.AllOfChain<GamingHallViewComponentModel>("test");
             int count = 0;
