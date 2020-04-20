@@ -2,33 +2,33 @@
 @{
     ViewData["Title"] = "Enter";
 }
-<div class="col-md-4 border border-dark bg-light">
-    <p class="m-2" align="center">Enter slot machine counters:</p>
-    <form asp-controller="Counters" asp-action="Enter" method="post">
-        <div>
-            <label asp-for="EllIn">Еlectronic input</label>
-            <input asp-for="EllIn" class="form-control" />
-            <span asp-validation-for="EllIn" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="EllOut">Еlectronic output</label>
-            <input asp-for="EllOut" class="form-control" />
-            <span asp-validation-for="EllOut" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="MechIn">Mechanical input</label>
-            <input asp-for="MechIn" class="form-control" />
-            <span asp-validation-for="MechIn" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="MechOut">Mechanical output</label>
-            <input asp-for="MechOut" class="form-control" />
-            <span asp-validation-for="MechOut" class="text-danger"></span>
-        </div>
-        <br />
-        <div>
-            <input type="submit" name="Save" value="Save" class="btn btn-primary m-2" />
-        </div>
-    </form>
-</div>
+    <div class="col-md-4 border border-light bg-dark">
+        <p class="m-2" align="center">Enter slot machine counters:</p>
+        <form asp-controller="Counters" asp-action="Enter" method="post">
+            <div>
+                <label asp-for="EllIn">Еlectronic input</label>
+                <input asp-for="EllIn" class="form-control" />
+                <span asp-validation-for="EllIn" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="EllOut">Еlectronic output</label>
+                <input asp-for="EllOut" class="form-control" />
+                <span asp-validation-for="EllOut" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="MechIn">Mechanical input</label>
+                <input asp-for="MechIn" class="form-control" />
+                <span asp-validation-for="MechIn" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="MechOut">Mechanical output</label>
+                <input asp-for="MechOut" class="form-control" />
+                <span asp-validation-for="MechOut" class="text-danger"></span>
+            </div>
+            <br />
+            <div>
+                <input type="submit" name="Save" value="Save" class="btn btn-primary m-2" />
+            </div>
+        </form>
+    </div>
 

@@ -64,7 +64,7 @@
 
             var gamingHallId = await this.services.AddAsync(input.Url, input.Description, input.Date, id, input.SlotMachineId);
 
-            this.TempData["Message"] = "Object was added successfully!";
+            this.TempData["Message"] = "Win was added successfully!";
 
             return this.Redirect("/Wins/All/" + gamingHallId);
         }
@@ -114,7 +114,7 @@
 
             await this.services.DeleteAsync(id);
 
-            this.TempData["Message"] = "Object was deleted successfully!";
+            this.TempData["Message"] = "Win was deleted successfully!";
 
             return this.Redirect("/Wins/All/" + gamingHallId);
         }

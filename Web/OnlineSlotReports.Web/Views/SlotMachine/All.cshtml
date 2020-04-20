@@ -9,9 +9,16 @@
         @this.TempData["Message"]
     </div>
 }
-<p>
-    <a href="/SlotMachine/Add/@Model.GamingHallId" class="btn btn-primary">Add Slot machine!</a>
-</p>
+<div class="row">
+    <div class="col-md-2">
+        <p>
+            <a href="/SlotMachine/Add/@Model.GamingHallId" class="btn btn-primary btn-block">Add Slot machine</a>
+        </p>
+        <p>
+            <a asp-controller="GamingHall" asp-action="Halls" asp-route-id="@Model.GamingHallId" class="btn btn-primary btn-block">Back</a>
+        </p>
+    </div>
+</div>
 <table class="table table-dark">
     <thead>
         <tr>

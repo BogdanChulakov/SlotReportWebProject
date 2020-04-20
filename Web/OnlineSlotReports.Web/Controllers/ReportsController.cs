@@ -71,16 +71,16 @@
         }
 
         [HttpGet("/Report/ForAPeriod/")]
-        public IActionResult ForAPeriod([FromQuery] ForADateReportViewModel input)
+        public IActionResult ForAPeriod([FromQuery] string id, DateTime fromDate, DateTime toDate)
         {
-            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(input.Id);
+            var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || userId != hall.UserId)
             {
                 return this.NotFound();
             }
 
-            var reports = this.reportServices.AllForAPeriod<IndexReportViewModel>(input.Id, input.FromDate, input.ToDate);
+            var reports = this.reportServices.AllForAPeriod<IndexReportViewModel>(id, fromDate, toDate);
             var allReports = new ForADateReportViewModel
             {
                 Reports = reports,

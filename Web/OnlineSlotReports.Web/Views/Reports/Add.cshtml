@@ -2,27 +2,27 @@
 @{
     ViewData["Title"] = "Add";
 }
-<div class="col-md-4 border border-dark bg-light">
-    <p class="m-2" align="center">Add Report for day:</p>
-    <form asp-controller="Reports" asp-action="Add" method="post">
-        <div>
-            <label asp-for="Date">Date</label>
-            <input asp-for="Date" class="form-control" />
-            <span asp-validation-for="Date" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="InForDay">InForDay</label>
-            <input asp-for="InForDay" class="form-control" />
-            <span asp-validation-for="InForDay" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="OutForDay">OutForDay</label>
-            <input asp-for="OutForDay" class="form-control" />
-            <span asp-validation-for="OutForDay" class="text-danger"></span>
-        </div>
-        <br />
-        <div>
-            <input type="submit" name="Save" value="Add" class="btn btn-primary m-2"/>
-        </div>
-    </form>
-</div>
+    <div class="col-md-4 border border-light bg-dark">
+        <p class="m-2" align="center">Add Report for day:</p>
+        <form asp-controller="Reports" asp-action="Add" method="post">
+            <div>
+                <label asp-for="Date">Date</label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="InForDay">InForDay</label>
+                <input asp-for="InForDay" class="form-control" />
+                <span asp-validation-for="InForDay" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="OutForDay">OutForDay</label>
+                <input asp-for="OutForDay" class="form-control" />
+                <span asp-validation-for="OutForDay" class="text-danger"></span>
+            </div>
+            <br />
+            <div>
+                <input type="submit" name="Save" value="Add" class="btn btn-primary m-2" />
+            </div>
+        </form>
+    </div>

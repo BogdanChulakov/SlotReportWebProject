@@ -51,7 +51,7 @@
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             await this.service.AddAsync(input.HallName, input.ImageUrl, input.Description, input.PhoneNumber, input.Adress, input.Town, userId);
-
+            this.TempData["Message"] = "Gaming hall was aded successfully!";
             return this.Redirect("/GamingHall/Halls");
         }
 
@@ -71,6 +71,7 @@
         {
             await this.service.DeleteAsync(id);
 
+            this.TempData["Message"] = "Gaming hall was deleted successfully!";
             return this.Redirect("/GamingHall/Halls");
         }
 
@@ -101,7 +102,7 @@
             }
 
             await this.service.UpdateAsync(input.Id, input.HallName, input.ImageUrl, input.Description, input.PhoneNumber, input.Adress, input.Town);
-
+            this.TempData["Message"] = "Gaming hall was edited successfully!";
             return this.Redirect("/GamingHall/Halls");
         }
 

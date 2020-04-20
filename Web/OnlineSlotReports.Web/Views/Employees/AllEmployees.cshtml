@@ -4,9 +4,17 @@
 }
 
 <h1 align="center" class="display-4">All Employees</h1>
-<p>
-    <a asp-controller="Employees" asp-action="Add" asp-route-id="@Model.GamingHallId" class="btn btn-primary">Add Employee!</a>
-</p>
+
+<div class="row">
+    <div class="col-md-2">
+        <p>
+            <a asp-controller="Employees" asp-action="Add" asp-route-id="@Model.GamingHallId" class="btn btn-primary btn-block">Add Employee</a>
+        </p>
+        <p>
+            <a asp-controller="GamingHall" asp-action="Halls" asp-route-id="@Model.GamingHallId" class="btn btn-primary btn-block">Back</a>
+        </p>
+    </div>
+</div>
 @if (this.TempData["Message"] != null)
 {
     <div class="alert alert-success">
@@ -36,7 +44,4 @@
         }
     </tbody>
 </table>
-<p align="right">
-    <a asp-controller="GamingHall" asp-action="Halls" asp-route-id="@Model.GamingHallId" class="btn btn-primary">Back</a>
-</p>
 

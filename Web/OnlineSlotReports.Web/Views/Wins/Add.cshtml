@@ -3,30 +3,30 @@
     ViewData["Title"] = "Add";
 }
 
-<div class="col-md-4 border border-dark bg-light">
-    <p class="m-2" align="center">Add win:</p>
-    <form asp-controller="Wins" asp-action="Add" method="post" dash-controller="Files" enctype="multipart/form-data">
-        <div>
-            <input type="file" name="file" required />
-        </div>
-        <div>
-            <label asp-for="Description">Description</label>
-            <input asp-for="Description" class="form-control" />
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Date">Date of win</label>
-            <input asp-for="Date" class="form-control" />
-            <span asp-validation-for="Date" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="SlotMachineId">Machine Number</label>
-            <select asp-for="SlotMachineId" asp-items="Model.MachineNumbers.Select(x=> new SelectListItem( x.NumberInHall.ToString(),x.Id))" class="form-control"></select>
-            <span asp-validation-for="SlotMachineId" class="text-danger"></span>
-        </div>
-        <br>
-        <div>
-            <input type="submit" name="Save" value="Add" class="btn btn-primary m-2" />
-        </div>
-    </form>
-</div>
+    <div class="col-md-4 border border-light bg-dark">
+        <p class="m-2" align="center">Add win:</p>
+        <form asp-controller="Wins" asp-action="Add" method="post" dash-controller="Files" enctype="multipart/form-data">
+            <div>
+                <input type="file" name="file" required />
+            </div>
+            <div>
+                <label asp-for="Description">Description</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Date">Date of win</label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="SlotMachineId">Machine Number</label>
+                <select asp-for="SlotMachineId" asp-items="Model.MachineNumbers.Select(x=> new SelectListItem( x.NumberInHall.ToString(),x.Id))" class="form-control"></select>
+                <span asp-validation-for="SlotMachineId" class="text-danger"></span>
+            </div>
+            <br>
+            <div>
+                <input type="submit" name="Save" value="Add" class="btn btn-primary m-2" />
+            </div>
+        </form>
+    </div>

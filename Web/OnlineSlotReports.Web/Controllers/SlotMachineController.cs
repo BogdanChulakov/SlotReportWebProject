@@ -44,7 +44,7 @@
 
             await this.service.AddAsync(input.LicenseNumber, input.Model, input.NumberInHall, id);
 
-            this.TempData["Message"] = "Successfully added slot machine!";
+            this.TempData["Message"] = "Slot machine was added successfully!";
 
             return this.Redirect("/SlotMachine/All/" + id);
         }

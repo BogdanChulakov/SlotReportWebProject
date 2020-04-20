@@ -4,38 +4,49 @@
 }
 
 <h1 align="center" class="display-4">Reports</h1>
-<hr />
-<a asp-controller="Reports" asp-action="Add" asp-route-id="@Model.HallId" class="btn btn-primary">Add</a>
-<hr />
 @if (this.TempData["Message"] != null)
 {
     <div class="alert alert-success">
         @this.TempData["Message"]
     </div>
 }
-<div>
-    <a asp-controller="Reports" asp-action="ForAPeriod" asp-route-id="@Model.HallId" class="btn btn-primary">Reports for a perod</a>
+
+<div class="row">
+    <div class="col-md-2">
+        <p>
+            <a asp-controller="Reports" asp-action="Add" asp-route-id="@Model.HallId" class="btn btn-primary btn-block">Add report</a>
+        </p>
+        <p>
+            <a asp-controller="Reports" asp-action="ForAPeriod" asp-route-id="@Model.HallId" class="btn btn-primary btn-block">Period report</a>
+        </p>
+        <p>
+            <a asp-controller="GamingHall" asp-action="Halls" asp-route-id="@Model.HallId" class="btn btn-primary btn-block">Back</a>
+        </p>
+    </div>
 </div>
 <hr />
-@foreach (var report in Model.Reports)
-{
-    <div class="row">
-        <div class="col-md-3">
-            For Date: @report.Date
-        </div>
-        <div class="col-md-3">
-            Entrance for the day:  @report.InForDay
-        </div>
-        <div class="col-md-3">
-            Profits for the day: @report.OutForDay
-        </div>
-        <div class="col-md-3">
-            Result: @report.DeilyResult
-        </div>
-    </div>
-}
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Entrance for the day:</th>
+            <th scope="col">Entrance for the day: </th>
+            <th scope="col">Result:</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var report in Model.Reports)
+        {
 
-
+            <tr>
+                <th>@report.Date</th>
+                <th>@report.InForDay</th>
+                <td>@report.OutForDay</td>
+                <td>@report.DeilyResult</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 
 

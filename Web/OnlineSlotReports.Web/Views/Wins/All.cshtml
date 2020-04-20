@@ -4,15 +4,22 @@
 }
 
 <h1 align="center" class="display-4">All Wins</h1>
-<p>
-    <a asp-controller="Wins" asp-action="Add" asp-route-id="@Model.GamingHallId" class="btn btn-primary">Add Wins!</a>
-</p>
 @if (this.TempData["Message"] != null)
 {
     <div class="alert alert-success">
         @this.TempData["Message"]
     </div>
 }
+<div class="row">
+    <div class="col-md-2">
+        <p>
+            <a asp-controller="Wins" asp-action="Add" asp-route-id="@Model.GamingHallId" class="btn btn-primary btn-block">Add Wins</a>
+        </p>
+        <p>
+            <a asp-controller="GamingHall" asp-action="Halls" asp-route-id="@Model.GamingHallId" class="btn btn-primary btn-block">Back</a>
+        </p>
+    </div>
+</div>
 <div class="row" align="center">
     @foreach (var win in Model.Wins)
     {

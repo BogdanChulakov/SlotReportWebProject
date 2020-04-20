@@ -4,28 +4,34 @@
 }
 
 <h2 align="center" class="display-4">My Gaming Halls</h2>
+@if (this.TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @this.TempData["Message"]
+    </div>
+}
 @foreach (var hall in Model.GamingHalls)
 {
-<div class="jumbotron row border border-dark">
+    <div class="jumbotron row bg-dark border-dark">
 
-    <div class="col-md-3 border-right">
-        <p class="lead"><a asp-controller="SlotMachine" asp-action="All" asp-route-id="@hall.Id">Slot Machines (@hall.SlotMachinesCount)</a></p>
-        <p class="lead"><a asp-controller="Employees" asp-action="AllEmployees" asp-route-id="@hall.Id">Employees (@hall.EmployeesCount)</a></p>
-        <p class="lead"><a asp-controller="Wins" asp-action="All" asp-route-id="@hall.Id">Wins</a></p>
-        <p class="lead"><a asp-controller="Gallery" asp-action="All" asp-route-id="@hall.Id">Gallery</a></p>
-        <p class="lead"><a asp-controller="Message" asp-action="All" asp-route-id="@hall.Id">Mail</a></p>
+        <div class="col-md-3 border-right">
+            <p class="lead"><a class="btn btn-primary btn-block" asp-controller="SlotMachine" asp-action="All" asp-route-id="@hall.Id">Slot Machines (@hall.SlotMachinesCount)</a></p>
+            <p class="lead"><a class="btn btn-primary btn-block" asp-controller="Employees" asp-action="AllEmployees" asp-route-id="@hall.Id">Employees (@hall.EmployeesCount)</a></p>
+            <p class="lead"><a class="btn btn-primary btn-block" asp-controller="Wins" asp-action="All" asp-route-id="@hall.Id">Wins</a></p>
+            <p class="lead"><a class="btn btn-primary btn-block" asp-controller="Gallery" asp-action="All" asp-route-id="@hall.Id">Gallery</a></p>
+            <p class="lead"><a class="btn btn-primary btn-block" asp-controller="Message" asp-action="All" asp-route-id="@hall.Id">Mail</a></p>
+        </div>
+        <div class="container col-md-9">
+            <h3>"@hall.HallName"</h3>
+            <p class="lead">@hall.Adress - @hall.Town</p>
+            <p class="lead"><a asp-controller="Reports" asp-action="All" asp-route-id="@hall.Id" class="btn btn-primary">Reports</a></p>
+            <hr />
+            <a asp-controller="GamingHall" asp-action="AddElements" asp-route-id="@hall.Id">Insert panel</a> |
+            <a asp-controller="GamingHall" asp-action="Update" asp-route-id="@hall.Id">Edit</a> |
+            <a asp-controller="GamingHall" asp-action="Details" asp-route-id="@hall.Id">Details</a>
+            <a asp-controller="GamingHall" asp-action="Delete" asp-route-id="@hall.Id" class="btn btn-danger float-right" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+        </div>
     </div>
-    <div class="container col-md-9">
-        <h3>"@hall.HallName"</h3>
-        <p class="lead">@hall.Adress - @hall.Town</p>
-        <p class="lead"><a asp-controller="Reports" asp-action="All" asp-route-id="@hall.Id" class="btn btn-primary">Reports</a></p>
-        <hr />
-        <a asp-controller="GamingHall" asp-action="AddElements" asp-route-id="@hall.Id">Insert panel</a> |
-        <a asp-controller="GamingHall" asp-action="Update" asp-route-id="@hall.Id">Edit</a> |
-        <a asp-controller="GamingHall" asp-action="Details" asp-route-id="@hall.Id">Details</a>
-        <a asp-controller="GamingHall" asp-action="Delete" asp-route-id="@hall.Id" class="btn btn-danger float-right" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
-    </div>
-</div>
 }
 
 

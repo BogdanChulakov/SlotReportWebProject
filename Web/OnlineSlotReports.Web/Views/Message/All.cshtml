@@ -4,8 +4,15 @@
 }
 
 <h1 class="display-4" align="center">Mail</h1>
+<div class="row">
+    <div class="col-md-2">
+        <p>
+            <a asp-controller="GamingHall" asp-action="Halls" asp-route-id="@Model.GamingHallId" class="btn btn-primary btn-block">Back</a>
+        </p>
+    </div>
+</div>
 <hr />
-<p class="alert-dismissible">New messages</p>
+<p class="alert-dismissible">New:</p>
 @foreach (var message in Model.NewMessages)
 {
     <div class="card alert-primary m-2">
@@ -19,7 +26,7 @@
     </div>
 }
 <hr />
-<p>Read messages</p>
+<p>Read:</p>
 @foreach (var message in Model.ReadMessages)
 {
     <div class="card alert-secondary m-2">

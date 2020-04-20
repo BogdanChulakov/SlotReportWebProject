@@ -2,46 +2,46 @@
 @{
     ViewData["Title"] = "Update";
 }
-<div class="col-md-4 border border-dark bg-light">
-    <p class="m-2" align="center">Edit Gaming hall:</p>
-    <form asp-controller="GamingHall" asp-action="Update" method="post" dash-controller="Files" enctype="multipart/form-data">
-        <input asp-for="Id" class="form-control" type="hidden" />
-        <div>
-            <label asp-for="HallName">Hall Name</label>
-            <input asp-for="HallName" class="form-control" />
-            <span asp-validation-for="HallName" class="text-danger"></span>
-        </div>
-        <div>
-            <input asp-for="ImageUrl" class="form-control" type="hidden" />
-            <span asp-validation-for="ImageUrl" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Description"></label>
-            <textarea asp-for="Description" class="form-control"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="PhoneNumber"></label>
-            <input asp-for="PhoneNumber" class="form-control" />
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Adress"></label>
-            <input asp-for="Adress" class="form-control" />
-            <span asp-validation-for="Adress" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Town"></label>
-            <input asp-for="Town" class="form-control" />
-            <span asp-validation-for="Town" class="text-danger"></span>
-        </div>
-        <br>
-        <div>
-            <input type="file" name="file" />
-        </div>
-        <br />
-        <div>
-            <input type="submit" name="Save" value="Save" class="btn btn-primary m-2" />
-        </div>
-    </form>
-</div>
+    <div class="col-md-4 border border-light bg-dark">
+        <p class="m-2" align="center">Edit Gaming hall:</p>
+        <form asp-controller="GamingHall" asp-action="Update" method="post" dash-controller="Files" enctype="multipart/form-data">
+            <input asp-for="Id" class="form-control" type="hidden" />
+            <div>
+                <label asp-for="HallName">Hall Name</label>
+                <input asp-for="HallName" class="form-control bg-secondary" />
+                <span asp-validation-for="HallName" class="text-danger"></span>
+            </div>
+            <div>
+                <input asp-for="ImageUrl" class="form-control" type="hidden" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Adress"></label>
+                <input asp-for="Adress" class="form-control" />
+                <span asp-validation-for="Adress" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Town"></label>
+                <input asp-for="Town" class="form-control" />
+                <span asp-validation-for="Town" class="text-danger"></span>
+            </div>
+            <br>
+            <div>
+                <input type="file" name="file" />
+            </div>
+            <br />
+            <div>
+                <input type="submit" name="Save" value="Save" class="btn btn-primary m-2" />
+            </div>
+        </form>
+    </div>
