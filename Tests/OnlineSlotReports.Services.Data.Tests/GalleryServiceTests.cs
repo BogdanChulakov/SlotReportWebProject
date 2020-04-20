@@ -1,10 +1,12 @@
 ﻿namespace OnlineSlotReports.Services.Data.Tests
 {
+    using System;
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
+    using OnlineSlotReports.Data;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Data.Repositories;
     using OnlineSlotReports.Services.Data.GalleryServices;
@@ -20,7 +22,8 @@
         [Fact]
         public async Task AddAsyncWithValidlId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new GalleryService(new EfDeletableEntityRepository<Pic>(dbContext));
             await service.AddAsync(
                 "http://wwww.test.img",
@@ -30,12 +33,14 @@
 
             Assert.Equal("http://wwww.test.img", pic.Url);
             Assert.Equal("1", pic.GamingHallId);
+            dbContext.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task AllWithValidlId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new GalleryService(new EfDeletableEntityRepository<Pic>(dbContext));
             for (int i = 1; i < 6; i++)
             {
@@ -54,12 +59,15 @@
             }
 
             Assert.Equal(5, count);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task AllWithInvalidlId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new GalleryService(new EfDeletableEntityRepository<Pic>(dbContext));
             for (int i = 1; i < 6; i++)
             {
@@ -77,12 +85,15 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task AllWithNulllId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new GalleryService(new EfDeletableEntityRepository<Pic>(dbContext));
             for (int i = 1; i < 6; i++)
             {
@@ -105,7 +116,8 @@
         [Fact]
         public async Task DeleteAsyncWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new GalleryService(new EfDeletableEntityRepository<Pic>(dbContext));
             await service.AddAsync(
                 "http://www.test.com",
@@ -118,12 +130,15 @@
             var result = await dbContext.Pics.Where(x => x.Id == pic.Id).FirstOrDefaultAsync();
 
             Assert.True(result == null);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task GetHallIdWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new GalleryService(new EfDeletableEntityRepository<Pic>(dbContext));
             await service.AddAsync(
                 "http://www.test.com",
@@ -134,6 +149,8 @@
             string hallId = service.GetHallId(pic.Id);
 
             Assert.Equal("1", hallId);
+            dbContext.Database.EnsureDeleted();
+
         }
     }
 }

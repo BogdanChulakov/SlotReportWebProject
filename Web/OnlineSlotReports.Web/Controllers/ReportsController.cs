@@ -16,10 +16,10 @@
     [Authorize]
     public class ReportsController : Controller
     {
-        private readonly IReportServices reportServices;
+        private readonly IReportService reportServices;
         private readonly IGamingHallService gamingHallService;
 
-        public ReportsController(IReportServices reportServices, IGamingHallService gamingHallService)
+        public ReportsController(IReportService reportServices, IGamingHallService gamingHallService)
         {
             this.reportServices = reportServices;
             this.gamingHallService = gamingHallService;
@@ -63,11 +63,11 @@
                 return this.View(input);
             }
 
-            await this.reportServices.Add(input.Date, input.InForDay, input.OutForDay, id);
+            await this.reportServices.AddAsync(input.Date, input.InForDay, input.OutForDay, id);
 
             this.TempData["Message"] = "Report was added successfully!";
 
-            return this.Redirect("/Reports/All/" + input.GamingHallId);
+            return this.Redirect("/Reports/All/" + id);
         }
 
         [HttpGet("/Report/ForAPeriod/")]
@@ -80,7 +80,7 @@
                 return this.NotFound();
             }
 
-            var reports = this.reportServices.AllForAPeriod<IndexReportViewModel>(input.Id, userId, input.FromDate, input.ToDate);
+            var reports = this.reportServices.AllForAPeriod<IndexReportViewModel>(input.Id, input.FromDate, input.ToDate);
             var allReports = new ForADateReportViewModel
             {
                 Reports = reports,

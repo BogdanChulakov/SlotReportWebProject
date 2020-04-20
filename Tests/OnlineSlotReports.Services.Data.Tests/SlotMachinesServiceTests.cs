@@ -1,10 +1,12 @@
 ﻿namespace OnlineSlotReports.Services.Data.Tests
 {
+    using System;
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
+    using OnlineSlotReports.Data;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Data.Repositories;
     using OnlineSlotReports.Services.Data.EmployeesServices;
@@ -20,7 +22,8 @@
         [Fact]
         public async Task AddAsyncWithCorectData()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
             await service.AddAsync(
                 "1234567890",
@@ -34,12 +37,14 @@
             Assert.Equal("Megajack", result.Model);
             Assert.Equal(1, result.NumberInHall);
             Assert.Equal("1", result.GamingHallId);
+            dbContext.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task AllWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
             for (int i = 1; i <= 5; i++)
             {
@@ -63,12 +68,14 @@
             }
 
             Assert.Equal(5, count);
+            dbContext.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task AllWithNullId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
             for (int i = 1; i <= 5; i++)
             {
@@ -89,12 +96,14 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task AllWithNoExistingId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
             for (int i = 1; i <= 5; i++)
             {
@@ -115,12 +124,15 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task DeleteAsyncWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
             await service.AddAsync(
                 "1234567890",
@@ -135,12 +147,15 @@
             var result = await dbContext.GamingHalls.Where(x => x.Id == slotMachine.Id).FirstOrDefaultAsync();
 
             Assert.True(result == null);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task GetHallIdWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
             await service.AddAsync(
                 "1234567890",
@@ -153,12 +168,15 @@
             var result = service.GetHallId(slotMachine.Id);
 
             Assert.Equal("1", result);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task GetByIdWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
             await service.AddAsync(
                 "1234567890",
@@ -172,12 +190,15 @@
 
             Assert.True(result != null);
             Assert.Equal(slotMachine.Id, result.Id);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task GetByIdWithInvalidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
             await service.AddAsync(
                 "1234567890",
@@ -189,12 +210,15 @@
             var result = service.GetById<IndexViewModel>("invalidId");
 
             Assert.True(result == null);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task GetByIdWithNullId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new SlotMachinesService(new EfDeletableEntityRepository<SlotMachine>(dbContext));
             await service.AddAsync(
                 "1234567890",
@@ -206,6 +230,7 @@
             var result = service.GetById<IndexViewModel>(null);
 
             Assert.True(result == null);
+            dbContext.Database.EnsureDeleted();
         }
     }
 }

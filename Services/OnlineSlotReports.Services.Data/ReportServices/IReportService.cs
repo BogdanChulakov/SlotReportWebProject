@@ -5,12 +5,12 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface IReportServices
+    public interface IReportService
     {
-        Task Add(DateTime date, decimal inForDay, decimal outForday, string hallid);
+        Task AddAsync(DateTime date, decimal inForDay, decimal outForday, string hallid);
 
         IEnumerable<T> All<T>(string id);
 
-        IEnumerable<T> AllForAPeriod<T>(string id, string userId, DateTime fromData, DateTime toData);
+        IEnumerable<T> AllForAPeriod<T>(string id, DateTime fromData, DateTime toData);
     }
 }

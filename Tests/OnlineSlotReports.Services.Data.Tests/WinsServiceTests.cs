@@ -1,6 +1,12 @@
 ﻿namespace OnlineSlotReports.Services.Data.Tests
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using System.Threading.Tasks;
+
     using Microsoft.EntityFrameworkCore;
+    using OnlineSlotReports.Data;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Data.Repositories;
     using OnlineSlotReports.Services.Data.Tests.Factory;
@@ -8,12 +14,6 @@
     using OnlineSlotReports.Services.Mapping;
     using OnlineSlotReports.Web.ViewModels;
     using OnlineSlotReports.Web.ViewModels.WinsViewModels;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Text;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class WinsServiceTests
@@ -21,7 +21,8 @@
         [Fact]
         public async Task AddAsyncWithValidlId()
         {
-            var dbContextWins = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextWins = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new WinsService(new EfDeletableEntityRepository<Win>(dbContextWins));
             var date = DateTime.UtcNow;
             await service.AddAsync( 
@@ -37,12 +38,15 @@
             Assert.Equal("desc", win.Description);
             Assert.Equal(date, win.Date);
             Assert.Equal("1", win.GamingHallId);
+
+            dbContextWins.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task AllWithValidlId()
         {
-            var dbContextWins = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextWins = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                   .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new WinsService(new EfDeletableEntityRepository<Win>(dbContextWins));
             var date = DateTime.UtcNow;
             for (int i = 1; i < 6; i++)
@@ -67,12 +71,14 @@
             }
 
             Assert.Equal(5, count);
+            dbContextWins.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task AllWithInvalidlId()
         {
-            var dbContextWins = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextWins = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                   .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new WinsService(new EfDeletableEntityRepository<Win>(dbContextWins));
             var date = DateTime.UtcNow;
             for (int i = 1; i < 6; i++)
@@ -94,12 +100,14 @@
             }
 
             Assert.Equal(0, count);
+            dbContextWins.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task AllWithNulllId()
         {
-            var dbContextWins = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextWins = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                   .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new WinsService(new EfDeletableEntityRepository<Win>(dbContextWins));
             var date = DateTime.UtcNow;
             for (int i = 1; i < 6; i++)
@@ -121,12 +129,14 @@
             }
 
             Assert.Equal(0, count);
+            dbContextWins.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task DeleteAsyncWithValidId()
         {
-            var dbContextWins = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextWins = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                   .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new WinsService(new EfDeletableEntityRepository<Win>(dbContextWins));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -143,12 +153,14 @@
             var result = await dbContextWins.Wins.Where(x => x.Id == win.Id).FirstOrDefaultAsync();
 
             Assert.True(result == null);
+            dbContextWins.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task GetHallIdWithValidId()
         {
-            var dbContextWins = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextWins = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                   .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new WinsService(new EfDeletableEntityRepository<Win>(dbContextWins));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -163,6 +175,7 @@
             string hallId = service.GetHallId(win.Id);
 
             Assert.Equal("1", hallId);
+            dbContextWins.Database.EnsureDeleted();
         }
     }
 }

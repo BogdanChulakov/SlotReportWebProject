@@ -1,10 +1,12 @@
 ﻿namespace OnlineSlotReports.Services.Data.Tests
 {
+    using System;
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
+    using OnlineSlotReports.Data;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Data.Repositories;
     using OnlineSlotReports.Services.Data.MessageServices;
@@ -19,7 +21,8 @@
         [Fact]
         public async Task AddAsyncWithCorectData()
         {
-            var dbContextMessage = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextMessage = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new MessageService(new EfDeletableEntityRepository<Message>(dbContextMessage));
             await service.AddAsync(
                 "Ivan Ivanov",
@@ -31,12 +34,15 @@
             Assert.Equal("Ivan Ivanov", result.Sender);
             Assert.Equal("content", result.Content);
             Assert.Equal("1", result.GamingHallId);
+            dbContextMessage.Database.EnsureDeleted();
+            dbContextMessage.Dispose();
         }
 
         [Fact]
         public async Task GetByIdAsyncWithCorectId()
         {
-            var dbContextMessage = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextMessage = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new MessageService(new EfDeletableEntityRepository<Message>(dbContextMessage));
             await service.AddAsync(
                 "Ivan Ivanov",
@@ -50,12 +56,15 @@
             Assert.Equal("Ivan Ivanov", result.Sender);
             Assert.Equal("content", result.Content);
             Assert.Equal("1", result.GamingHallId);
+            dbContextMessage.Database.EnsureDeleted();
+            dbContextMessage.Dispose();
         }
 
         [Fact]
         public async Task AllWithCorectId()
         {
-            var dbContextMessage = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextMessage = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
             var service = new MessageService(new EfDeletableEntityRepository<Message>(dbContextMessage));
             for (int i = 1; i <= 5; i++)
             {
@@ -79,12 +88,15 @@
             }
 
             Assert.Equal(5, count);
+            dbContextMessage.Database.EnsureDeleted();
+            dbContextMessage.Dispose();
         }
 
         [Fact]
         public async Task AllWithNullId()
         {
-            var dbContextMessage = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextMessage = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
             var service = new MessageService(new EfDeletableEntityRepository<Message>(dbContextMessage));
             for (int i = 1; i <= 5; i++)
             {
@@ -105,12 +117,15 @@
             }
 
             Assert.Equal(0, count);
+            dbContextMessage.Database.EnsureDeleted();
+            dbContextMessage.Dispose();
         }
 
         [Fact]
         public async Task GetAllReadadWithOneReadMessage()
         {
-            var dbContextMessage = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextMessage = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
             var service = new MessageService(new EfDeletableEntityRepository<Message>(dbContextMessage));
             for (int i = 1; i <= 5; i++)
             {
@@ -138,12 +153,15 @@
             }
 
             Assert.Equal(1, count);
+            dbContextMessage.Database.EnsureDeleted();
+            dbContextMessage.Dispose();
         }
 
         [Fact]
         public async Task DeleteAsyncWithValidId()
         {
-            var dbContextMessage = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextMessage = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
             var service = new MessageService(new EfDeletableEntityRepository<Message>(dbContextMessage));
             await service.AddAsync(
                           "Ivan Ivanov",
@@ -156,12 +174,15 @@
             var result = await dbContextMessage.Messages.Where(x => x.Id == message.Id).FirstOrDefaultAsync();
 
             Assert.True(result == null);
+            dbContextMessage.Database.EnsureDeleted();
+            dbContextMessage.Dispose();
         }
 
         [Fact]
         public async Task GetHallIdWithValidId()
         {
-            var dbContextMessage = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContextMessage = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
             var service = new MessageService(new EfDeletableEntityRepository<Message>(dbContextMessage));
             await service.AddAsync(
                    "Ivan Ivanov",
@@ -172,6 +193,8 @@
             string hallId = service.GetHallId(message.Id);
 
             Assert.Equal("1", hallId);
+            dbContextMessage.Database.EnsureDeleted();
+            dbContextMessage.Dispose();
         }
     }
 }

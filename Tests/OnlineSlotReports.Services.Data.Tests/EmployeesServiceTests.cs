@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
+    using OnlineSlotReports.Data;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Data.Repositories;
     using OnlineSlotReports.Services.Data.EmployeesServices;
@@ -23,7 +24,8 @@
         [Fact]
         public async Task AddAsyncWithCorectData()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -40,12 +42,15 @@
             Assert.Equal("08888888888", result.PhoneNumber);
             Assert.Equal(date, result.StartWorkDate);
             Assert.Equal("1", result.GamingHallId);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task AllWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             for (int i = 1; i <= 5; i++)
@@ -73,12 +78,15 @@
             }
 
             Assert.Equal(5, count);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task AllWithNullId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             for (int i = 1; i <= 5; i++)
@@ -101,12 +109,14 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task AllWithNoexistinglId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             for (int i = 1; i <= 5; i++)
@@ -129,12 +139,15 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task ChangeEmailWithCorectEmail()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -150,12 +163,15 @@
 
             var result = await dbContext.Employees.FirstOrDefaultAsync();
             Assert.Equal("abv@abv.bg", result.Email);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task ChangeEmailWithIncorectEmail()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -171,12 +187,15 @@
 
             var result = await dbContext.Employees.FirstOrDefaultAsync();
             Assert.Equal(employee.Email, result.Email);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task ChangeEmailWithNullEmail()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -192,12 +211,15 @@
 
             var result = await dbContext.Employees.FirstOrDefaultAsync();
             Assert.Equal(employee.Email, result.Email);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task ChangePhoneNumberWithCorectData()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -213,12 +235,15 @@
 
             var result = await dbContext.Employees.FirstOrDefaultAsync();
             Assert.Equal("0111111111", result.PhoneNumber);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task ChangePhonenumberWithIncorectData()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -234,12 +259,15 @@
 
             var result = await dbContext.Employees.FirstOrDefaultAsync();
             Assert.Equal(employee.PhoneNumber, result.PhoneNumber);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task ChangePhoneNumberWithNull()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -255,12 +283,15 @@
 
             var result = await dbContext.Employees.FirstOrDefaultAsync();
             Assert.Equal(employee.PhoneNumber, result.PhoneNumber);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task DeleteAsyncWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -277,12 +308,15 @@
             var result = await dbContext.GamingHalls.Where(x => x.Id == employee.Id).FirstOrDefaultAsync();
 
             Assert.True(result == null);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task GetByIdWithVaidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                     .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -303,12 +337,15 @@
             Assert.Equal(employee.PhoneNumber, result.PhoneNumber);
             Assert.Equal(employee.StartWorkDate, result.StartWorkDate);
             Assert.Equal(employee.GamingHallId, result.GamingHallId);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task GetByIdWithInvalidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -323,12 +360,15 @@
             var result = service.GetById<EmployeeViewModel>("1234");
 
             Assert.True(result == null);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task GetByIdWithNullId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -343,12 +383,15 @@
             var result = service.GetById<EmployeeViewModel>(null);
 
             Assert.True(result == null);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
 
         [Fact]
         public async Task GetHallIdWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new EmployeesService(new EfDeletableEntityRepository<Employee>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -362,7 +405,8 @@
             var result = service.GetHallId(employee.Id);
 
             Assert.Equal("1", result);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
         }
-
     }
 }

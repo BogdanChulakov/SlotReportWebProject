@@ -10,18 +10,18 @@
     using OnlineSlotReports.Services.Data.MachineCountersServices;
     using OnlineSlotReports.Services.Mapping;
 
-    public class ReportServices : IReportServices
+    public class ReportService : IReportService
     {
         private readonly IDeletableEntityRepository<Report> repository;
         private readonly IMachineCountersService countersServices;
 
-        public ReportServices(IDeletableEntityRepository<Report> repository, IMachineCountersService countersServices)
+        public ReportService(IDeletableEntityRepository<Report> repository, IMachineCountersService countersServices)
         {
             this.repository = repository;
             this.countersServices = countersServices;
         }
 
-        public async Task Add(DateTime date, decimal inForDay, decimal outForday, string hallid)
+        public async Task AddAsync(DateTime date, decimal inForDay, decimal outForday, string hallid)
         {
             var report = new Report
             {
@@ -42,14 +42,14 @@
             return halls.To<T>().ToList();
         }
 
-        public IEnumerable<T> AllForAPeriod<T>(string id, string userId, DateTime fromData, DateTime toData)
+        public IEnumerable<T> AllForAPeriod<T>(string id, DateTime fromData, DateTime toData)
         {
-            IQueryable<Report> halls = this.repository.All().Where(x => x.GamingHallId == id
-                                                                     && x.GamingHall.UserId == userId
-                                                                     && x.Date > fromData
-                                                                     && x.Date < toData).OrderByDescending(x => x.Date);
+            IQueryable<Report> reports = this.repository.All().Where(x => x.GamingHallId == id
+                                                                     && x.Date >= fromData
+                                                                     && x.Date <= toData).OrderByDescending(x => x.Date);
 
-            return halls.To<T>().ToList();
+            return reports.To<T>().ToList();
         }
+
     }
 }

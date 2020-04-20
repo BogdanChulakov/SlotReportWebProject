@@ -24,7 +24,8 @@
         [Fact]
         public async Task AddAsyncWithImageUrl()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             GamingHallService service = new GamingHallService(new EfDeletableEntityRepository<GamingHall>(dbContext));
             await service.AddAsync(
                 "hall1",
@@ -42,12 +43,15 @@
             Assert.Equal("adress1", result.Adress);
             Assert.Equal("town", result.Town);
             Assert.Equal("1", result.UserId);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task AddAsyncWithoutImageUrl()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new GamingHallService(new EfDeletableEntityRepository<GamingHall>(dbContext));
             await service.AddAsync(
                 "hall1",
@@ -65,12 +69,15 @@
             Assert.Equal("adress1", result.Adress);
             Assert.Equal("town", result.Town);
             Assert.Equal("1", result.UserId);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task GetHallCountWithEntity()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             await service.AddAsync(
@@ -82,22 +89,28 @@
                   "town",
                   "1");
             Assert.Equal(1, service.GetHallsCount());
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public void GetHallCountWithotEntity()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
 
             Assert.Equal(0, service.GetHallsCount());
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task UpdateAsyncWithValidData()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             await service.AddAsync(
@@ -125,12 +138,15 @@
             Assert.Equal("11114", result.PhoneNumber);
             Assert.Equal("adress", result.Adress);
             Assert.Equal("town1", result.Town);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task UpdateAsyncWithInvalidData()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             await service.AddAsync(
@@ -158,12 +174,15 @@
             Assert.Equal(hall.PhoneNumber, result.PhoneNumber);
             Assert.Equal(hall.Adress, result.Adress);
             Assert.Equal(hall.Town, result.Town);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task GetTWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             await service.AddAsync(
@@ -185,12 +204,15 @@
             Assert.Equal(hall.PhoneNumber, result.PhoneNumber);
             Assert.Equal(hall.Adress, result.Adress);
             Assert.Equal(hall.Town, result.Town);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task GetTWithInvalidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             await service.AddAsync(
@@ -206,12 +228,15 @@
             var result = service.GetT<DetailsViewModel>("1234567");
 
             Assert.Null(result);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task GetTWithNullId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             await service.AddAsync(
@@ -227,12 +252,15 @@
             var result = service.GetT<DetailsViewModel>(null);
 
             Assert.Null(result);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task SearchByName()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             await service.AddAsync(
@@ -259,12 +287,15 @@
             {
                 Assert.Equal("hall1", hall.HallName);
             }
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task SearchByTown()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             await service.AddAsync(
@@ -291,12 +322,15 @@
             {
                 Assert.Equal("town", hall.Town);
             }
+
+            dbContext.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task SearchByNevalideString()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             await service.AddAsync(
@@ -325,12 +359,15 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task DeleteAsyncWithValidId()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             await service.AddAsync(
@@ -347,12 +384,15 @@
             var result = await dbContext.GamingHalls.Where(x => x.Id == hall.Id).FirstOrDefaultAsync();
 
             Assert.True(result == null);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task All()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             for (int i = 0; i < 10; i++)
@@ -381,12 +421,15 @@
             }
 
             Assert.Equal(3, count);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task AllOnTheLastPage()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             for (int i = 0; i < 10; i++)
@@ -415,12 +458,15 @@
             }
 
             Assert.Equal(1, count);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task AllHallsWithVaildID()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             for (int i = 1; i <= 5; i++)
@@ -458,12 +504,14 @@
             }
 
             Assert.Equal(5, count);
+            dbContext.Database.EnsureDeleted();
         }
 
         [Fact]
         public async Task AllHallsWithInvaildID()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             for (int i = 1; i <= 5; i++)
@@ -488,12 +536,15 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task AllHallsWithNullID()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             for (int i = 1; i <= 5; i++)
@@ -518,12 +569,15 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task AllOfChainGetAllWithSameName()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             for (int i = 1; i <= 5; i++)
@@ -561,12 +615,15 @@
             }
 
             Assert.Equal(5, count);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task AllOfChainGetAllWithNUllName()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             for (int i = 1; i <= 5; i++)
@@ -603,12 +660,15 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Database.EnsureDeleted();
+
         }
 
         [Fact]
         public async Task AllOfChainGetAllWithNoExistingName()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
             for (int i = 1; i <= 5; i++)
@@ -645,6 +705,7 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Database.EnsureDeleted();
         }
     }
 }

@@ -85,7 +85,7 @@
             services.AddTransient<IMachineCountersService, MachineCountersService>();
             services.AddTransient<IWinsService, WinsService>();
             services.AddTransient<IGalleryService, GalleryService>();
-            services.AddTransient<IReportServices, ReportServices>();
+            services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IMessageService, MessageService>();
         }
 

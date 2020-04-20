@@ -6,6 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
+    using OnlineSlotReports.Data;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Data.Repositories;
     using OnlineSlotReports.Services.Data.MachineCountersServices;
@@ -19,7 +20,8 @@
         [Fact]
         public async Task AddAsyncWithCorectData()
         {
-            var dbContext = ApplicationDbContextFactory.CreateDbContext();
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var service = new MachineCountersService(new EfRepository<MachineCounters>(dbContext));
             var date = DateTime.UtcNow;
             await service.AddAsync(
@@ -38,6 +40,9 @@
             Assert.Equal(2, result.MechOut);
             Assert.Equal(date, result.Date);
             Assert.Equal("1", result.SlotMachineId);
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
+
         }
     }
 }
