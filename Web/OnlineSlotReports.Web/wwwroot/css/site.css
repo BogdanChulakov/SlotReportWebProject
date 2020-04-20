@@ -43,7 +43,9 @@ html {
 
 body {
     /* Margin bottom by footer height */
+    background-image: url(https://us.123rf.com/450wm/almagami/almagami1505/almagami150500017/39521430-dark-perforated-paper-with-cut-out-effect-3d-card-symbol-seamless-background-.jpg?ver=6);
     margin-bottom: 60px;
+    color: azure;
 }
 .footer {
     position: absolute;

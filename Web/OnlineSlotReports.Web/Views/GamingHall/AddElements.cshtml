@@ -5,17 +5,21 @@
 
 <h1 align="center" class="display-4">Add Elements</h1>
 <hr />
-<div class="alert-heading">
-    <p>
-        <a asp-controller="SlotMachine" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add Slot machine!</a>
-    </p>
-    <p>
-        <a asp-controller="Employees" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add Employee!</a>
-    </p>
-    <p>
-        <a asp-controller="Wins" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add Wins!</a>
-    </p>
-    <p>
-        <a asp-controller="Gallery" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary">Add picture!</a>
-    </p>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="alert-heading col-md-6" align="center">
+        <p>
+            <a asp-controller="SlotMachine" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary btn-block">Add Slot machine!</a>
+        </p>
+        <p>
+            <a asp-controller="Employees" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary btn-block">Add Employee!</a>
+        </p>
+        <p>
+            <a asp-controller="Wins" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary btn-block">Add Wins!</a>
+        </p>
+        <p>
+            <a asp-controller="Gallery" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-primary btn-block">Add picture!</a>
+        </p>
+    </div>
+    <div class="col-md-3"></div>
 </div>

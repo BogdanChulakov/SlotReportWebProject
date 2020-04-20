@@ -18,9 +18,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-info border-bottom box-shadow mb-5">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark border-bottom box-shadow mb-5">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,19 +31,19 @@
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="GamingHall" asp-action="All">Gaming Halls</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="GamingHall" asp-action="All">Gaming Halls</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="GamingHall" asp-action="Search">Search <i class="fa fa-search"></i></a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="GamingHall" asp-action="Search"><i class="fa fa-search"></i></a>
                             </li>
                         }
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="GamingHall" asp-action="Add">Add Gaming Hall</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="GamingHall" asp-action="Add">Add Gaming Hall</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="GamingHall" asp-action="Halls">MyHalls</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="GamingHall" asp-action="Halls">MyHalls</a>
                             </li>
                         }
                         @RenderSection("Links", false)
@@ -56,11 +56,12 @@
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
+           
             @this.RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted  bg-light">
+    <footer class="border-top footer text-light  bg-dark">
         <div class="container">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

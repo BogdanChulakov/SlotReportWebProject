@@ -15,7 +15,7 @@ body {
 }
 
 a {
-  color: #fdcc52;
+  color: azure;
   transition: all .35s;
 }
 
@@ -40,9 +40,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
-  font-weight: 200;
-  letter-spacing: 1px;
+    font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif';
+    font-weight: 200;
+    letter-spacing: 1px;
 }
 
 p {

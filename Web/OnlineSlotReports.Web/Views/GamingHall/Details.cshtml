@@ -3,8 +3,8 @@
     ViewData["Title"] = "Details";
 }
 
-<h1 align="center" class="display-4">"@Model.HallName"</h1>
-<hr />
+<h1 align="center" class="display-4 mb-5">"@Model.HallName"</h1>
+<hr.light />
 <div class="row">
     <div class="col-md-4" align="left">
         <img src="@Model.ImageUrl" alt="Alternate Text" width="300" />
@@ -13,7 +13,7 @@
         <p class="m-2">Town: @Model.Town</p>
     </div>
     <div class="col-md-8" align="left">
-        <h2 align="center">@Model.Description</h2>
+        <p align="left" style="font-size:160%;">@Model.Description</p>
     </div>
 </div>
 @if (!User.Identity.IsAuthenticated)
