@@ -20,5 +20,7 @@
         public int SlotMachinesCount { get; set; }
 
         public int EmployeesCount { get; set; }
+
+        public int MessagesCount { get; set; }
     }
 }

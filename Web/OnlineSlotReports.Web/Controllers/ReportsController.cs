@@ -31,7 +31,7 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var reports = this.reportServices.All<IndexReportViewModel>(id);
@@ -49,7 +49,7 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View();
@@ -77,7 +77,7 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var reports = this.reportServices.AllForAPeriod<IndexReportViewModel>(id, fromDate, toDate);

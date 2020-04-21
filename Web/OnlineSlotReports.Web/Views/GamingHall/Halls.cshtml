@@ -19,16 +19,16 @@
             <p class="lead"><a class="btn btn-primary btn-block" asp-controller="Employees" asp-action="AllEmployees" asp-route-id="@hall.Id">Employees (@hall.EmployeesCount)</a></p>
             <p class="lead"><a class="btn btn-primary btn-block" asp-controller="Wins" asp-action="All" asp-route-id="@hall.Id">Wins</a></p>
             <p class="lead"><a class="btn btn-primary btn-block" asp-controller="Gallery" asp-action="All" asp-route-id="@hall.Id">Gallery</a></p>
-            <p class="lead"><a class="btn btn-primary btn-block" asp-controller="Message" asp-action="All" asp-route-id="@hall.Id">Mail</a></p>
+            <p class="lead"><a class="btn btn-primary btn-block" asp-controller="Message" asp-action="All" asp-route-id="@hall.Id">Mail (@hall.MessagesCount)</a></p>
         </div>
         <div class="container col-md-9">
             <h3>"@hall.HallName"</h3>
             <p class="lead">@hall.Adress - @hall.Town</p>
             <p class="lead"><a asp-controller="Reports" asp-action="All" asp-route-id="@hall.Id" class="btn btn-primary">Reports</a></p>
-            <hr />
-            <a asp-controller="GamingHall" asp-action="AddElements" asp-route-id="@hall.Id">Insert panel</a> |
-            <a asp-controller="GamingHall" asp-action="Update" asp-route-id="@hall.Id">Edit</a> |
-            <a asp-controller="GamingHall" asp-action="Details" asp-route-id="@hall.Id">Details</a>
+            <hr class="bg-light" />
+            <a asp-controller="GamingHall" asp-action="AddElements" asp-route-id="@hall.Id" style="font-size:120%;">Insert panel</a> |
+            <a asp-controller="GamingHall" asp-action="Update" asp-route-id="@hall.Id"  style="font-size:120%;">Edit</a> |
+            <a asp-controller="GamingHall" asp-action="Details" asp-route-id="@hall.Id"  style="font-size:120%;">Details</a>
             <a asp-controller="GamingHall" asp-action="Delete" asp-route-id="@hall.Id" class="btn btn-danger float-right" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
         </div>
     </div>

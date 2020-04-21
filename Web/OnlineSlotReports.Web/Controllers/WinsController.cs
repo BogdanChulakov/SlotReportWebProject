@@ -41,7 +41,7 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var machineNumbers = this.slotMachinesServices.All<MachineDropDownViewModel>(id);
@@ -75,7 +75,7 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || (userId != hall.UserId && !this.User.IsInRole(GlobalConstants.AdministratorRoleName)))
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var wins = this.services.All<WinViewModel>(id);
@@ -94,7 +94,7 @@
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             if (hall == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var wins = this.services.All<WinViewModel>(id);

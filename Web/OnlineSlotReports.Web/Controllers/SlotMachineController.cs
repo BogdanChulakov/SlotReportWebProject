@@ -28,7 +28,7 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View();
@@ -55,7 +55,7 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var macines = this.service.All<SlotMachineViewModel>(id);
@@ -74,7 +74,7 @@
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             if (hall == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var macines = this.service.All<IndexViewModel>(id);

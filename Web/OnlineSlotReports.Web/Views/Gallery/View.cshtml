@@ -18,15 +18,15 @@
 
 </head>
 <body>
-    @if (this.TempData["Message"] != null)
-    {
-        <div class="alert alert-success">
-            @this.TempData["Message"]
-        </div>
-    }
     <div class="container gallery-container">
 
         <h1 align="center" class="display-4">Gallery</h1>
+        @if (this.TempData["Message"] != null)
+        {
+            <div class="alert alert-success">
+                @this.TempData["Message"]
+            </div>
+        }
         <div class="row">
             <div class="col-md-2">
                 <p>

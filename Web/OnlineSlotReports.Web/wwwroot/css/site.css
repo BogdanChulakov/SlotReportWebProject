@@ -12,6 +12,7 @@ a.navbar-brand {
 html {
     font-size: 14px;
 }
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -21,6 +22,7 @@ html {
 .border-top {
     border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
     border-bottom: 1px solid #e5e5e5;
 }
@@ -43,10 +45,11 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    background-image: url(https://us.123rf.com/450wm/almagami/almagami1505/almagami150500017/39521430-dark-perforated-paper-with-cut-out-effect-3d-card-symbol-seamless-background-.jpg?ver=6);
+    background-image: url(https://res.cloudinary.com/bogdankick/image/upload/v1587429095/dbt8a9xnpdcdwgeahjms.jpg);
     margin-bottom: 60px;
     color: azure;
 }
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -56,3 +59,22 @@ body {
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
 }
+
+
+.pagination a {
+    color: azure;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 2px;
+    background-color: black;
+}
+
+    .pagination a.active {
+        background-color: #4CAF50;
+        color: white;
+        border: 1px solid #4CAF50;
+    }
+

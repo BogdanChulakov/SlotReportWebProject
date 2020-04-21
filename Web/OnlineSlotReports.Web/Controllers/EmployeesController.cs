@@ -31,7 +31,7 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View();
@@ -59,7 +59,7 @@
 
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var employees = this.service.All<EmployeeViewModel>(id);
@@ -88,7 +88,7 @@
             var employee = this.service.GetById<EmployeeChangeEmailViewModel>(id);
             if (employee == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View(employee);
@@ -116,7 +116,7 @@
             var employee = this.service.GetById<ChangePhoneNumberViewModel>(id);
             if (employee == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View(employee);

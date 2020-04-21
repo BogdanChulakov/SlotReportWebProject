@@ -2,13 +2,16 @@
 @{
     ViewData["Title"] = "Search";
 }
-<p align="center" class="alert-info align-content-center m-4" >You can search hall by name or town!</p>
 <form asp-controller="GamingHall" asp-action="Search" asp-route-name="@Model.Name" method="get">
-    <div class="md-form active-pink-2 mb-3">
-        <input asp-for="Name" class="form-control" type="text" placeholder="Search" aria-label="Search">
-    </div>
-    <div align="center">
-        <input type="submit" value="Search" class="btn btn-primary" />
+    <div class="row">
+        <div class="col-md-3">   </div>
+        <div class="md-form active-pink-2 col-md-5">
+            <input asp-for="Name" class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <p align="left" class="align-content-center" style="font-size:120%;">You can search Gaming hall by name or town!</p>
+        </div>
+        <div class="col-md-1" align="left">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
     </div>
 </form>
 <div align="center">
@@ -22,14 +25,14 @@
 @foreach (var hall in Model.GamingHalls)
 {
     <div class="card m-4">
-        <div class="card-header">
+        <div class="card-header bg-dark">
             <a asp-controller="GamingHall" asp-action="Index" asp-route-id="@hall.Id">@hall.HallName</a>
         </div>
-        <div class="card-body">
+        <div class="card-body bg-dark">
             <blockquote class="blockquote mb-0">
                 <div class="row">
                     <div class="col-md-2">
-                        <img src="@hall.ImageUrl" alt="Alternate Text" height="100" />
+                        <img src="@hall.ImageUrl" alt="Alternate Text" height="100" width="100" />
                     </div>
                     <div class="col-md-10">
                         <p>@hall.ShortDescription</p>

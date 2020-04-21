@@ -45,7 +45,7 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var newMessages = this.massageService.All<IndexMessageViewModel>(id);
@@ -63,7 +63,7 @@
             var message = await this.massageService.GetByIdAsync<IndexMessageViewModel>(id);
             if (message == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View(message);

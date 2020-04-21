@@ -81,7 +81,7 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var datailsViewModel = this.service.GetT<DetailsViewModel>(id);
@@ -151,7 +151,7 @@
             var model = this.service.GetT<IndexGamingHallViewModel>(id);
             if (model == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View(model);
@@ -163,7 +163,7 @@
             var datailsViewModel = this.service.GetT<DetailsViewModel>(id);
             if (datailsViewModel == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View(datailsViewModel);

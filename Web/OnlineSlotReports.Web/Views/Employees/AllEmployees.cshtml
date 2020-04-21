@@ -4,7 +4,12 @@
 }
 
 <h1 align="center" class="display-4">All Employees</h1>
-
+@if (this.TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @this.TempData["Message"]
+    </div>
+}
 <div class="row">
     <div class="col-md-2">
         <p>
@@ -15,12 +20,6 @@
         </p>
     </div>
 </div>
-@if (this.TempData["Message"] != null)
-{
-    <div class="alert alert-success">
-        @this.TempData["Message"]
-    </div>
-}
 <table class="table table-dark">
     <thead>
         <tr>

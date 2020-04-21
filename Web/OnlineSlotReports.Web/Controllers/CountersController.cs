@@ -38,7 +38,7 @@
 
             if (slotMachine == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var date = DateTime.UtcNow;

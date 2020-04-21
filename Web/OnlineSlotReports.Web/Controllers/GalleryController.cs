@@ -44,14 +44,14 @@
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             if (hall == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             foreach (var item in pictures)
             {
                 if (item.GamingHallUserId != userId && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                 {
-                    return this.NotFound();
+                    return this.View("NotFound");
                 }
             }
 
@@ -71,7 +71,7 @@
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             if (hall == null)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             var allpicture = new AllGuestViewModel
@@ -91,7 +91,7 @@
 
             if (hall == null || userId != hall.UserId)
             {
-                return this.NotFound();
+                return this.View("NotFound");
             }
 
             return this.View();
