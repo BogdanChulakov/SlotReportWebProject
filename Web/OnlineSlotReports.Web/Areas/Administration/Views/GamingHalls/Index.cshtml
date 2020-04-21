@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 align="center" class="display-4">All Gaming Halls</h1>
+    <h1 align="center" class="display-4">Admin dashboard</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,7 +13,7 @@
     @foreach (var item in Model)
     {
     <div class="col-md-4">
-        <div class="card m-2" style="width: 18rem;">
+        <div class="card m-2 bg-dark" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title"> @Html.DisplayFor(modelItem => item.HallName)</h5>
                 <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.Adress)</h6>

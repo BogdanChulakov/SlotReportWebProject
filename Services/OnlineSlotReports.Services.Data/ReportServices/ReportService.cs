@@ -37,7 +37,7 @@
 
         public IEnumerable<T> All<T>(string id)
         {
-            IQueryable<Report> halls = this.repository.All().Where(x => x.GamingHallId == id).OrderByDescending(x => x.Date);
+            IQueryable<Report> halls = this.repository.All().Where(x => x.GamingHallId == id).OrderByDescending(x => x.Date).Take(7);
 
             return halls.To<T>().ToList();
         }
