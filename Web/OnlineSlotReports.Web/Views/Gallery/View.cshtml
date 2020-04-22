@@ -48,7 +48,7 @@
                             <img src="@pic.Url" height="200" width="320">
                         </a>
                         <p align="center">
-                            <a asp-controller="Gallery" asp-action="Delete" asp-route-id="@pic.Id" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a>
+                            <a asp-controller="Gallery" asp-action="Delete" asp-route-id="@pic.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a>
                         </p>
                     </div>
                 }

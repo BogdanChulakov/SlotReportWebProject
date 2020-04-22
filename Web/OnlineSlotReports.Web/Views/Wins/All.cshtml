@@ -31,7 +31,7 @@
                 <h5 class="card-title">@win.Date</h5>
                 <p class="card-text">@win.Description </p>
                 <p align="right">
-                    <a asp-controller="Wins" asp-action="Delete" asp-route-id="@win.Id" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a>
+                    <a asp-controller="Wins" asp-action="Delete" asp-route-id="@win.Id" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a>
                 </p>
             </div>
         </div>

@@ -4,13 +4,13 @@
 }
 <form asp-controller="GamingHall" asp-action="Search" asp-route-name="@Model.Name" method="get">
     <div class="row">
-        <div class="col-md-3">   </div>
+        <div class="col-md-3">        
+        </div>
         <div class="md-form active-pink-2 col-md-5">
-            <input asp-for="Name" class="form-control" type="text" placeholder="Search" aria-label="Search">
-            <p align="left" class="align-content-center" style="font-size:120%;">You can search Gaming hall by name or town!</p>
+            <input asp-for="Name" class="form-control" type="text" placeholder="You can search Gaming hall by name or town!" aria-label="Search">
         </div>
         <div class="col-md-1" align="left">
-            <input type="submit" value="Search" class="btn btn-primary" />
+            <input type="submit" value="Search" class="btn btn-light" />
         </div>
     </div>
 </form>

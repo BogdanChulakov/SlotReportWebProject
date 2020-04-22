@@ -2,24 +2,26 @@
 @{
     ViewData["Title"] = "Create";
 }
-<div class="col-md-4 border border-light bg-dark">
-    <p class="m-2" align="center">Send message:</p>
-    <form asp-controller="Message" asp-action="Create" method="post">
-        <div>
-            <label asp-for="Sender">Name</label>
-            <input asp-for="Sender" class="form-control" />
-            <span asp-validation-for="Sender" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="Content">Content</label>
-            <textarea asp-for="Content" class="form-control"></textarea>
-            <span asp-validation-for="Content" class="text-danger"></span>
-        </div>
-        <br />
-        <div>
-            <input type="submit" name="Save" value="Save" class="btn btn-primary m-2" />
-        </div>
-    </form>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 border border-light bg-dark">
+        <p class="m-2" align="center">New message:</p>
+        <form asp-controller="Message" asp-action="Create" method="post">
+            <div class="col-md-6">
+                <label asp-for="Sender">Name</label>
+                <input asp-for="Sender" class="form-control" />
+                <span asp-validation-for="Sender" class="text-danger"></span>
+            </div>
+            <div class="col-md-12">
+                <label asp-for="Content">Content</label>
+                <textarea asp-for="Content" class="form-control"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="m-3">
+                <input type="submit" name="Save" value="Send" class="btn btn-primary float-right mb-3" />
+            </div>
+        </form>
+    </div>
 </div>
 @section Links{
     <partial name="_LinksPartial" model="@Model.GamingHallId" />

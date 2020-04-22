@@ -36,7 +36,7 @@
                 <td>@machine.Model</td>
                 <td>@machine.NumberInHall</td>
                 <td><a asp-controller="Counters" asp-action="Enter" asp-route-id="@machine.Id">Enter Counters</a></td>
-                <td><a asp-controller="SlotMachine" asp-action="Delete" asp-route-id="@machine.Id" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a></td>
+                <td><a class="text-danger" asp-controller="SlotMachine" asp-action="Delete" asp-route-id="@machine.Id" onclick="return confirm('Are you sure you want to delete this item?');">Delete!</a></td>
             </tr>
         }
     </tbody>

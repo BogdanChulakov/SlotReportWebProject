@@ -2,18 +2,18 @@
     ViewData["Title"] = "Add";
 }
 
-<h1 align="center" class="display-4">Add picture to Gallery</h1>
+<h1 align="center" class="display-4 m-5">Add picture to Gallery</h1>
 
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 border border-white bg-dark" align="center">
         <form asp-controller="Gallery" asp-action="Add" method="post" dash-controller="Files" enctype="multipart/form-data">
             <div>
-                <input class="m-4 btn btn-outline-primary" type="file" name="files" multiple required />
+                <input class="m-4" type="file" name="files" multiple required />
             </div>
             <br />
             <div>
-                <input type="submit" name="Save" value="Upload" class="btn btn-dark m-4" />
+                <input type="submit" name="Save" value="Upload" class="btn btn-primary m-4" />
             </div>
         </form>
     </div>

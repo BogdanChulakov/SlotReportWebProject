@@ -3,12 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
     public class ApplicationDbContextSeeder : ISeeder
     {
+
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext == null)
