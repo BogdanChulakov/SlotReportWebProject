@@ -6,13 +6,16 @@
 <h1 align="center" class="display-4 mb-5">"@Model.HallName"</h1>
 <hr.light />
 <div class="row">
-    <div class="col-md-4 border-right border-light" align="left">
-        <img src="@Model.ImageUrl" alt="Alternate Text" width="300" />
+    <div class="col-md-3 border-right border-light">
+        <div align="center">
+            <img src="@Model.ImageUrl" alt="Alternate Text" height="200" width="220" />
+        </div>
+        <hr class="bg-light">
         <p class="m-2"><i class="fas fa-phone-square"></i> @Model.PhoneNumber</p>
         <p class="m-2">Adress: @Model.Adress</p>
         <p class="m-2">Town: @Model.Town</p>
     </div>
-    <div class="col-md-8" align="left">
+    <div class="col-md-9" align="left">
         <p align="left" style="font-size:160%;">@Model.Description</p>
     </div>
 </div>

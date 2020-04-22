@@ -87,6 +87,15 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            builder.Entity<MachineCounters>()
+                   .Property(o => o.ElIn).HasColumnType("decimal(18,2)");
+            builder.Entity<MachineCounters>()
+                   .Property(o => o.ElOut).HasColumnType("decimal(18,2)");
+            builder.Entity<Report>()
+                   .Property(o => o.InForDay).HasColumnType("decimal(18,2)");
+            builder.Entity<Report>()
+                   .Property(o => o.OutForDay).HasColumnType("decimal(18,2)");
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

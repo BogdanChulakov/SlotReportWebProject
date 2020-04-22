@@ -15,24 +15,21 @@
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            var admin = await userManager.FindByEmailAsync("admin@admin.admin");
+            var admin = await userManager.FindByNameAsync("admin@admin.admin");
 
-            if (admin != null)
+            if (admin == null)
             {
-                return;
-            }
-
-            IdentityResult result = await userManager.CreateAsync(
-                    new ApplicationUser
-                    {
-                        UserName = "admin@admin.admin",
-                        Email = "admin@adimin.admin",
-                        EmailConfirmed = true,
-                    }, "admin1111");
-
-            if (!result.Succeeded)
-            {
-                throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
+                IdentityResult result = await userManager.CreateAsync(
+                   new ApplicationUser
+                   {
+                       UserName = "admin@admin.admin",
+                       Email = "admin@admin.admin",
+                       EmailConfirmed = true,
+                   }, "admin1111");
+                if (!result.Succeeded)
+                {
+                    throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
+                }
             }
 
             var user = await userManager.FindByNameAsync("admin@admin.admin");

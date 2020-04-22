@@ -46,7 +46,7 @@
         {
             IQueryable<Report> reports = this.repository.All().Where(x => x.GamingHallId == id
                                                                      && x.Date >= fromData
-                                                                     && x.Date <= toData).OrderByDescending(x => x.Date);
+                                                                     && x.Date <= toData).OrderBy(x => x.Date);
 
             return reports.To<T>().ToList();
         }

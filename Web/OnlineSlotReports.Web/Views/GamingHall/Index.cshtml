@@ -5,19 +5,33 @@
 
 <div class="row">
 
-    <div class="col-md-3">
+    <div class="col-md-3 border-right border-light" align="center">
         <div>
             <img src="@Model.ImageUrl" alt="Alternate Text" width="200" />
         </div>
-        <hr />
-        <h6>All "@Model.HallName"</h6>
-        <h6>Gaming Halls</h6>
-        <hr />
-        <vc:index-g-hall name="@Model.HallName"></vc:index-g-hall>
+        <hr class="bg-light" />
+
+        <a class="btn btn-primary btn-block text-light" asp-controller="GamingHall" asp-action="Index" asp-route-id="@Model.Id">Home</a>
+
+        <a class="btn btn-primary btn-block text-light" asp-controller="SlotMachine" asp-action="Index" asp-route-id="@Model.Id">Slot machines</a>
+
+        <a class="btn btn-primary btn-block text-light" asp-controller="Gallery" asp-action="Index" asp-route-id="@Model.Id">Gallery</a>
+
+        <a class="btn btn-primary btn-block text-light" asp-controller="Wins" asp-action="Index" asp-route-id="@Model.Id">Wins</a>
+
+        <a class="btn btn-primary btn-block text-light" asp-controller="Message" asp-action="Create" asp-route-id="@Model.Id">Contacts</a>
+
+        <a class="btn btn-primary btn-block text-light" asp-controller="GamingHall" asp-action="Details" asp-route-id="@Model.Id">Details</a>
+
     </div>
-    <div class="col-md-9">
+    <div class="col-md-6">
         <h1 align="center" class="display-4">"@Model.HallName"</h1>
         <p align="center"> @Model.Description</p>
+    </div>
+    <div class="col-md-3 border-left border-light">
+        <p>All "@Model.HallName" Gaming Halls</p>
+        <hr class="bg-light" />
+        <vc:index-g-hall name="@Model.HallName"></vc:index-g-hall>
     </div>
 </div>
 @section Links{
