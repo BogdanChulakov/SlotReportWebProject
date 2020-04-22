@@ -32,8 +32,6 @@
         {
             await this.massageService.AddAsync(input.Sender, input.Content, id);
 
-            this.TempData["message"] = "Message was successfully send!";
-
             return this.Redirect("/GamingHall/Index/" + id);
         }
 
