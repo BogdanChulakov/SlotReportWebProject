@@ -24,6 +24,8 @@
 
         int GetHallsCount();
 
-        IEnumerable<T> Search<T>(string name);
+        int GetSearchHallsCount(string name);
+
+        IEnumerable<T> Search<T>(string name, int take, int skip = 0);
     }
 }

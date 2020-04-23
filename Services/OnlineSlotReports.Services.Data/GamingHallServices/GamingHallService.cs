@@ -79,6 +79,13 @@
             return count;
         }
 
+        public int GetSearchHallsCount(string name)
+        {
+            int count = this.repository.All().Where(x => x.HallName.Contains(name) || x.Town.Contains(name)).Count();
+
+            return count;
+        }
+
         public T GetT<T>(string id)
         {
             var hall = this.repository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
@@ -86,9 +93,9 @@
             return hall;
         }
 
-        public IEnumerable<T> Search<T>(string name)
+        public IEnumerable<T> Search<T>(string name, int take, int skip)
         {
-            IQueryable<GamingHall> halls = this.repository.All().Where(x => x.Town.Contains(name) || x.HallName.Contains(name)).OrderBy(x => x.CreatedOn);
+            IQueryable<GamingHall> halls = this.repository.All().Where(x => x.Town.Contains(name) || x.HallName.Contains(name)).OrderBy(x => x.CreatedOn).Skip(skip).Take(take);
 
             return halls.To<T>().ToList();
         }

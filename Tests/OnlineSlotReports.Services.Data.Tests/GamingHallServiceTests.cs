@@ -107,6 +107,44 @@
         }
 
         [Fact]
+        public async Task GetSearchCountWithEntity()
+        {
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
+            var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
+            var service = new GamingHallService(repository);
+            await service.AddAsync(
+                  "hall1",
+                  null,
+                  "desc1",
+                  "1111",
+                  "adress1",
+                  "town",
+                  "1");
+            Assert.Equal(1, service.GetSearchHallsCount("hall1"));
+            dbContext.Database.EnsureDeleted();
+        }
+
+        [Fact]
+        public async Task GetSearchCountWithNoexistingName()
+        {
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
+            var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
+            var service = new GamingHallService(repository);
+            await service.AddAsync(
+                  "hall1",
+                  null,
+                  "desc1",
+                  "1111",
+                  "adress1",
+                  "town",
+                  "1");
+            Assert.Equal(0, service.GetSearchHallsCount("hall11"));
+            dbContext.Database.EnsureDeleted();
+        }
+
+        [Fact]
         public async Task UpdateAsyncWithValidData()
         {
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
@@ -276,15 +314,20 @@
                   "adress1",
                   "town",
                   "1");
-
-            var halls = service.Search<IndexGamingHallViewModel>("hall1");
-
+            int page = 1;
+            int itemPerPage = 3;
+            var halls = service.Search<GamingHallsIndexViewModel>("hall1", itemPerPage, (page - 1) * itemPerPage);
+            int count = 0;
             foreach (var hall in halls)
             {
-                Assert.Equal("hall1", hall.HallName);
+                if (hall.HallName.Contains("hall1"))
+                {
+                    count++;
+                }
             }
-            dbContext.Database.EnsureDeleted();
 
+            Assert.Equal(1, count);
+            dbContext.Database.EnsureDeleted();
         }
 
         [Fact]
@@ -310,14 +353,19 @@
                   "adress1",
                   "town",
                   "1");
-
-            var halls = service.Search<IndexGamingHallViewModel>("town");
-
+            int page = 1;
+            int itemPerPage = 3;
+            var halls = service.Search<GamingHallsIndexViewModel>("town", itemPerPage, (page - 1) * itemPerPage);
+            int count = 0;
             foreach (var hall in halls)
             {
-                Assert.Equal("town", hall.Town);
+                if (hall.Town.Contains("town"))
+                {
+                    count++;
+                }
             }
 
+            Assert.Equal(2, count);
             dbContext.Database.EnsureDeleted();
         }
 
@@ -344,8 +392,9 @@
                   "adress1",
                   "town",
                   "1");
-
-            var halls = service.Search<IndexGamingHallViewModel>("non-existent");
+            int page = 1;
+            int itemPerPage = 3;
+            var halls = service.Search<IndexGamingHallViewModel>("non-existent", itemPerPage, (page - 1) * itemPerPage);
             int count = 0;
             foreach (var hall in halls)
             {
@@ -401,7 +450,7 @@
                   "userId" + i);
             }
 
-            int page = 2;
+            int page = 1;
             int itemPerPage = 3;
 
             var result = service.All<GamingHallsIndexViewModel>(itemPerPage, (page - 1) * itemPerPage);
@@ -414,7 +463,6 @@
 
             Assert.Equal(3, count);
             dbContext.Database.EnsureDeleted();
-
         }
 
         [Fact]

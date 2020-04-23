@@ -1,6 +1,7 @@
 ﻿namespace OnlineSlotReports.Web.Controllers
 {
     using System;
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -118,16 +119,20 @@
 
         [AllowAnonymous]
         [HttpGet("/GamingHall/Search/")]
-        public IActionResult Search(string name)
+        public IActionResult Search(string name, int page = 1)
         {
             var searchModel = new SearchHallsViewModel();
-            var halls = this.service.Search<GamingHallsIndexViewModel>(name);
+            var halls = this.service.Search<GamingHallsIndexViewModel>(name, ItemPerPage, (page - 1) * ItemPerPage);
             searchModel.GamingHalls = halls;
-            if (name != null)
+            if (name != null && halls.Count() == 0)
             {
                this.TempData["message"] = "No result for this serach!";
             }
 
+            var count = this.service.GetSearchHallsCount(name);
+            searchModel.PagesCount = (int)Math.Ceiling((double)count / ItemPerPage);
+            searchModel.CurentPage = page;
+            searchModel.Name = name;
             return this.View(searchModel);
         }
 
