@@ -56,15 +56,17 @@
             return this.Redirect("/GamingHall/Halls");
         }
 
-        public async Task<IActionResult> Halls()
+        public async Task<IActionResult> Halls(int page = 1)
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
             AllHallsViewModel allHallsViewModel = new AllHallsViewModel
             {
-                GamingHalls = this.service.AllHalls<GamingHallViewModel>(user.Id),
+                GamingHalls = this.service.AllHalls<GamingHallViewModel>(user.Id, GlobalConstants.ItemPerPageHalls, (page - 1) * GlobalConstants.ItemPerPageHalls),
             };
-
+            var count = this.service.GetHallsCount(user.Id);
+            allHallsViewModel.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ItemPerPageHalls);
+            allHallsViewModel.CurentPage = page;
             return this.View(allHallsViewModel);
         }
 
@@ -144,7 +146,7 @@
                 GamingHalls = this.service.All<GamingHallsIndexViewModel>(ItemPerPage, (page - 1) * ItemPerPage),
             };
 
-            var count = this.service.GetHallsCount();
+            var count = this.service.GetAllHallsCount();
             allHallsViewModel.PagesCount = (int)Math.Ceiling((double)count / ItemPerPage);
             allHallsViewModel.CurentPage = page;
             return this.View(allHallsViewModel);

@@ -49,9 +49,9 @@
             return halls.To<T>().ToList();
         }
 
-        public IEnumerable<T> AllHalls<T>(string userId)
+        public IEnumerable<T> AllHalls<T>(string userId, int take, int skip)
         {
-            IQueryable<GamingHall> halls = this.repository.All().Where(x => x.UserId == userId).OrderBy(x => x.CreatedOn);
+            IQueryable<GamingHall> halls = this.repository.All().Where(x => x.UserId == userId).OrderBy(x => x.CreatedOn).Skip(skip).Take(take);
 
             return halls.To<T>().ToList();
         }
@@ -72,9 +72,16 @@
             await this.repository.SaveChangesAsync();
         }
 
-        public int GetHallsCount()
+        public int GetAllHallsCount()
         {
             int count = this.repository.All().Count();
+
+            return count;
+        }
+
+        public int GetHallsCount(string userId)
+        {
+            int count = this.repository.All().Where(x => x.UserId == userId).Count();
 
             return count;
         }

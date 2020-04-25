@@ -10,11 +10,11 @@
     {
         Task AddAsync(string hallName, string imageUrl, string description, string phoneNumber, string adress, string town, string userId);
 
-        IEnumerable<T> AllHalls<T>(string userId);
+        IEnumerable<T> AllHalls<T>(string userId, int take, int skip = 0);
 
         IEnumerable<T> AllOfChain<T>(string hallName);
 
-        IEnumerable<T> All<T>(int take, int skip = 0);
+        IEnumerable<T> All<T>(int take, int skip);
 
         Task DeleteAsync(string id);
 
@@ -22,7 +22,9 @@
 
         Task UpdateAsync(string id, string hallName, string imageUrl, string description, string phoneNumber, string adress, string town);
 
-        int GetHallsCount();
+        int GetAllHallsCount();
+
+        int GetHallsCount(string userId);
 
         int GetSearchHallsCount(string name);
 

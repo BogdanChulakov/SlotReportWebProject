@@ -12,5 +12,6 @@
         public const int ItemPerPage = 4;
         public const int ItemPerPageGallery = 6;
         public const int ItemPerPageWins = 3;
+        public const int ItemPerPageHalls = 2;
     }
 }

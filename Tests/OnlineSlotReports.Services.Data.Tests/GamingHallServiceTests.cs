@@ -45,7 +45,6 @@
             Assert.Equal("town", result.Town);
             Assert.Equal("1", result.UserId);
             dbContext.Database.EnsureDeleted();
-
         }
 
         [Fact]
@@ -71,11 +70,10 @@
             Assert.Equal("town", result.Town);
             Assert.Equal("1", result.UserId);
             dbContext.Database.EnsureDeleted();
-
         }
 
         [Fact]
-        public async Task GetHallCountWithEntity()
+        public async Task GetAllHallCountWithEntity()
         {
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
@@ -89,20 +87,20 @@
                   "adress1",
                   "town",
                   "1");
-            Assert.Equal(1, service.GetHallsCount());
+            Assert.Equal(1, service.GetAllHallsCount());
             dbContext.Database.EnsureDeleted();
 
         }
 
         [Fact]
-        public void GetHallCountWithotEntity()
+        public void GetAllHallCountWithotEntity()
         {
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
             var service = new GamingHallService(repository);
 
-            Assert.Equal(0, service.GetHallsCount());
+            Assert.Equal(0, service.GetAllHallsCount());
             dbContext.Database.EnsureDeleted();
         }
 
@@ -428,7 +426,6 @@
 
             Assert.True(result == null);
             dbContext.Database.EnsureDeleted();
-
         }
 
         [Fact]
@@ -531,7 +528,9 @@
                   "userId" + i);
             }
 
-            var result = service.AllHalls<GamingHallViewModel>("userId");
+            int page = 1;
+            int itemPerPage = 3;
+            var result = service.AllHalls<GamingHallViewModel>("userId", itemPerPage, (page - 1) * itemPerPage);
             int count = 0;
             foreach (var hall in result)
             {
@@ -539,7 +538,7 @@
                 Assert.Equal("hall" + count, hall.HallName);
             }
 
-            Assert.Equal(5, count);
+            Assert.Equal(itemPerPage, count);
             dbContext.Database.EnsureDeleted();
         }
 
@@ -562,7 +561,9 @@
                   "userId");
             }
 
-            var result = service.AllHalls<GamingHallViewModel>("userIdInvalid");
+            int page = 1;
+            int itemPerPage = 3;
+            var result = service.AllHalls<GamingHallViewModel>("userIdInvalid", itemPerPage, (page - 1) * itemPerPage);
             int count = 0;
             foreach (var hall in result)
             {
@@ -593,7 +594,9 @@
                   "userId");
             }
 
-            var result = service.AllHalls<GamingHallViewModel>(null);
+            int page = 1;
+            int itemPerPage = 3;
+            var result = service.AllHalls<GamingHallViewModel>(null, itemPerPage, (page - 1) * itemPerPage);
             int count = 0;
             foreach (var hall in result)
             {
@@ -731,6 +734,38 @@
             }
 
             Assert.Equal(0, count);
+            dbContext.Database.EnsureDeleted();
+        }
+
+        [Fact]
+        public async Task GetHallCountWithEntity()
+        {
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
+            var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
+            var service = new GamingHallService(repository);
+            await service.AddAsync(
+                  "hall1",
+                  null,
+                  "desc1",
+                  "1111",
+                  "adress1",
+                  "town",
+                  "1");
+            Assert.Equal(1, service.GetHallsCount("1"));
+            dbContext.Database.EnsureDeleted();
+
+        }
+
+        [Fact]
+        public void GetHallCountWithotEntity()
+        {
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
+            var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
+            var service = new GamingHallService(repository);
+
+            Assert.Equal(0, service.GetHallsCount("1"));
             dbContext.Database.EnsureDeleted();
         }
     }
