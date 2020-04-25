@@ -1,5 +1,6 @@
 ﻿namespace OnlineSlotReports.Web.Controllers
 {
+    using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -69,7 +70,7 @@
             return this.Redirect("/Wins/All/" + gamingHallId);
         }
 
-        public IActionResult All([FromRoute] string id)
+        public IActionResult All([FromRoute] string id , int page = 1)
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -78,18 +79,21 @@
                 return this.View("NotFound");
             }
 
-            var wins = this.services.All<WinViewModel>(id);
+            var wins = this.services.All<WinViewModel>(id, GlobalConstants.ItemPerPageWins, (page - 1) * GlobalConstants.ItemPerPageWins);
             var allWins = new AllWinsViewModel
             {
                 Wins = wins,
                 GamingHallId = id,
             };
-
+            var count = this.services.GetWinsCount(id);
+            allWins.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ItemPerPageWins);
+            allWins.CurentPage = page;
+            allWins.GamingHallId = id;
             return this.View(allWins);
         }
 
         [AllowAnonymous]
-        public IActionResult Index([FromRoute] string id)
+        public IActionResult Index([FromRoute] string id, int page = 1)
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             if (hall == null)
@@ -97,13 +101,19 @@
                 return this.View("NotFound");
             }
 
-            var wins = this.services.All<WinViewModel>(id);
+            var wins = this.services.All<WinViewModel>(id, GlobalConstants.ItemPerPageWins, (page - 1) * GlobalConstants.ItemPerPageWins);
 
             var allWins = new AllWinsViewModel
             {
                 Wins = wins,
                 GamingHallId = id,
             };
+
+            var count = this.services.GetWinsCount(id);
+            allWins.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ItemPerPageWins);
+            allWins.CurentPage = page;
+            allWins.GamingHallId = id;
+
             return this.View(allWins);
         }
 

@@ -7,7 +7,9 @@
 
     public interface IWinsService
     {
-        IEnumerable<T> All<T>(string id);
+        IEnumerable<T> All<T>(string id, int take, int skip = 0);
+
+        int GetWinsCount(string hallId);
 
         Task<string> AddAsync(string url, string description, DateTime date, string hallid, string slotMachineId);
 

@@ -6,6 +6,10 @@
 
     public class AllWinsViewModel
     {
+        public int PagesCount { get; set; }
+
+        public int CurentPage { get; set; }
+
         public IEnumerable<WinViewModel> Wins { get; set; }
 
         public string GamingHallId { get; set; }

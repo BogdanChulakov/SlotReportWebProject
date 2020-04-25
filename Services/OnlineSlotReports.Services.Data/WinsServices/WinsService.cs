@@ -35,9 +35,9 @@
             return win.GamingHallId;
         }
 
-        public IEnumerable<T> All<T>(string id)
+        public IEnumerable<T> All<T>(string id, int take, int skip = 0)
         {
-            IQueryable<Win> wins = this.repository.All().Where(x => x.GamingHallId == id).OrderByDescending(x => x.Date).Take(9);
+            IQueryable<Win> wins = this.repository.All().Where(x => x.GamingHallId == id).OrderByDescending(x => x.Date).Skip(skip).Take(take);
 
             return wins.To<T>().ToList();
         }
@@ -58,6 +58,13 @@
             var gamingHallId = win.GamingHallId;
 
             return gamingHallId;
+        }
+
+        public int GetWinsCount(string hallId)
+        {
+            int count = this.repository.All().Where(x => x.GamingHallId == hallId).Count();
+
+            return count;
         }
     }
 }
