@@ -33,9 +33,9 @@
             return pic.Id;
         }
 
-        public IEnumerable<T> All<T>(string id)
+        public IEnumerable<T> All<T>(string id, int take, int skip = 0)
         {
-            IQueryable<Pic> allPicture = this.repository.All().Where(x => x.GamingHallId == id);
+            IQueryable<Pic> allPicture = this.repository.All().Where(x => x.GamingHallId == id).Skip(skip).Take(take);
 
             return allPicture.To<T>().ToList();
         }
@@ -47,6 +47,13 @@
             this.repository.Delete(pic);
 
             await this.repository.SaveChangesAsync();
+        }
+
+        public int GetGalleryCount(string hallId)
+        {
+            int count = this.repository.All().Where(x => x.GamingHallId == hallId).Count();
+
+            return count;
         }
 
         public string GetHallId(string id)

@@ -35,9 +35,9 @@
             this.cloudinary = cloudinary;
         }
 
-        public IActionResult All([FromRoute] string id)
+        public IActionResult All([FromRoute] string id, int page = 1)
         {
-            var pictures = this.services.All<PictureViewModel>(id);
+            var pictures = this.services.All<PictureViewModel>(id, GlobalConstants.ItemPerPageGallery, (page - 1) * GlobalConstants.ItemPerPageGallery);
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -60,14 +60,17 @@
                 Pictures = pictures,
                 GamingHallId = id,
             };
-
+            var count = this.services.GetGalleryCount(id);
+            allpicture.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ItemPerPageGallery);
+            allpicture.CurentPage = page;
+            allpicture.GamingHallId = id;
             return this.View("View", allpicture);
         }
 
         [AllowAnonymous]
-        public IActionResult Index([FromRoute] string id)
+        public IActionResult Index([FromRoute] string id, int page = 1)
         {
-            var pictures = this.services.All<GuestViewModel>(id);
+            var pictures = this.services.All<GuestViewModel>(id, GlobalConstants.ItemPerPageGallery, (page - 1) * GlobalConstants.ItemPerPageGallery);
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             if (hall == null)
             {
@@ -79,7 +82,10 @@
                 Pictures = pictures,
                 GamingHallId = id,
             };
-
+            var count = this.services.GetGalleryCount(id);
+            allpicture.PagesCount = (int)Math.Ceiling((double)count / GlobalConstants.ItemPerPageGallery);
+            allpicture.CurentPage = page;
+            allpicture.GamingHallId = id;
             return this.View(allpicture);
         }
 

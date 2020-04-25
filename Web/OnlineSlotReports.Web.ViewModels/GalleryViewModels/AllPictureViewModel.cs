@@ -6,8 +6,12 @@
 
     public class AllPictureViewModel
     {
-        public IEnumerable<PictureViewModel> Pictures { get; set; }
+        public int PagesCount { get; set; }
+
+        public int CurentPage { get; set; }
 
         public string GamingHallId { get; set; }
+
+        public IEnumerable<PictureViewModel> Pictures { get; set; }
     }
 }

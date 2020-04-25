@@ -6,8 +6,12 @@
 
     public class AllGuestViewModel
     {
-        public IEnumerable<GuestViewModel> Pictures { get; set; }
+        public int PagesCount { get; set; }
+
+        public int CurentPage { get; set; }
 
         public string GamingHallId { get; set; }
+
+        public IEnumerable<GuestViewModel> Pictures { get; set; }
     }
 }
