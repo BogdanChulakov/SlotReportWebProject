@@ -87,12 +87,12 @@
                 return this.View("NotFound");
             }
 
-            var datailsViewModel = this.service.GetT<DetailsViewModel>(id);
+            var datailsViewModel = this.service.GetT<UpdateHallViewModel>(id);
             return this.View(datailsViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(DetailsViewModel input, IFormFile file)
+        public async Task<IActionResult> Update(UpdateHallViewModel input, IFormFile file)
         {
             if (!this.ModelState.IsValid)
             {
