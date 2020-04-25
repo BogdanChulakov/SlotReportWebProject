@@ -70,7 +70,7 @@
             return this.Redirect("/Wins/All/" + gamingHallId);
         }
 
-        public IActionResult All([FromRoute] string id , int page = 1)
+        public IActionResult All([FromRoute] string id, int page = 1)
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -101,9 +101,9 @@
                 return this.View("NotFound");
             }
 
-            var wins = this.services.All<WinViewModel>(id, GlobalConstants.ItemPerPageWins, (page - 1) * GlobalConstants.ItemPerPageWins);
+            var wins = this.services.All<IndexWinsViewModel>(id, GlobalConstants.ItemPerPageWins, (page - 1) * GlobalConstants.ItemPerPageWins);
 
-            var allWins = new AllWinsViewModel
+            var allWins = new AllWinsIndexViewModel
             {
                 Wins = wins,
                 GamingHallId = id,

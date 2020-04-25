@@ -19,7 +19,6 @@
     [Collection("Mappings collection")]
     public class GalleryServiceTests
     {
-
         [Fact]
         public async Task AddAsyncWithValidlId()
         {
@@ -49,8 +48,9 @@
                                "http://wwww.test.img" + i,
                                "1");
             }
-
-            var pics = service.All<GuestViewModel>("1");
+            int page = 1;
+            int itemPerPage = 3;
+            var pics = service.All<GuestViewModel>("1", itemPerPage, (page - 1) * itemPerPage);
             int count = 0;
             foreach (var pic in pics)
             {
@@ -58,7 +58,7 @@
                 Assert.Equal("http://wwww.test.img" + count, pic.Url);
             }
 
-            Assert.Equal(5, count);
+            Assert.Equal(itemPerPage, count);
             dbContext.Database.EnsureDeleted();
 
         }
@@ -76,7 +76,9 @@
                                "1");
             }
 
-            var pics = service.All<GuestViewModel>("2");
+            int page = 1;
+            int itemPerPage = 3;
+            var pics = service.All<GuestViewModel>("2", itemPerPage, (page - 1) * itemPerPage);
             int count = 0;
             foreach (var pic in pics)
             {
@@ -101,7 +103,9 @@
                                "1");
             }
 
-            var pics = service.All<GuestViewModel>(null);
+            int page = 1;
+            int itemPerPage = 3;
+            var pics = service.All<GuestViewModel>(null, itemPerPage, (page - 1) * itemPerPage);
             int count = 0;
             foreach (var pic in pics)
             {
@@ -148,7 +152,34 @@
 
             Assert.Equal("1", hallId);
             dbContext.Database.EnsureDeleted();
+        }
 
+        [Fact]
+        public async Task GetGalleryCountWithEntity()
+        {
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
+            var repository = new EfDeletableEntityRepository<Pic>(dbContext);
+            var service = new GalleryService(repository);
+            await service.AddAsync(
+                 "http://www.test.com",
+                 "1");
+            Assert.Equal(1, service.GetGalleryCount("1"));
+            dbContext.Database.EnsureDeleted();
+        }
+
+        [Fact]
+        public async Task GetGalleryCountWithNoexistingName()
+        {
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+         .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
+            var repository = new EfDeletableEntityRepository<Pic>(dbContext);
+            var service = new GalleryService(repository);
+            await service.AddAsync(
+                 "http://www.test.com",
+                 "1");
+            Assert.Equal(0, service.GetGalleryCount("11"));
+            dbContext.Database.EnsureDeleted();
         }
     }
 }

@@ -59,8 +59,11 @@
                "1");
             }
 
+            int page = 1;
+            int itemPerPage = 3;
+
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-            var wins = service.All<WinViewModel>("1");
+            var wins = service.All<WinViewModel>("1", itemPerPage, (page - 1) * itemPerPage);
             int count = 0;
             foreach (var win in wins)
             {
@@ -70,7 +73,7 @@
                 Assert.Equal(date, win.Date);
             }
 
-            Assert.Equal(5, count);
+            Assert.Equal(itemPerPage, count);
             dbContextWins.Database.EnsureDeleted();
         }
 
@@ -91,8 +94,11 @@
                "1");
             }
 
+            int page = 1;
+            int itemPerPage = 3;
+
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-            var wins = service.All<WinViewModel>("2");
+            var wins = service.All<WinViewModel>("2", itemPerPage, (page - 1) * itemPerPage);
             int count = 0;
             foreach (var win in wins)
             {
@@ -120,8 +126,10 @@
                "1");
             }
 
+            int page = 1;
+            int itemPerPage = 3;
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-            var pics = service.All<WinViewModel>(null);
+            var pics = service.All<WinViewModel>(null, itemPerPage, (page - 1) * itemPerPage);
             int count = 0;
             foreach (var pic in pics)
             {
@@ -176,6 +184,42 @@
 
             Assert.Equal("1", hallId);
             dbContextWins.Database.EnsureDeleted();
+        }
+
+        [Fact]
+        public async Task GetGalleryCountWithEntity()
+        {
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
+            var repository = new EfDeletableEntityRepository<Win>(dbContext);
+            var service = new WinsService(repository);
+            var date = DateTime.UtcNow;
+            await service.AddAsync(
+               "http://wwww.test.img",
+               "desc",
+               date,
+               "1",
+               "1");
+            Assert.Equal(1, service.GetWinsCount("1"));
+            dbContext.Database.EnsureDeleted();
+        }
+
+        [Fact]
+        public async Task GetGalleryCountWithNoexistingName()
+        {
+            ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+         .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
+            var repository = new EfDeletableEntityRepository<Win>(dbContext);
+            var service = new WinsService(repository);
+            var date = DateTime.UtcNow;
+            await service.AddAsync(
+                "http://wwww.test.img",
+                "desc",
+                date,
+                "1",
+                "1");
+            Assert.Equal(0, service.GetWinsCount("11"));
+            dbContext.Database.EnsureDeleted();
         }
     }
 }
