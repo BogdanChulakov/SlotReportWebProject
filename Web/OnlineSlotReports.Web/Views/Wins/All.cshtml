@@ -12,13 +12,16 @@
 }
 <div class="row">
     <div class="col-md-2">
-        <p>
-            <a asp-controller="Wins" asp-action="Add" asp-route-id="@Model.GamingHallId" class="btn btn-primary btn-block">Add Wins</a>
-        </p>
-        <p>
-            <a asp-controller="GamingHall" asp-action="Halls" asp-route-id="@Model.GamingHallId" class="btn btn-primary btn-block">Back</a>
-        </p>
-    </div>
+        @if (!this.User.IsInRole("Administrator"))
+        {
+            <p>
+                <a asp-controller="Wins" asp-action="Add" asp-route-id="@Model.GamingHallId" class="btn btn-primary btn-block">Add Wins</a>
+            </p>
+            <p>
+                <a asp-controller="GamingHall" asp-action="Halls" asp-route-id="@Model.GamingHallId" class="btn btn-primary btn-block">Back</a>
+            </p>
+        }
+        </div>
 </div>
 <div class="row" align="center">
     @foreach (var win in Model.Wins)

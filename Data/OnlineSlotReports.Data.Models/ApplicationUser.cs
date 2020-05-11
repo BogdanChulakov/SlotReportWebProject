@@ -16,7 +16,7 @@ namespace OnlineSlotReports.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
-            this.GamingHalls = new HashSet<GamingHall>();
+            this.GamingHalls = new HashSet<UsersHalls>();
         }
 
         // Audit info
@@ -35,6 +35,6 @@ namespace OnlineSlotReports.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
-        public virtual ICollection<GamingHall> GamingHalls { get; set; }
+        public virtual ICollection<UsersHalls> GamingHalls { get; set; }
     }
 }

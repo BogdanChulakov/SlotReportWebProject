@@ -35,10 +35,6 @@
         [MaxLength(30)]
         public string Town { get; set; }
 
-        [Required]
-        public string UserId { get; set; }
-
-        public ApplicationUser User { get; set; }
 
         public virtual IEnumerable<SlotMachine> SlotMachines { get; set; } = new HashSet<SlotMachine>();
 
@@ -51,5 +47,7 @@
         public virtual IEnumerable<Report> Reports { get; set; } = new HashSet<Report>();
 
         public virtual IEnumerable<Message> Messages { get; set; } = new HashSet<Message>();
+
+        public virtual IEnumerable<UsersHalls> Users { get; set; } = new HashSet<UsersHalls>();
     }
 }

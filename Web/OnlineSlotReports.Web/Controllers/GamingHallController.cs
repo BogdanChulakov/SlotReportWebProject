@@ -13,6 +13,7 @@
     using OnlineSlotReports.Common;
     using OnlineSlotReports.Data.Models;
     using OnlineSlotReports.Services.Data.GamingHallServices;
+    using OnlineSlotReports.Services.Data.UsersHallsServices;
     using OnlineSlotReports.Web.CloudinaryHelper;
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
 
@@ -24,12 +25,14 @@
         private readonly IGamingHallService service;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly Cloudinary cloudinary;
+        private readonly IUsersHallsService usersHallsService;
 
-        public GamingHallController(IGamingHallService service, UserManager<ApplicationUser> userManager, Cloudinary cloudinary)
+        public GamingHallController(IGamingHallService service, UserManager<ApplicationUser> userManager, Cloudinary cloudinary, IUsersHallsService usersHallsService)
         {
             this.service = service;
             this.userManager = userManager;
             this.cloudinary = cloudinary;
+            this.usersHallsService = usersHallsService;
         }
 
         public IActionResult Add()
@@ -82,7 +85,9 @@
         {
             var hall = this.service.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (hall == null || userId != hall.UserId)
+            var exist = this.usersHallsService.IfExist(id, userId);
+
+            if (hall == null || !exist)
             {
                 return this.View("NotFound");
             }

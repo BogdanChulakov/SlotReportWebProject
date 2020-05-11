@@ -14,6 +14,7 @@
     using OnlineSlotReports.Data.Repositories;
     using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Services.Data.Tests.Factory;
+    using OnlineSlotReports.Services.Data.UsersHallsServices;
     using OnlineSlotReports.Services.Mapping;
     using OnlineSlotReports.Web.ViewModels;
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
@@ -27,7 +28,8 @@
         {
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
-            GamingHallService service = new GamingHallService(new EfDeletableEntityRepository<GamingHall>(dbContext));
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            GamingHallService service = new GamingHallService(new EfDeletableEntityRepository<GamingHall>(dbContext), usersHallsService);
             await service.AddAsync(
                 "hall1",
                 "image1",
@@ -43,7 +45,6 @@
             Assert.Equal("1111", result.PhoneNumber);
             Assert.Equal("adress1", result.Adress);
             Assert.Equal("town", result.Town);
-            Assert.Equal("1", result.UserId);
             dbContext.Database.EnsureDeleted();
         }
 
@@ -52,7 +53,8 @@
         {
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
-            var service = new GamingHallService(new EfDeletableEntityRepository<GamingHall>(dbContext));
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(new EfDeletableEntityRepository<GamingHall>(dbContext), usersHallsService);
             await service.AddAsync(
                 "hall1",
                 null,
@@ -68,7 +70,6 @@
             Assert.Equal("1111", result.PhoneNumber);
             Assert.Equal("adress1", result.Adress);
             Assert.Equal("town", result.Town);
-            Assert.Equal("1", result.UserId);
             dbContext.Database.EnsureDeleted();
         }
 
@@ -78,7 +79,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -98,7 +100,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
 
             Assert.Equal(0, service.GetAllHallsCount());
             dbContext.Database.EnsureDeleted();
@@ -110,7 +113,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -129,7 +133,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -148,7 +153,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -184,7 +190,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -220,7 +227,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -249,7 +257,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -272,7 +281,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -295,7 +305,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -334,7 +345,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -373,7 +385,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -410,7 +423,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -434,7 +448,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             for (int i = 0; i < 10; i++)
             {
                 await service.AddAsync(
@@ -468,7 +483,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             for (int i = 0; i < 10; i++)
             {
                 await service.AddAsync(
@@ -503,7 +519,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             for (int i = 1; i <= 5; i++)
             {
                 await service.AddAsync(
@@ -548,7 +565,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             for (int i = 1; i <= 5; i++)
             {
                 await service.AddAsync(
@@ -581,7 +599,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             for (int i = 1; i <= 5; i++)
             {
                 await service.AddAsync(
@@ -614,7 +633,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             for (int i = 1; i <= 5; i++)
             {
                 await service.AddAsync(
@@ -658,7 +678,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             for (int i = 1; i <= 5; i++)
             {
                 await service.AddAsync(
@@ -701,7 +722,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             for (int i = 1; i <= 5; i++)
             {
                 await service.AddAsync(
@@ -743,7 +765,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
             await service.AddAsync(
                   "hall1",
                   null,
@@ -763,7 +786,8 @@
             ApplicationDbContext dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
                     .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options);
             var repository = new EfDeletableEntityRepository<GamingHall>(dbContext);
-            var service = new GamingHallService(repository);
+            UsersHallsService usersHallsService = new UsersHallsService(new EfRepository<UsersHalls>(dbContext));
+            var service = new GamingHallService(repository, usersHallsService);
 
             Assert.Equal(0, service.GetHallsCount("1"));
             dbContext.Database.EnsureDeleted();

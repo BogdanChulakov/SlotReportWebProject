@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Services.Data.MessageServices;
+    using OnlineSlotReports.Services.Data.UsersHallsServices;
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
     using OnlineSlotReports.Web.ViewModels.MessageViewModels;
 
@@ -13,11 +14,13 @@
     {
         private readonly IMessageService massageService;
         private readonly IGamingHallService gamingHallService;
+        private readonly IUsersHallsService usersHallsService;
 
-        public MessageController(IMessageService massageService, IGamingHallService gamingHallService)
+        public MessageController(IMessageService massageService, IGamingHallService gamingHallService, IUsersHallsService usersHallsService)
         {
             this.massageService = massageService;
             this.gamingHallService = gamingHallService;
+            this.usersHallsService = usersHallsService;
         }
 
         public IActionResult Create(string id)
@@ -41,7 +44,10 @@
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (hall == null || userId != hall.UserId)
+
+            var exist = this.usersHallsService.IfExist(id, userId);
+
+            if (hall == null || !exist)
             {
                 return this.View("NotFound");
             }

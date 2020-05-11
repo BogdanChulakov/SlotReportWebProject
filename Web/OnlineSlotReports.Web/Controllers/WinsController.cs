@@ -11,6 +11,7 @@
     using OnlineSlotReports.Common;
     using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
+    using OnlineSlotReports.Services.Data.UsersHallsServices;
     using OnlineSlotReports.Services.Data.WinsServices;
     using OnlineSlotReports.Web.CloudinaryHelper;
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
@@ -23,24 +24,28 @@
         private readonly ISlotMachinesService slotMachinesServices;
         private readonly Cloudinary cloudinary;
         private readonly IGamingHallService gamingHallService;
+        private readonly IUsersHallsService usersHallsService;
 
         public WinsController(
             IWinsService services,
             ISlotMachinesService slotMachinesServices,
             Cloudinary cloudinary,
-            IGamingHallService gamingHallService)
+            IGamingHallService gamingHallService,
+            IUsersHallsService usersHallsService)
         {
             this.services = services;
             this.slotMachinesServices = slotMachinesServices;
             this.cloudinary = cloudinary;
             this.gamingHallService = gamingHallService;
+            this.usersHallsService = usersHallsService;
         }
 
         public IActionResult Add([FromRoute]string id)
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (hall == null || userId != hall.UserId)
+            var exist = this.usersHallsService.IfExist(id, userId);
+            if (hall == null || !exist)
             {
                 return this.View("NotFound");
             }
@@ -74,7 +79,8 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (hall == null || (userId != hall.UserId && !this.User.IsInRole(GlobalConstants.AdministratorRoleName)))
+            var exist = this.usersHallsService.IfExist(id, userId);
+            if (hall == null || (!exist && !this.User.IsInRole(GlobalConstants.AdministratorRoleName)))
             {
                 return this.View("NotFound");
             }

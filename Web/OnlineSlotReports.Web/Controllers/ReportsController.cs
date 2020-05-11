@@ -10,6 +10,7 @@
     using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Services.Data.ReportServices;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
+    using OnlineSlotReports.Services.Data.UsersHallsServices;
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
     using OnlineSlotReports.Web.ViewModels.ReportsViewModels;
 
@@ -18,18 +19,21 @@
     {
         private readonly IReportService reportServices;
         private readonly IGamingHallService gamingHallService;
+        private readonly IUsersHallsService usersHallsService;
 
-        public ReportsController(IReportService reportServices, IGamingHallService gamingHallService)
+        public ReportsController(IReportService reportServices, IGamingHallService gamingHallService, IUsersHallsService usersHallsService)
         {
             this.reportServices = reportServices;
             this.gamingHallService = gamingHallService;
+            this.usersHallsService = usersHallsService;
         }
 
         public IActionResult All([FromRoute] string id)
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (hall == null || userId != hall.UserId)
+            var exist = this.usersHallsService.IfExist(id, userId);
+            if (hall == null || !exist)
             {
                 return this.View("NotFound");
             }
@@ -47,7 +51,8 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (hall == null || userId != hall.UserId)
+            var exist = this.usersHallsService.IfExist(id, userId);
+            if (hall == null || !exist)
             {
                 return this.View("NotFound");
             }
@@ -75,7 +80,9 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (hall == null || userId != hall.UserId)
+            var exist = this.usersHallsService.IfExist(id, userId);
+
+            if (hall == null || !exist)
             {
                 return this.View("NotFound");
             }

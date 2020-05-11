@@ -41,6 +41,8 @@
 
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<UsersHalls> UsersHalls { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -87,6 +89,9 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            builder.Entity<UsersHalls>()
+                   .HasKey(x => new { x.UserId, x.GamingHallId });
 
             builder.Entity<MachineCounters>()
                    .Property(o => o.ElIn).HasColumnType("decimal(18,2)");

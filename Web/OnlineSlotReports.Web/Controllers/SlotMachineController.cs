@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using OnlineSlotReports.Services.Data.GamingHallServices;
     using OnlineSlotReports.Services.Data.SlotMachinesServices;
+    using OnlineSlotReports.Services.Data.UsersHallsServices;
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
     using OnlineSlotReports.Web.ViewModels.SlotMachinesViewModels;
 
@@ -15,18 +16,21 @@
     {
         private readonly ISlotMachinesService service;
         private readonly IGamingHallService gamingHallService;
+        private readonly IUsersHallsService usersHallsService;
 
-        public SlotMachineController(ISlotMachinesService service, IGamingHallService gamingHallService)
+        public SlotMachineController(ISlotMachinesService service, IGamingHallService gamingHallService, IUsersHallsService usersHallsService)
         {
             this.service = service;
             this.gamingHallService = gamingHallService;
+            this.usersHallsService = usersHallsService;
         }
 
         public IActionResult Add([FromRoute]string id)
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (hall == null || userId != hall.UserId)
+            var exist = this.usersHallsService.IfExist(id, userId);
+            if (hall == null || !exist)
             {
                 return this.View("NotFound");
             }
@@ -53,7 +57,8 @@
         {
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (hall == null || userId != hall.UserId)
+            var exist = this.usersHallsService.IfExist(id, userId);
+            if (hall == null || !exist)
             {
                 return this.View("NotFound");
             }

@@ -14,6 +14,7 @@
     using OnlineSlotReports.Common;
     using OnlineSlotReports.Services.Data.GalleryServices;
     using OnlineSlotReports.Services.Data.GamingHallServices;
+    using OnlineSlotReports.Services.Data.UsersHallsServices;
     using OnlineSlotReports.Web.CloudinaryHelper;
     using OnlineSlotReports.Web.ViewModels.GalleryViewModels;
     using OnlineSlotReports.Web.ViewModels.GamingHallViewModels;
@@ -24,15 +25,18 @@
         private readonly IGalleryService services;
         private readonly IGamingHallService gamingHallService;
         private readonly Cloudinary cloudinary;
+        private readonly IUsersHallsService usersHallsService;
 
         public GalleryController(
             IGalleryService services,
             IGamingHallService gamingHallService,
-            Cloudinary cloudinary)
+            Cloudinary cloudinary,
+            IUsersHallsService usersHallsService)
         {
             this.services = services;
             this.gamingHallService = gamingHallService;
             this.cloudinary = cloudinary;
+            this.usersHallsService = usersHallsService;
         }
 
         public IActionResult All([FromRoute] string id, int page = 1)
@@ -42,17 +46,10 @@
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
-            if (hall == null)
+            var exist = this.usersHallsService.IfExist(id, userId);
+            if (hall == null || (!exist && !this.User.IsInRole(GlobalConstants.AdministratorRoleName)))
             {
                 return this.View("NotFound");
-            }
-
-            foreach (var item in pictures)
-            {
-                if (item.GamingHallUserId != userId && !this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                {
-                    return this.View("NotFound");
-                }
             }
 
             var allpicture = new AllPictureViewModel
@@ -94,8 +91,8 @@
             var hall = this.gamingHallService.GetT<UserIdHallViewModel>(id);
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if (hall == null || userId != hall.UserId)
+            var exist = this.usersHallsService.IfExist(id, userId);
+            if (hall == null || !exist)
             {
                 return this.View("NotFound");
             }

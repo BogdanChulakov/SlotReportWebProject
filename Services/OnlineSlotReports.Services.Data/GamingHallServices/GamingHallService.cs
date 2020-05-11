@@ -9,15 +9,18 @@
     using OnlineSlotReports.Common;
     using OnlineSlotReports.Data.Common.Repositories;
     using OnlineSlotReports.Data.Models;
+    using OnlineSlotReports.Services.Data.UsersHallsServices;
     using OnlineSlotReports.Services.Mapping;
 
     public class GamingHallService : IGamingHallService
     {
         private readonly IDeletableEntityRepository<GamingHall> repository;
+        private readonly IUsersHallsService usersHallsService;
 
-        public GamingHallService(IDeletableEntityRepository<GamingHall> repository)
+        public GamingHallService(IDeletableEntityRepository<GamingHall> repository, IUsersHallsService usersHallsService)
         {
             this.repository = repository;
+            this.usersHallsService = usersHallsService;
         }
 
         public async Task AddAsync(string hallName, string imageUrl, string description, string phoneNumber, string adress, string town, string userId)
@@ -36,10 +39,11 @@
             gamingHall.PhoneNumber = phoneNumber;
             gamingHall.Adress = adress;
             gamingHall.Town = town;
-            gamingHall.UserId = userId;
 
             await this.repository.AddAsync(gamingHall);
             await this.repository.SaveChangesAsync();
+
+            await this.usersHallsService.AddHallToUserAsync(userId, gamingHall.Id);
         }
 
         public IEnumerable<T> All<T>(int take, int skip)
@@ -51,7 +55,7 @@
 
         public IEnumerable<T> AllHalls<T>(string userId, int take, int skip)
         {
-            IQueryable<GamingHall> halls = this.repository.All().Where(x => x.UserId == userId).OrderBy(x => x.CreatedOn).Skip(skip).Take(take);
+            IQueryable<GamingHall> halls = this.repository.All().Where(x => x.Users.All(y => y.UserId == userId)).OrderBy(x => x.CreatedOn).Skip(skip).Take(take);
 
             return halls.To<T>().ToList();
         }
@@ -81,7 +85,7 @@
 
         public int GetHallsCount(string userId)
         {
-            int count = this.repository.All().Where(x => x.UserId == userId).Count();
+            int count = this.repository.All().Where(x => x.Users.All(y => y.UserId == userId)).Count();
 
             return count;
         }
