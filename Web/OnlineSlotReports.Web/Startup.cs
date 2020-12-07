@@ -59,6 +59,7 @@
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
+
             services.AddRazorPages();
 
             Account account = new Account(
