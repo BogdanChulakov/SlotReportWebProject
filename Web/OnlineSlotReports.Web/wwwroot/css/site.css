@@ -12,6 +12,9 @@ a.navbar-brand {
 html {
     font-size: 14px;
 }
+#imgCustom {
+    border-radius: 20%;
+}
 
 @media (min-width: 768px) {
     html {
@@ -30,7 +33,6 @@ html {
 .box-shadow {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
-
 button.accept-policy {
     font-size: 1rem;
     line-height: inherit;
@@ -77,4 +79,7 @@ body {
         color: white;
         border: 1px solid #4CAF50;
     }
-
+img {
+    border:solid 1px;
+    border-color:aliceblue;
+}

@@ -3,11 +3,11 @@
     ViewData["Title"] = "All";
 }
 
-<h1 align="center" class="display-4"><strong>Gaming Halls</strong></h1>
+<h1  align="center" class="display-4"><strong>Gaming Halls</strong></h1>
 
 @foreach (var hall in Model.GamingHalls)
 {
-    <div class="card m-4">
+    <div  class="card m-4 myC">
         <div class="card-header bg-dark">
             <a asp-controller="GamingHall" asp-action="Index" asp-route-id="@hall.Id">@hall.HallName</a>
         </div>
@@ -55,4 +55,17 @@
             }
         </ul>
     </nav>
+}
+@section Scripts{ 
+    <script>
+        let da = document.getElementsByClassName("myC");
+        for (let x of da) {
+            x.addEventListener("mouseover", function (e) {             
+                e.target.style.color = "red";
+            });
+            x.addEventListener("mouseout", function (e) {
+                e.target.style.color = "";
+            });
+        }
+    </script>
 }
