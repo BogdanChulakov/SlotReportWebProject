@@ -61,6 +61,12 @@
             });
 
             services.AddRazorPages();
+            services.AddAuthentication()
+                    .AddGoogle(options =>
+                    {
+                    options.ClientId = this.configuration["Google:AppKey"];
+                    options.ClientSecret = this.configuration["Google:AppSecret"];
+                    });
 
             Account account = new Account(
                              this.configuration["Cloudinary:AppName"],

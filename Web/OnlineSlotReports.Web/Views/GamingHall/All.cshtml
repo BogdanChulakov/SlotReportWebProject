@@ -56,16 +56,3 @@
         </ul>
     </nav>
 }
-@section Scripts{ 
-    <script>
-        let da = document.getElementsByClassName("myC");
-        for (let x of da) {
-            x.addEventListener("mouseover", function (e) {             
-                e.target.style.color = "red";
-            });
-            x.addEventListener("mouseout", function (e) {
-                e.target.style.color = "";
-            });
-        }
-    </script>
-}
